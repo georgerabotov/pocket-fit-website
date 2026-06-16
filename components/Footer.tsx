@@ -20,7 +20,7 @@ const columns = [
   },
 ];
 
-const socials = ["Instagram", "X", "Reddit", "YouTube"];
+const socials = ["Instagram", "X", "Reddit", "YouTube", "Facebook"];
 
 export function Footer() {
   return (

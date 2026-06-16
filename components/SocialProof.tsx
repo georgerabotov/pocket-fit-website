@@ -7,42 +7,46 @@ const stats = [
   { value: "4.8★", label: "average app rating" },
 ];
 
-const cards = [
-  { name: "Maya", note: "ran her first half-marathon", tone: "bg-brand-100" },
-  { name: "Tomás", note: "fixed his afternoon energy dips", tone: "bg-accent-soft" },
-  { name: "Priya", note: "lowered resting heart rate by 8 bpm", tone: "bg-[#e7eaff]" },
-  { name: "Devon", note: "finally sleeps through the night", tone: "bg-brand-50" },
+const members = [
+  { name: "Maya", note: "Half-marathon, first time", tone: "from-brand-200 to-brand-400" },
+  { name: "Tomás", note: "Steadier afternoons", tone: "from-[#9aa6ff] to-[#6f7bff]" },
+  { name: "Priya", note: "Resting HR −8 bpm", tone: "from-accent-soft to-accent" },
+  { name: "Devon", note: "Sleeps through the night", tone: "from-brand-100 to-brand-300" },
+  { name: "Sara", note: "Back to lifting", tone: "from-[#cdd4ff] to-[#9aa6ff]" },
+  { name: "Leo", note: "Marathon training block", tone: "from-brand-200 to-brand-500" },
 ];
 
 export function SocialProof() {
+  const row = [...members, ...members];
   return (
     <Section>
       <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl">
-        Over a million people on their health journey.
+        Join over 1 million members on their health journey.
       </h2>
 
-      <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {stats.map((s) => (
-          <div
-            key={s.label}
-            className="rounded-card border border-line bg-cloud p-6 text-center shadow-sm"
-          >
+          <div key={s.label} className="text-center">
             <div className="text-3xl font-bold text-brand-600">{s.value}</div>
             <div className="mt-1 text-sm text-ink-soft">{s.label}</div>
           </div>
         ))}
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {cards.map((c) => (
-          <div
-            key={c.name}
-            className={`flex aspect-[4/5] flex-col justify-end rounded-card ${c.tone} p-5`}
-          >
-            <p className="text-lg font-bold">{c.name}</p>
-            <p className="text-sm text-ink-soft">{c.note}</p>
-          </div>
-        ))}
+      <div className="relative mt-12 overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cloud to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cloud to-transparent" />
+        <div className="flex w-max animate-marquee gap-4">
+          {row.map((m, i) => (
+            <div
+              key={i}
+              className={`flex aspect-[3/4] w-52 shrink-0 flex-col justify-end rounded-card bg-gradient-to-br ${m.tone} p-5`}
+            >
+              <p className="text-lg font-bold text-ink">{m.name}</p>
+              <p className="text-sm font-medium text-ink/70">{m.note}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </Section>
   );

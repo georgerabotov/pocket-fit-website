@@ -57,6 +57,57 @@ export function Section({
   );
 }
 
+/** A full-width alternating block: phone screen on one side, copy + cards on the other. */
+export function FeatureBlock({
+  eyebrow,
+  title,
+  body,
+  screen,
+  cards,
+  flip = false,
+}: {
+  eyebrow?: ReactNode;
+  title: string;
+  body: string;
+  screen: ReactNode;
+  cards?: { label: string; value: string }[];
+  flip?: boolean;
+}) {
+  return (
+    <div className="grid items-center gap-10 lg:grid-cols-2">
+      <div className={`flex justify-center ${flip ? "lg:order-2" : ""}`}>
+        <div className="relative">
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 m-auto size-64 rounded-full bg-brand-100 blur-3xl"
+          />
+          <PhoneFrame>{screen}</PhoneFrame>
+        </div>
+      </div>
+      <div className={flip ? "lg:order-1" : ""}>
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <h3 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-3 max-w-md text-ink-soft">{body}</p>
+        {cards && (
+          <div className="mt-6 grid max-w-md grid-cols-2 gap-3">
+            {cards.map((c) => (
+              <div
+                key={c.label}
+                className="rounded-2xl border border-line bg-cloud p-4 shadow-sm"
+              >
+                <p className="text-xs text-ink-soft">{c.label}</p>
+                <p className="text-xl font-bold">{c.value}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /** A stylized phone frame that wraps arbitrary "screen" content. */
 export function PhoneFrame({
   children,

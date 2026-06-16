@@ -1,33 +1,6 @@
-import { Section, Eyebrow, PhoneFrame } from "./ui";
-import { Bolt, Moon, Heart, Plate } from "./icons";
+import { Section, Eyebrow, FeatureBlock } from "./ui";
 import { SleepScreen, NutritionScreen } from "./screens";
-
-const pillars = [
-  {
-    icon: Bolt,
-    title: "Strain",
-    body: "See how much your body put in today, from steady effort to all-out sessions, and know when you've done enough.",
-    color: "var(--color-accent)",
-  },
-  {
-    icon: Moon,
-    title: "Sleep",
-    body: "Stage-by-stage breakdown with a nightly sleep-need target that adapts to the load you carried during the day.",
-    color: "#6f7bff",
-  },
-  {
-    icon: Heart,
-    title: "Recovery",
-    body: "A simple morning readiness score built from heart-rate variability, resting heart rate, and last night's rest.",
-    color: "var(--color-brand-500)",
-  },
-  {
-    icon: Plate,
-    title: "Nutrition",
-    body: "Scan a barcode or snap a plate to log macros and micronutrients without the tedious manual entry.",
-    color: "var(--color-brand-600)",
-  },
-];
+import { StrainScreen, RecoveryScreen } from "./screens2";
 
 export function Metrics() {
   return (
@@ -35,39 +8,60 @@ export function Metrics() {
       <div className="text-center">
         <Eyebrow>Daily picture</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
-          Start the day knowing where you stand.
+          Start the day with confidence.
         </h2>
+        <p className="mx-auto mt-3 max-w-lg text-ink-soft">
+          Turn your body&apos;s signals into a handful of clear numbers you can
+          actually act on.
+        </p>
       </div>
 
-      <div className="mt-14 grid items-center gap-12 lg:grid-cols-2">
-        <div className="flex justify-center gap-4">
-          <PhoneFrame>
-            <SleepScreen />
-          </PhoneFrame>
-          <PhoneFrame className="mt-12 hidden sm:block">
-            <NutritionScreen />
-          </PhoneFrame>
-        </div>
+      <div className="mt-16 space-y-20 sm:space-y-28">
+        <FeatureBlock
+          eyebrow="Strain"
+          title="Know how hard you pushed."
+          body="One effort score captures your whole day, from a steady commute to an all-out session, so you can tell when you've done enough."
+          screen={<StrainScreen />}
+          cards={[
+            { label: "Effort score", value: "65" },
+            { label: "Energy burned", value: "2,140" },
+          ]}
+        />
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {pillars.map((p) => (
-            <div
-              key={p.title}
-              className="rounded-card border border-line bg-cloud p-6 shadow-sm transition-shadow hover:shadow-md"
-            >
-              <span
-                className="mb-4 grid size-11 place-items-center rounded-xl"
-                style={{ background: "color-mix(in srgb, " + p.color + " 14%, white)", color: p.color }}
-              >
-                <p.icon className="size-5" />
-              </span>
-              <h3 className="text-lg font-bold">{p.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                {p.body}
-              </p>
-            </div>
-          ))}
-        </div>
+        <FeatureBlock
+          flip
+          eyebrow="Sleep"
+          title="Understand your rest."
+          body="A stage-by-stage breakdown with a nightly sleep-need target that adapts to the load you carried during the day."
+          screen={<SleepScreen />}
+          cards={[
+            { label: "Time asleep", value: "8h 12m" },
+            { label: "Efficiency", value: "94%" },
+          ]}
+        />
+
+        <FeatureBlock
+          eyebrow="Recovery"
+          title="See if you're ready."
+          body="A simple morning readiness score built from heart-rate variability, resting heart rate, and last night's rest tells you when to push and when to ease off."
+          screen={<RecoveryScreen />}
+          cards={[
+            { label: "Readiness", value: "70%" },
+            { label: "HRV", value: "68 ms" },
+          ]}
+        />
+
+        <FeatureBlock
+          flip
+          eyebrow="Nutrition"
+          title="Understand what you eat."
+          body="Scan a barcode or snap a plate to log macros and micronutrients in seconds — no tedious manual entry."
+          screen={<NutritionScreen />}
+          cards={[
+            { label: "Logged today", value: "312 kcal" },
+            { label: "Protein", value: "32%" },
+          ]}
+        />
       </div>
     </Section>
   );

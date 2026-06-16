@@ -2,12 +2,7 @@ import Link from "next/link";
 import { Logo } from "./icons";
 import { Button } from "./ui";
 
-const links = [
-  { label: "Features", href: "#features" },
-  { label: "Integrations", href: "#integrations" },
-  { label: "Intelligence", href: "#intelligence" },
-  { label: "Privacy", href: "#privacy" },
-];
+const links = [{ label: "About", href: "#features" }];
 
 export function Nav() {
   return (
