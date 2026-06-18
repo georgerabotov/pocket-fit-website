@@ -4,7 +4,10 @@ import { Shield } from "./icons";
 export function Privacy() {
   return (
     <Section id="privacy">
-      <div className="relative overflow-hidden rounded-card bg-ink px-6 py-16 text-center text-cloud">
+      <div
+        data-reveal
+        className="relative overflow-hidden rounded-card bg-ink px-6 py-16 text-center text-cloud"
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 -z-0 opacity-30 [background:radial-gradient(circle_at_20%_20%,var(--color-brand-700),transparent_40%),radial-gradient(circle_at_80%_70%,#3b4bd8,transparent_40%)]"

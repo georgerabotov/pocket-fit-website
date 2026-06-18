@@ -5,7 +5,7 @@ import { ProactiveScreen, SourcesScreen, TrainingScreen } from "./screens2";
 export function Intelligence() {
   return (
     <Section id="intelligence">
-      <div className="text-center">
+      <div data-reveal className="text-center">
         <Eyebrow>Lumio Intelligence</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           Go deeper with your own 24/7 coach.

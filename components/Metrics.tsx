@@ -5,7 +5,7 @@ import { StrainScreen, RecoveryScreen } from "./screens2";
 export function Metrics() {
   return (
     <Section id="features">
-      <div className="text-center">
+      <div data-reveal className="text-center">
         <Eyebrow>Daily picture</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           Start the day with confidence.

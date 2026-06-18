@@ -3,7 +3,10 @@ import { Section, Button } from "./ui";
 export function FinalCta() {
   return (
     <Section id="download">
-      <div className="rounded-card border border-line bg-gradient-to-b from-brand-50 to-cloud px-6 py-16 text-center">
+      <div
+        data-reveal
+        className="rounded-card border border-line bg-gradient-to-b from-brand-50 to-cloud px-6 py-16 text-center"
+      >
         <h2 className="mx-auto max-w-xl text-3xl font-bold tracking-tight sm:text-5xl">
           Ready when you are.
         </h2>

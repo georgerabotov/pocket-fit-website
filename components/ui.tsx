@@ -74,7 +74,7 @@ export function FeatureBlock({
   flip?: boolean;
 }) {
   return (
-    <div className="grid items-center gap-10 lg:grid-cols-2">
+    <div data-reveal className="grid items-center gap-10 lg:grid-cols-2">
       <div className={`flex justify-center ${flip ? "lg:order-2" : ""}`}>
         <div className="relative">
           <div

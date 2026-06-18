@@ -20,11 +20,17 @@ export function SocialProof() {
   const row = [...members, ...members];
   return (
     <Section>
-      <h2 className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl">
+      <h2
+        data-reveal
+        className="mx-auto max-w-2xl text-center text-3xl font-bold tracking-tight sm:text-4xl"
+      >
         Join over 1 million members on their health journey.
       </h2>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+      <div
+        data-reveal-stagger
+        className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
+      >
         {stats.map((s) => (
           <div key={s.label} className="text-center">
             <div className="text-3xl font-bold text-brand-600">{s.value}</div>
