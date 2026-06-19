@@ -110,6 +110,14 @@ html.lenis body {
   letter-spacing: -0.01em;
 }
 
+/* Cinematic hero — light text over full-bleed footage */
+.forme-hero {
+  color: var(--color-forme-bone);
+}
+.forme-hero .label {
+  color: rgba(243, 237, 226, 0.82);
+}
+
 .forme-scope .body-sans {
   font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
 }

@@ -120,16 +120,22 @@ export function ScrollScrub() {
 
   return (
     <section ref={sectionRef} className="relative h-[360vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
+        {/* Full-bleed cinematic scrub */}
         <canvas
           ref={canvasRef}
           className="absolute inset-0 h-full w-full"
-          style={{ mixBlendMode: "multiply" }}
         />
 
+        {/* Legibility scrim — darkens top/bottom for the overlaid text, and
+            eases the final frame into the bone editorial section below. */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-forme-bone)_0%,transparent_18%,transparent_82%,var(--color-forme-bone-deep)_100%)]"
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,12,8,0.45)_0%,rgba(15,12,8,0.05)_24%,rgba(15,12,8,0.05)_62%,rgba(15,12,8,0.6)_100%)]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_45%_at_50%_46%,rgba(15,12,8,0.35)_0%,transparent_70%)]"
         />
 
         <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 pt-7 sm:px-12">
@@ -138,7 +144,7 @@ export function ScrollScrub() {
           </Link>
           <Link
             href="/app"
-            className="body-sans rounded-full border border-forme-ink/40 bg-forme-bone/40 px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.22em] text-forme-ink backdrop-blur-sm transition-colors hover:bg-forme-ink hover:text-forme-bone"
+            className="body-sans rounded-full border border-forme-bone/50 bg-white/10 px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.22em] text-forme-bone backdrop-blur-sm transition-colors hover:bg-forme-bone hover:text-forme-ink"
           >
             About our app
           </Link>
@@ -154,7 +160,7 @@ export function ScrollScrub() {
             <br />
             <em className="text-forme-gold">start your workout?</em>
           </h1>
-          <div className="mt-9 h-px w-24 bg-forme-line" />
+          <div className="mt-9 h-px w-24 bg-forme-bone/50" />
         </div>
 
         <div
@@ -170,10 +176,10 @@ export function ScrollScrub() {
           className="absolute inset-x-0 bottom-8 z-20 flex flex-col items-center gap-3"
         >
           <span className="label">Scroll</span>
-          <span className="block h-10 w-px animate-pulse bg-forme-stone/60" />
+          <span className="block h-10 w-px animate-pulse bg-forme-bone/60" />
         </div>
 
-        <div className="absolute inset-x-0 bottom-0 z-20 h-px bg-forme-line/60">
+        <div className="absolute inset-x-0 bottom-0 z-20 h-px bg-forme-bone/30">
           <div ref={barRef} className="h-full origin-left scale-x-0 bg-forme-gold" />
         </div>
       </div>
