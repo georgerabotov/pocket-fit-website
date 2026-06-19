@@ -25,6 +25,15 @@
     "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   --radius-card: 1.5rem;
+
+  /* FORME scroll page — namespaced bone/editorial palette */
+  --color-forme-bone: #f3ede2;
+  --color-forme-bone-deep: #ece4d6;
+  --color-forme-ink: #1c1a16;
+  --color-forme-espresso: #2b2620;
+  --color-forme-stone: #8a8276;
+  --color-forme-line: #d8cfbf;
+  --color-forme-gold: #9a7b43;
 }
 
 html {
@@ -63,4 +72,64 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+/* ---------- FORME scroll page (scoped under .forme-scope) ---------- */
+
+/* Lenis smooth scroll (global mechanics, only active when /forme mounts it) */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.forme-scope {
+  background: var(--color-forme-bone);
+  color: var(--color-forme-ink);
+  font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+}
+
+.forme-scope .label {
+  font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.38em;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--color-forme-stone);
+}
+
+.forme-scope .display {
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+}
+
+.forme-scope .body-sans {
+  font-family: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+}
+
+.motion-ready .forme-scope [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.motion-ready .forme-scope [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .forme-scope [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

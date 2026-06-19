@@ -2,7 +2,10 @@ import Link from "next/link";
 import { Logo } from "./icons";
 import { Button } from "./ui";
 
-const links = [{ label: "About", href: "#features" }];
+const links = [
+  { label: "About", href: "#features" },
+  { label: "The Lift", href: "/forme" },
+];
 
 export function Nav() {
   return (
