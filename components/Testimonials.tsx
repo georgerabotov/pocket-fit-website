@@ -52,7 +52,7 @@ export function Testimonials() {
   const row = [...reviews, ...reviews];
   return (
     <Section>
-      <div data-reveal className="text-center">
+      <div className="text-center">
         <Eyebrow>Loved everywhere</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           Crafted with care, loved by members.

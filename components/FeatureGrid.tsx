@@ -62,7 +62,7 @@ const features = [
 export function FeatureGrid() {
   return (
     <Section className="border-y border-line bg-mist">
-      <div data-reveal className="text-center">
+      <div className="text-center">
         <Eyebrow>And there&apos;s more</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           And that&apos;s not all.
@@ -72,10 +72,7 @@ export function FeatureGrid() {
         </p>
       </div>
 
-      <div
-        data-reveal-stagger="70"
-        className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
-      >
+      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f) => (
           <div
             key={f.label}

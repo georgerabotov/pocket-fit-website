@@ -10,7 +10,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,var(--color-brand-50),transparent)]"
       />
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-2">
-        <div data-reveal-stagger="110" className="text-center lg:text-left">
+        <div className="text-center lg:text-left">
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-cloud px-3 py-1 text-xs font-medium text-ink-soft">
             <span className="flex">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -42,7 +42,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div data-reveal className="relative flex justify-center">
+        <div className="relative flex justify-center">
           <div
             aria-hidden
             className="absolute inset-0 -z-10 m-auto size-72 rounded-full bg-brand-100 blur-3xl"

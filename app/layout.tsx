@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
-import { SiteEffects } from "@/components/SiteEffects";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -21,10 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={geist.variable}>
-      <body>
-        <SiteEffects />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

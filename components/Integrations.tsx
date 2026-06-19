@@ -14,7 +14,7 @@ export function Integrations() {
   const row = [...devices, ...devices];
   return (
     <Section id="integrations" className="border-y border-line bg-mist">
-      <div data-reveal className="text-center">
+      <div className="text-center">
         <Eyebrow>Works with your gear</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           One home for every device you already wear.

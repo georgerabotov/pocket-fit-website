@@ -20,7 +20,7 @@ export function Records() {
   return (
     <Section className="border-y border-line bg-mist">
       <div className="grid items-center gap-12 lg:grid-cols-2">
-        <div data-reveal className="order-2 lg:order-1">
+        <div className="order-2 lg:order-1">
           <Eyebrow>Bloodwork &amp; records</Eyebrow>
           <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
             Bring your lab results into the picture.
@@ -31,7 +31,7 @@ export function Records() {
             alongside your daily metrics.
           </p>
 
-          <div data-reveal-stagger="50" className="mt-8 grid grid-cols-3 gap-2">
+          <div className="mt-8 grid grid-cols-3 gap-2">
             {providers.map((p) => (
               <div
                 key={p}
@@ -46,7 +46,7 @@ export function Records() {
           </p>
         </div>
 
-        <div data-reveal className="order-1 flex justify-center lg:order-2">
+        <div className="order-1 flex justify-center lg:order-2">
           <PhoneFrame>
             <RecordsScreen />
           </PhoneFrame>
