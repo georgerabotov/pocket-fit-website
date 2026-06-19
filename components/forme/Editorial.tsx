@@ -58,9 +58,12 @@ export function Footer() {
         <h2 className="display text-[clamp(2.4rem,6vw,5rem)]">
           The art of the lift.
         </h2>
-        <button className="body-sans mt-12 rounded-full border border-forme-ink px-10 py-4 text-xs uppercase tracking-[0.3em] text-forme-ink transition-colors hover:bg-forme-ink hover:text-forme-bone">
-          Begin your workout
-        </button>
+        <a
+          href="/app"
+          className="body-sans mt-12 inline-block rounded-full border border-forme-ink px-10 py-4 text-xs uppercase tracking-[0.3em] text-forme-ink transition-colors hover:bg-forme-ink hover:text-forme-bone"
+        >
+          About our app
+        </a>
         <p className="body-sans mt-16 text-xs tracking-widest text-forme-stone">
           © FORME STUDIO · 2026
         </p>

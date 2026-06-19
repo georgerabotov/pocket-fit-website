@@ -3,15 +3,15 @@ import { Logo } from "./icons";
 import { Button } from "./ui";
 
 const links = [
-  { label: "About", href: "#features" },
-  { label: "The Lift", href: "/forme" },
+  { label: "Our Story", href: "/" },
+  { label: "Features", href: "#features" },
 ];
 
 export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-line/70 bg-cloud/80 backdrop-blur-lg">
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5">
-        <Link href="#" className="flex items-center gap-2 font-semibold">
+        <Link href="/" className="flex items-center gap-2 font-semibold">
           <Logo />
           <span className="text-lg tracking-tight">Lumio</span>
         </Link>

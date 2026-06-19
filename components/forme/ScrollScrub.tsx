@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import Lenis from "lenis";
 
 const FRAME_COUNT = 121;
@@ -131,9 +132,16 @@ export function ScrollScrub() {
           className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,var(--color-forme-bone)_0%,transparent_18%,transparent_82%,var(--color-forme-bone-deep)_100%)]"
         />
 
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 pt-7 sm:px-12">
-          <span className="display text-2xl tracking-tight">FORME</span>
-          <span className="label">Étude No. 1</span>
+        <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 pt-7 sm:px-12">
+          <Link href="/" className="display text-2xl tracking-tight">
+            FORME
+          </Link>
+          <Link
+            href="/app"
+            className="body-sans rounded-full border border-forme-ink/40 bg-forme-bone/40 px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.22em] text-forme-ink backdrop-blur-sm transition-colors hover:bg-forme-ink hover:text-forme-bone"
+          >
+            About our app
+          </Link>
         </div>
 
         <div
