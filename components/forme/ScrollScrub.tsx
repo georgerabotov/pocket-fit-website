@@ -36,8 +36,10 @@ export function ScrollScrub() {
       const cw = canvas.width;
       const ch = canvas.height;
       ctx.clearRect(0, 0, cw, ch);
-      // object-fit: cover — full-bleed so the studio backdrop fills the
-      // viewport uniformly and leaves no visible frame seam.
+      // object-fit: cover, bottom-anchored — full-bleed with no seam. Any
+      // vertical overflow is cropped from the TOP (sky), so the subjects at
+      // the bottom of the frame are always kept in view. Horizontal overflow
+      // stays centered.
       const ir = img.naturalWidth / img.naturalHeight;
       const cr = cw / ch;
       let dw: number;
@@ -49,7 +51,7 @@ export function ScrollScrub() {
         dw = cw;
         dh = cw / ir;
       }
-      ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+      ctx.drawImage(img, (cw - dw) / 2, ch - dh, dw, dh);
     };
 
     const resize = () => {
