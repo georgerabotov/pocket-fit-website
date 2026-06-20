@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Lenis from "lenis";
 
-const FRAME_COUNT = 121;
+const FRAME_COUNT = 178;
 const framePath = (i: number) =>
   `/frames/frame_${String(i).padStart(3, "0")}.jpg`;
 
@@ -119,7 +119,7 @@ export function ScrollScrub() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[360vh]">
+    <section ref={sectionRef} className="relative h-[560vh]">
       <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
         {/* Full-bleed cinematic scrub */}
         <canvas
