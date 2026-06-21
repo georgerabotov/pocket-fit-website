@@ -75,10 +75,8 @@ export function HeadTrack() {
     const onPointer = (e: PointerEvent) => {
       const xnorm = clamp(e.clientX / window.innerWidth, 0, 1);
       target = xnorm * (FRAME_COUNT - 1);
-      if (!interacted) {
-        interacted = true;
-        if (hintRef.current) hintRef.current.style.opacity = "0";
-      }
+      // stop the idle sway once the user takes over (hint stays visible)
+      interacted = true;
     };
 
     const reduce = window.matchMedia(
