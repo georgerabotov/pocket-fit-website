@@ -36,6 +36,8 @@ export function ScrollScrub() {
       const cw = canvas.width;
       const ch = canvas.height;
       ctx.clearRect(0, 0, cw, ch);
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       // object-fit: cover, bottom-anchored — full-bleed with no seam. Any
       // vertical overflow is cropped from the TOP (sky), so the subjects at
       // the bottom of the frame are always kept in view. Horizontal overflow
