@@ -73,6 +73,8 @@ export function ScrollScrub() {
       const sec = sectionRef.current;
       if (!sec) return;
       const rect = sec.getBoundingClientRect();
+      // Skip all draw/choreography work while the section is off-screen.
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
       const total = rect.height - window.innerHeight;
       const p = total > 0 ? clamp(-rect.top / total, 0, 1) : 0;
 

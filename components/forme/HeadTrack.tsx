@@ -85,12 +85,17 @@ export function HeadTrack() {
 
     let rafId = 0;
     const loop = (t: number) => {
-      if (!interacted && !reduce) {
-        // gentle idle sway so the character feels alive before interaction
-        target = center + Math.sin(t / 900) * (FRAME_COUNT * 0.16);
+      const sec = sectionRef.current;
+      const r = sec?.getBoundingClientRect();
+      const onScreen = r && r.bottom > 0 && r.top < window.innerHeight;
+      if (onScreen) {
+        if (!interacted && !reduce) {
+          // gentle idle sway so the character feels alive before interaction
+          target = center + Math.sin(t / 900) * (FRAME_COUNT * 0.16);
+        }
+        current += (target - current) * (reduce ? 1 : 0.12);
+        paint(current);
       }
-      current += (target - current) * (reduce ? 1 : 0.12);
-      paint(current);
       rafId = requestAnimationFrame(loop);
     };
 

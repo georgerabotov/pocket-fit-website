@@ -112,9 +112,12 @@ export function WorkoutCurl() {
 
     let rafId = 0;
     const loop = () => {
-      amountR += (targetR - amountR) * k;
-      amountL += (targetL - amountL) * k;
-      paint();
+      const r = canvas.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        amountR += (targetR - amountR) * k;
+        amountL += (targetL - amountL) * k;
+        paint();
+      }
       rafId = requestAnimationFrame(loop);
     };
 
