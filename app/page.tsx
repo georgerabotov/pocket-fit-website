@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import { ScrollScrub } from "@/components/forme/ScrollScrub";
+import { HeadTrack } from "@/components/forme/HeadTrack";
 import { Editorial, Footer } from "@/components/forme/Editorial";
 import { RevealInit } from "@/components/forme/RevealInit";
 
@@ -27,6 +28,7 @@ export default function Home() {
     <main className={`forme-scope ${cormorant.variable} ${jost.variable}`}>
       <RevealInit />
       <ScrollScrub />
+      <HeadTrack />
       <Editorial />
       <Footer />
     </main>
