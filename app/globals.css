@@ -165,16 +165,31 @@ html.lenis body {
     opacity: 1;
   }
 }
+@keyframes hint-up {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-7px);
+    opacity: 1;
+  }
+}
 .hint-arrow-l {
   animation: hint-arrow-l 1.5s ease-in-out infinite;
 }
 .hint-arrow-r {
   animation: hint-arrow-r 1.5s ease-in-out infinite;
 }
+.hint-up {
+  animation: hint-up 1.5s ease-in-out infinite;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .hint-arrow-l,
-  .hint-arrow-r {
+  .hint-arrow-r,
+  .hint-up {
     animation: none;
     opacity: 0.8;
   }
