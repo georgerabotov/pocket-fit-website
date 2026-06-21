@@ -4,6 +4,7 @@ import { ScrollScrub } from "@/components/forme/ScrollScrub";
 import { HeadTrack } from "@/components/forme/HeadTrack";
 import { WorkoutCurl } from "@/components/forme/WorkoutCurl";
 import { LockerJourney } from "@/components/forme/LockerJourney";
+import { Journey } from "@/components/forme/Journey";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function Home() {
       <HeadTrack />
       <WorkoutCurl />
       <LockerJourney />
+      <Journey />
     </main>
   );
 }

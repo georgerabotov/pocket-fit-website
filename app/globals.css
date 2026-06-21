@@ -209,3 +209,315 @@ html.lenis body {
     opacity: 0.8;
   }
 }
+
+/* ---------- Kai's 12-month journey (game), gym/gold recolor ---------- */
+.journey {
+  --j-gold: #d8a94a;
+  --j-gold-soft: #e8cfa0;
+  --j-amber: #c8843a;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #0d0a07;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-jost), system-ui, sans-serif;
+}
+.journey .stage {
+  position: relative;
+  width: 100vw;
+  height: 56.25vw;
+  max-height: 100vh;
+  max-width: 177.78vh;
+}
+.journey .card {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: radial-gradient(120% 130% at 78% 12%, #2a2018, #18120c 52%, #0d0a07);
+  color: #fff;
+  cursor: pointer;
+}
+.journey .frame {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 0 7px rgba(0, 0, 0, 0.45);
+}
+.journey .grain {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.5) 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+}
+.journey .glow {
+  position: absolute;
+  right: 14%;
+  bottom: -14%;
+  width: 46%;
+  height: 120%;
+  z-index: 1;
+  background: radial-gradient(
+    closest-side,
+    rgba(216, 169, 74, 0.3),
+    rgba(200, 132, 58, 0.16),
+    transparent 72%
+  );
+}
+.journey .ghostwrap {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-52%);
+  z-index: 1;
+  width: 46%;
+  height: 70vh;
+}
+.journey .ghost {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  font-size: 62vh;
+  line-height: 0.7;
+  letter-spacing: -0.04em;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.07);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.journey .ghost.on {
+  opacity: 1;
+}
+.journey .chars {
+  position: absolute;
+  right: 7%;
+  bottom: 0;
+  height: 104%;
+  width: 42%;
+  z-index: 3;
+}
+.journey .chars img {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: bottom right;
+  opacity: 0;
+  transform: scale(1.04);
+  transition:
+    opacity 0.6s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 26px 40px rgba(0, 0, 0, 0.55));
+}
+.journey .chars img.on {
+  opacity: 1;
+  transform: none;
+}
+.journey .meta {
+  position: absolute;
+  left: 7%;
+  top: 0;
+  bottom: 0;
+  width: 44%;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.journey .kicker {
+  font-weight: 700;
+  font-size: 1.5vh;
+  letter-spacing: 0.42em;
+  color: rgba(255, 255, 255, 0.42);
+  text-transform: uppercase;
+  min-height: 1.9vh;
+}
+.journey .lvl {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.6vh;
+  margin: 2.2vh 0 1vh;
+}
+.journey .lvl .n {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  font-size: 16vh;
+  line-height: 0.78;
+  letter-spacing: -0.03em;
+  background: linear-gradient(120deg, var(--j-gold-soft), #fff 38%, var(--j-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  min-width: 9vh;
+}
+.journey .lvl .lab {
+  font-weight: 700;
+  font-size: 1.7vh;
+  letter-spacing: 0.3em;
+  color: var(--j-gold);
+  padding-bottom: 2.4vh;
+  text-transform: uppercase;
+}
+.journey .rule {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+  margin: 2.4vh 0;
+  width: 88%;
+}
+.journey .stats {
+  display: flex;
+  gap: 5vh;
+}
+.journey .st .k {
+  font-weight: 700;
+  font-size: 1.4vh;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.42);
+  text-transform: uppercase;
+}
+.journey .st .v {
+  font-family: var(--font-cormorant), serif;
+  font-weight: 600;
+  font-size: 4.6vh;
+  line-height: 1;
+  margin-top: 0.9vh;
+}
+.journey .st .v small {
+  font-size: 0.46em;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+}
+.journey .st .v.t {
+  color: var(--j-gold);
+}
+.journey .prog {
+  margin-top: 3.4vh;
+  width: 88%;
+}
+.journey .prog .bar {
+  height: 0.7vh;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.journey .prog .bar i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--j-amber), var(--j-gold));
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.journey .prog .cap {
+  font-weight: 600;
+  font-size: 1.3vh;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 1.2vh;
+}
+.journey .ticks {
+  position: absolute;
+  left: 7%;
+  bottom: 4vh;
+  display: flex;
+  gap: 0.8vh;
+  z-index: 5;
+}
+.journey .ticks i {
+  width: 2.4vh;
+  height: 0.6vh;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.4s;
+}
+.journey .ticks i.on {
+  background: var(--j-gold);
+}
+.journey .ctl {
+  position: absolute;
+  right: 6%;
+  bottom: 3.4vh;
+  z-index: 8;
+  display: flex;
+  align-items: center;
+  gap: 1.4vh;
+}
+.journey .ctl button {
+  border: 0;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 99px;
+  width: 5vh;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2vh;
+  backdrop-filter: blur(8px);
+  transition: background 0.25s;
+}
+.journey .ctl button:hover {
+  background: var(--j-gold);
+  color: #18120c;
+}
+.journey .ctl .play {
+  width: auto;
+  padding: 0 2.4vh;
+  gap: 0.8vh;
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 700;
+  font-size: 1.5vh;
+  letter-spacing: 0.06em;
+}
+/* clear interaction hint */
+.journey .hint {
+  position: absolute;
+  left: 7%;
+  top: 5vh;
+  z-index: 8;
+  display: inline-flex;
+  align-items: center;
+  gap: 1vh;
+  padding: 1vh 2vh;
+  border-radius: 99px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-jost), sans-serif;
+  font-weight: 700;
+  font-size: 1.3vh;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+.journey .hint .dot {
+  width: 1vh;
+  height: 1vh;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.journey .hint .dot.live {
+  background: var(--j-gold);
+  animation: journey-pulse 1.4s ease-in-out infinite;
+}
+@keyframes journey-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey .hint .dot.live { animation: none; }
+}
