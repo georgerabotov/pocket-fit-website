@@ -54,7 +54,7 @@ export function Footer() {
   return (
     <footer className="bg-forme-bone px-6 py-32 text-center">
       <div data-reveal>
-        <p className="label mb-8">FORME</p>
+        <p className="label mb-8">Pocket Fit</p>
         <h2 className="display text-[clamp(2.4rem,6vw,5rem)]">
           The art of the lift.
         </h2>
@@ -65,7 +65,7 @@ export function Footer() {
           About our app
         </a>
         <p className="body-sans mt-16 text-xs tracking-widest text-forme-stone">
-          © FORME STUDIO · 2026
+          © Pocket Fit · 2026
         </p>
       </div>
     </footer>

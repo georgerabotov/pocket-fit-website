@@ -45,7 +45,7 @@ const features = [
   {
     icon: Sparkle,
     label: "Activity status",
-    body: "Let Lumio know when you're traveling, sick, or back at it.",
+    body: "Let Pocket Fit know when you're traveling, sick, or back at it.",
   },
   {
     icon: Drop,
@@ -68,7 +68,7 @@ export function FeatureGrid() {
           And that&apos;s not all.
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-ink-soft">
-          Lumio also includes the following:
+          Pocket Fit also includes the following:
         </p>
       </div>
 

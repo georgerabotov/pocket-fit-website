@@ -25,7 +25,7 @@ const reviews = [
   {
     name: "Marco V.",
     date: "Jan 2026",
-    text: "Switched from three separate apps. Lumio replaced all of them and does it better.",
+    text: "Switched from three separate apps. Pocket Fit replaced all of them and does it better.",
   },
 ];
 

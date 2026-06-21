@@ -8,9 +8,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Lumio — Your Connected Health Coach",
+  title: "Pocket Fit — Your Connected Health Coach",
   description:
-    "Lumio brings your wearables, lab results, and nutrition together into one clear picture — with a private AI coach that helps you act on it.",
+    "Pocket Fit brings your wearables, lab results, and nutrition together into one clear picture — with a private AI coach that helps you act on it.",
 };
 
 export default function RootLayout({

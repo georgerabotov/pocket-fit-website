@@ -29,7 +29,7 @@ export function Footer() {
         <div>
           <Link href="#" className="flex items-center gap-2 font-semibold">
             <Logo />
-            <span className="text-lg">Lumio</span>
+            <span className="text-lg">Pocket Fit</span>
           </Link>
           <p className="mt-3 max-w-xs text-sm text-ink-soft">
             Your connected health coach. Wearables, labs, and nutrition in one
@@ -57,7 +57,7 @@ export function Footer() {
       </div>
 
       <div className="mx-auto mt-12 flex w-full max-w-6xl flex-col items-center justify-between gap-4 border-t border-line pt-6 text-sm text-ink-soft sm:flex-row">
-        <p>© Lumio Health, Inc. 2026. A demo project.</p>
+        <p>© Pocket Fit, Inc. 2026.</p>
         <div className="flex gap-4">
           {socials.map((s) => (
             <Link key={s} href="#" className="transition-colors hover:text-ink">

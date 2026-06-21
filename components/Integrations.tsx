@@ -20,7 +20,7 @@ export function Integrations() {
           One home for every device you already wear.
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-ink-soft">
-          Lumio syncs across the wearables and sensors you own, so nothing lives
+          Pocket Fit syncs across the wearables and sensors you own, so nothing lives
           in a silo.
         </p>
       </div>

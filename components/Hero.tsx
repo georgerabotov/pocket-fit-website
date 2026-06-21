@@ -26,7 +26,7 @@ export function Hero() {
             health coach.
           </h1>
           <p className="mx-auto mt-5 max-w-md text-lg text-ink-soft lg:mx-0">
-            Lumio brings your wearables, lab results, and meals together into one
+            Pocket Fit brings your wearables, lab results, and meals together into one
             clear daily picture — then a private AI coach helps you act on it.
           </p>
 

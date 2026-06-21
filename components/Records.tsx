@@ -26,7 +26,7 @@ export function Records() {
             Bring your lab results into the picture.
           </h2>
           <p className="mt-3 max-w-md text-ink-soft">
-            Connect your test providers and Lumio reads your bloodwork, flags
+            Connect your test providers and Pocket Fit reads your bloodwork, flags
             what&apos;s drifting out of range, and explains it in plain language
             alongside your daily metrics.
           </p>

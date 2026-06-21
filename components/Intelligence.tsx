@@ -6,7 +6,7 @@ export function Intelligence() {
   return (
     <Section id="intelligence">
       <div className="text-center">
-        <Eyebrow>Lumio Intelligence</Eyebrow>
+        <Eyebrow>Pocket Fit Intelligence</Eyebrow>
         <h2 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight sm:text-4xl">
           Go deeper with your own 24/7 coach.
         </h2>
@@ -33,7 +33,7 @@ export function Intelligence() {
         <FeatureBlock
           eyebrow="Trusted sources"
           title="Findings you can trust."
-          body="Every insight links to the latest research and reputable sources, so you can see exactly why Lumio suggested it."
+          body="Every insight links to the latest research and reputable sources, so you can see exactly why Pocket Fit suggested it."
           screen={<SourcesScreen />}
         />
         <FeatureBlock

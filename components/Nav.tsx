@@ -13,7 +13,7 @@ export function Nav() {
       <nav className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5">
         <Link href="/" className="flex items-center gap-2 font-semibold">
           <Logo />
-          <span className="text-lg tracking-tight">Lumio</span>
+          <span className="text-lg tracking-tight">Pocket Fit</span>
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

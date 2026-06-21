@@ -18,7 +18,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "FORME — The Art of the Lift",
+  title: "Pocket Fit — Are You Ready to Start Your Workout?",
   description: "Our story. A scroll-driven study of movement.",
 };
 

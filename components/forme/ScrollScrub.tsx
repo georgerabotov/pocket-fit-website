@@ -141,9 +141,7 @@ export function ScrollScrub() {
         />
 
         <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 pt-7 sm:px-12">
-          <Link href="/" className="display text-2xl tracking-tight">
-            FORME
-          </Link>
+          <Link href="/" className="display text-2xl tracking-tight">Pocket Fit</Link>
           <Link
             href="/app"
             className="body-sans rounded-full border border-forme-bone/50 bg-white/10 px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.22em] text-forme-bone backdrop-blur-sm transition-colors hover:bg-forme-bone hover:text-forme-ink"

@@ -166,7 +166,7 @@ export function ChatScreen() {
     <div className="flex h-full flex-col gap-3 bg-mist p-4 pt-10">
       <div className="flex items-center gap-2">
         <Chat className="size-5 text-brand-600" />
-        <p className="text-sm font-bold">Ask Lumio</p>
+        <p className="text-sm font-bold">Ask Pocket Fit</p>
       </div>
       <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-brand-500 p-3 text-xs text-white">
         I feel a bit flat today. What happened?
