@@ -123,9 +123,9 @@ export function HeadTrack() {
 
       {/* Caption */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-6 pb-16 text-center sm:px-12">
-        <p className="label mb-5">Eyes on your form</p>
+        <p className="label mb-5">Surrounded by machines</p>
         <h2 className="display text-[clamp(2.4rem,6.5vw,5.5rem)]">
-          We&apos;ve got your back.
+          Wait… what do I do now?
         </h2>
         <div
           ref={hintRef}
