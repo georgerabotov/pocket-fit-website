@@ -18,7 +18,6 @@ export function ScrollScrub() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
-  const outroRef = useRef<HTMLDivElement>(null);
   const cueRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
@@ -80,7 +79,6 @@ export function ScrollScrub() {
       draw(Math.round(p * (FRAME_COUNT - 1)));
 
       const intro = introRef.current;
-      const outro = outroRef.current;
       const cue = cueRef.current;
       const bar = barRef.current;
       if (intro) {
@@ -89,11 +87,6 @@ export function ScrollScrub() {
         intro.style.transform = `translateY(${-40 * out}px)`;
       }
       if (cue) cue.style.opacity = String(1 - smoothstep(0, 0.06, p));
-      if (outro) {
-        const inn = smoothstep(0.72, 0.92, p);
-        outro.style.opacity = String(inn);
-        outro.style.transform = `translateY(${24 * (1 - inn)}px)`;
-      }
       if (bar) bar.style.transform = `scaleX(${p})`;
     };
 
@@ -163,14 +156,6 @@ export function ScrollScrub() {
             <em className="text-forme-gold">start your workout?</em>
           </h1>
           <div className="mt-9 h-px w-24 bg-forme-bone/50" />
-        </div>
-
-        <div
-          ref={outroRef}
-          className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center opacity-0"
-        >
-          <p className="label mb-6">Every rep, considered</p>
-          <h2 className="display text-[clamp(3rem,9vw,8rem)]">Begin.</h2>
         </div>
 
         <div
