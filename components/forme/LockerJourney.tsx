@@ -2,15 +2,19 @@
 
 import { useEffect, useRef } from "react";
 
-// Two consecutive clips united into one continuous scrub:
+// Three consecutive clips united into one continuous scrub:
 // dress[0..120] = walk across gym to the "Men" door
 // sit[0..120]   = through the door, into the locker room, sit down
+// weigh[0..120] = rise from the bench and step onto the scale (125 kg)
 const DRESS_COUNT = 121;
 const SIT_COUNT = 121;
-const TOTAL = DRESS_COUNT + SIT_COUNT;
+const WEIGH_COUNT = 121;
+const TOTAL = DRESS_COUNT + SIT_COUNT + WEIGH_COUNT;
 const dressPath = (i: number) =>
   `/dress/dress_${String(i).padStart(3, "0")}.jpg`;
 const sitPath = (i: number) => `/sit/sit_${String(i).padStart(3, "0")}.jpg`;
+const weighPath = (i: number) =>
+  `/weigh/weigh_${String(i).padStart(3, "0")}.jpg`;
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const smoothstep = (a: number, b: number, x: number) => {
@@ -30,10 +34,14 @@ export function LockerJourney() {
     const ctx = canvas.getContext("2d", { alpha: true })!;
     const dress: HTMLImageElement[] = [];
     const sit: HTMLImageElement[] = [];
+    const weigh: HTMLImageElement[] = [];
     let current = -1;
 
-    const frameAt = (g: number) =>
-      g < DRESS_COUNT ? dress[g] : sit[g - DRESS_COUNT];
+    const frameAt = (g: number) => {
+      if (g < DRESS_COUNT) return dress[g];
+      if (g < DRESS_COUNT + SIT_COUNT) return sit[g - DRESS_COUNT];
+      return weigh[g - DRESS_COUNT - SIT_COUNT];
+    };
 
     const draw = (g: number, force = false) => {
       if (g === current && !force) return;
@@ -77,13 +85,18 @@ export function LockerJourney() {
       img.src = sitPath(i + 1);
       sit[i] = img;
     }
+    for (let i = 0; i < WEIGH_COUNT; i++) {
+      const img = new Image();
+      img.src = weighPath(i + 1);
+      weigh[i] = img;
+    }
 
-    // line reveal windows (after he is seated)
+    // thought-balloon line reveal windows (while seated, before he rises)
     const windows = [
-      [0.82, 0.86],
-      [0.87, 0.9],
-      [0.905, 0.93],
-      [0.94, 0.985],
+      [0.46, 0.49],
+      [0.5, 0.53],
+      [0.535, 0.555],
+      [0.56, 0.585],
     ];
 
     const update = () => {
@@ -94,15 +107,18 @@ export function LockerJourney() {
       const total = rect.height - window.innerHeight;
       const p = total > 0 ? clamp(-rect.top / total, 0, 1) : 0;
 
-      // scrub the whole journey over the first 80%, then hold seated
-      draw(Math.round(clamp(p / 0.8, 0, 1) * (TOTAL - 1)));
+      // scrub the whole journey (walk -> sit -> rise -> weigh-in) over the
+      // first 92% of scroll, then hold the final frame (125 kg)
+      draw(Math.round(clamp(p / 0.92, 0, 1) * (TOTAL - 1)));
 
       const cue = cueRef.current;
       if (cue) cue.style.opacity = String(1 - smoothstep(0.02, 0.1, p));
 
+      // balloon fades in while he's seated, holds, then fades out as he rises
       const balloon = balloonRef.current;
       if (balloon) {
-        const inn = smoothstep(0.8, 0.84, p);
+        const inn =
+          smoothstep(0.43, 0.47, p) * (1 - smoothstep(0.59, 0.63, p));
         balloon.style.opacity = String(inn);
         balloon.style.transform = `translateY(${12 * (1 - inn)}px) scale(${0.94 + 0.06 * inn})`;
       }
@@ -131,7 +147,7 @@ export function LockerJourney() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[820vh]">
+    <section ref={sectionRef} className="relative h-[1180vh]">
       <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
