@@ -20,6 +20,7 @@ export function DressingRoom() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const capRef = useRef<HTMLDivElement>(null);
+  const cueRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -79,6 +80,9 @@ export function DressingRoom() {
         cap.style.opacity = String(inn);
         cap.style.transform = `translateY(${20 * (1 - inn)}px)`;
       }
+
+      const cue = cueRef.current;
+      if (cue) cue.style.opacity = String(1 - smoothstep(0.04, 0.2, p));
     };
 
     let rafId = 0;
@@ -115,6 +119,15 @@ export function DressingRoom() {
         >
           <p className="label mb-5">Workout complete</p>
           <h2 className="display text-[clamp(2.6rem,7vw,6rem)]">Earned it.</h2>
+        </div>
+
+        {/* Keep-scrolling cue (fades out as you move) */}
+        <div
+          ref={cueRef}
+          className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-2"
+        >
+          <span className="label">Keep scrolling</span>
+          <span className="hint-down text-xl leading-none">↓</span>
         </div>
       </div>
     </section>
