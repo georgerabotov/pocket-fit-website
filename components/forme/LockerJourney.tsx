@@ -2,8 +2,15 @@
 
 import { useEffect, useRef } from "react";
 
-const FRAME_COUNT = 121;
-const framePath = (i: number) => `/sit/sit_${String(i).padStart(3, "0")}.jpg`;
+// Two consecutive clips united into one continuous scrub:
+// dress[0..120] = walk across gym to the "Men" door
+// sit[0..120]   = through the door, into the locker room, sit down
+const DRESS_COUNT = 121;
+const SIT_COUNT = 121;
+const TOTAL = DRESS_COUNT + SIT_COUNT;
+const dressPath = (i: number) =>
+  `/dress/dress_${String(i).padStart(3, "0")}.jpg`;
+const sitPath = (i: number) => `/sit/sit_${String(i).padStart(3, "0")}.jpg`;
 
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const smoothstep = (a: number, b: number, x: number) => {
@@ -11,28 +18,28 @@ const smoothstep = (a: number, b: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
-/**
- * Continuation scrub: he walks into the locker room and sits. As he settles,
- * a thought balloon fades in above him and the lines build with the scroll,
- * landing on the resolve.
- */
-export function SitThought() {
+export function LockerJourney() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const cueRef = useRef<HTMLDivElement>(null);
   const balloonRef = useRef<HTMLDivElement>(null);
   const lineRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext("2d", { alpha: true })!;
-    const images: HTMLImageElement[] = [];
-    let currentFrame = -1;
+    const dress: HTMLImageElement[] = [];
+    const sit: HTMLImageElement[] = [];
+    let current = -1;
 
-    const draw = (frame: number, force = false) => {
-      if (frame === currentFrame && !force) return;
-      const img = images[frame];
+    const frameAt = (g: number) =>
+      g < DRESS_COUNT ? dress[g] : sit[g - DRESS_COUNT];
+
+    const draw = (g: number, force = false) => {
+      if (g === current && !force) return;
+      const img = frameAt(g);
       if (!img || !img.complete || img.naturalWidth === 0) return;
-      currentFrame = frame;
+      current = g;
       const cw = canvas.width;
       const ch = canvas.height;
       ctx.clearRect(0, 0, cw, ch);
@@ -56,22 +63,27 @@ export function SitThought() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(canvas.clientWidth * dpr);
       canvas.height = Math.round(canvas.clientHeight * dpr);
-      draw(currentFrame < 0 ? 0 : currentFrame, true);
+      draw(current < 0 ? 0 : current, true);
     };
 
-    for (let i = 0; i < FRAME_COUNT; i++) {
+    for (let i = 0; i < DRESS_COUNT; i++) {
       const img = new Image();
-      img.src = framePath(i + 1);
+      img.src = dressPath(i + 1);
       if (i === 0) img.onload = () => draw(0, true);
-      images[i] = img;
+      dress[i] = img;
+    }
+    for (let i = 0; i < SIT_COUNT; i++) {
+      const img = new Image();
+      img.src = sitPath(i + 1);
+      sit[i] = img;
     }
 
-    // line reveal windows (start, end) across scroll progress
+    // line reveal windows (after he is seated)
     const windows = [
-      [0.46, 0.56],
-      [0.58, 0.68],
-      [0.7, 0.79],
-      [0.82, 0.93],
+      [0.82, 0.86],
+      [0.87, 0.9],
+      [0.905, 0.93],
+      [0.94, 0.985],
     ];
 
     const update = () => {
@@ -81,12 +93,15 @@ export function SitThought() {
       const total = rect.height - window.innerHeight;
       const p = total > 0 ? clamp(-rect.top / total, 0, 1) : 0;
 
-      // walk in + sit over the first ~45% of scroll, then hold seated
-      draw(Math.round(clamp(p / 0.45, 0, 1) * (FRAME_COUNT - 1)));
+      // scrub the whole journey over the first 80%, then hold seated
+      draw(Math.round(clamp(p / 0.8, 0, 1) * (TOTAL - 1)));
+
+      const cue = cueRef.current;
+      if (cue) cue.style.opacity = String(1 - smoothstep(0.02, 0.1, p));
 
       const balloon = balloonRef.current;
       if (balloon) {
-        const inn = smoothstep(0.4, 0.5, p);
+        const inn = smoothstep(0.8, 0.84, p);
         balloon.style.opacity = String(inn);
         balloon.style.transform = `translateY(${12 * (1 - inn)}px) scale(${0.94 + 0.06 * inn})`;
       }
@@ -115,11 +130,26 @@ export function SitThought() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[520vh]">
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+    <section ref={sectionRef} className="relative h-[820vh]">
+      <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
         <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
-        {/* Thought balloon */}
+        {/* subtle bottom scrim for the cue */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(15,12,8,0.55)_0%,transparent_30%)]"
+        />
+
+        {/* Keep-scrolling cue */}
+        <div
+          ref={cueRef}
+          className="pointer-events-none absolute inset-x-0 bottom-8 z-10 flex flex-col items-center gap-2"
+        >
+          <span className="label">Keep scrolling</span>
+          <span className="hint-down text-xl leading-none">↓</span>
+        </div>
+
+        {/* Thought balloon (reveals once he's seated) */}
         <div
           ref={balloonRef}
           className="pointer-events-none absolute inset-x-0 top-[5vh] z-20 mx-auto w-[min(86vw,30rem)] opacity-0"
@@ -158,7 +188,6 @@ export function SitThought() {
               I WILL GET STRONG.
             </p>
           </div>
-          {/* thought tail */}
           <div className="mx-auto mt-2 flex flex-col items-center gap-1.5">
             <span className="block size-4 rounded-full bg-white/95 shadow-md" />
             <span className="block size-2.5 rounded-full bg-white/95 shadow" />

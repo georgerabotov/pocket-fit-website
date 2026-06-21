@@ -3,8 +3,7 @@ import { Cormorant_Garamond, Jost } from "next/font/google";
 import { ScrollScrub } from "@/components/forme/ScrollScrub";
 import { HeadTrack } from "@/components/forme/HeadTrack";
 import { WorkoutCurl } from "@/components/forme/WorkoutCurl";
-import { DressingRoom } from "@/components/forme/DressingRoom";
-import { SitThought } from "@/components/forme/SitThought";
+import { LockerJourney } from "@/components/forme/LockerJourney";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -30,8 +29,7 @@ export default function Home() {
       <ScrollScrub />
       <HeadTrack />
       <WorkoutCurl />
-      <DressingRoom />
-      <SitThought />
+      <LockerJourney />
     </main>
   );
 }
