@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Integrations } from "@/components/Integrations";
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function AppPage() {
   return (
     <>
+      <SmoothScroll />
       <Nav />
       <main>
         <Hero />
