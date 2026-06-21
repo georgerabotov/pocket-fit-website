@@ -107,11 +107,9 @@ export function HeadTrack() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="forme-hero relative h-screen w-full overflow-hidden bg-black"
-    >
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+    <section ref={sectionRef} className="relative h-[220vh]">
+      <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
       {/* Legibility scrim for the caption */}
       <div
@@ -134,6 +132,7 @@ export function HeadTrack() {
           <span className="label">Move left &amp; right to look around</span>
           <span className="hint-arrow-r text-xl leading-none">→</span>
         </div>
+      </div>
       </div>
     </section>
   );

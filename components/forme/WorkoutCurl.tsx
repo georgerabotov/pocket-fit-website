@@ -133,8 +133,9 @@ export function WorkoutCurl() {
   }, []);
 
   return (
-    <section className="forme-hero relative h-screen w-full overflow-hidden bg-black">
-      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
+    <section className="relative h-[220vh]">
+      <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
+        <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
 
       {/* Legibility scrim */}
       <div
@@ -153,6 +154,7 @@ export function WorkoutCurl() {
           <span className="label">Hover an arm &amp; drag up to curl</span>
           <span className="hint-up text-xl leading-none">↑</span>
         </div>
+      </div>
       </div>
     </section>
   );
