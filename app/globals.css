@@ -141,3 +141,41 @@ html.lenis body {
     transition: none;
   }
 }
+
+/* Drag-to-look hint arrows */
+@keyframes hint-arrow-l {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(-7px);
+    opacity: 1;
+  }
+}
+@keyframes hint-arrow-r {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateX(7px);
+    opacity: 1;
+  }
+}
+.hint-arrow-l {
+  animation: hint-arrow-l 1.5s ease-in-out infinite;
+}
+.hint-arrow-r {
+  animation: hint-arrow-r 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hint-arrow-l,
+  .hint-arrow-r {
+    animation: none;
+    opacity: 0.8;
+  }
+}

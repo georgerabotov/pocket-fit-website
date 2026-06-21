@@ -129,10 +129,12 @@ export function HeadTrack() {
         </h2>
         <div
           ref={hintRef}
-          className="label mt-7 transition-opacity duration-700"
+          className="mt-8 flex items-center justify-center gap-4 transition-opacity duration-700"
           style={{ opacity: 1 }}
         >
-          Move your cursor
+          <span className="hint-arrow-l text-xl leading-none">←</span>
+          <span className="label">Move left &amp; right to look around</span>
+          <span className="hint-arrow-r text-xl leading-none">→</span>
         </div>
       </div>
     </section>
