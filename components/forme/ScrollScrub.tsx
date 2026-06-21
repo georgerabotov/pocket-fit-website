@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Lenis from "lenis";
 
-const FRAME_COUNT = 178;
+const FRAME_COUNT = 183;
 const framePath = (i: number) =>
   `/frames/frame_${String(i).padStart(3, "0")}.jpg`;
 
@@ -20,6 +20,8 @@ export function ScrollScrub() {
   const introRef = useRef<HTMLDivElement>(null);
   const cueRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
+  const sheRef = useRef<HTMLDivElement>(null);
+  const heRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -90,6 +92,23 @@ export function ScrollScrub() {
       }
       if (cue) cue.style.opacity = String(1 - smoothstep(0, 0.06, p));
       if (bar) bar.style.transform = `scaleX(${p})`;
+
+      // dialogue at the face-to-face beat (vid2 end -> vid3), gone before he
+      // walks in. She speaks first, then he answers.
+      const fade = (inA: number, inB: number) =>
+        smoothstep(inA, inB, p) * (1 - smoothstep(0.86, 0.9, p));
+      const she = sheRef.current;
+      const he = heRef.current;
+      if (she) {
+        const s = fade(0.55, 0.6);
+        she.style.opacity = String(s);
+        she.style.transform = `translateY(${14 * (1 - s)}px)`;
+      }
+      if (he) {
+        const s = fade(0.67, 0.72);
+        he.style.opacity = String(s);
+        he.style.transform = `translateY(${14 * (1 - s)}px)`;
+      }
     };
 
     const reduce = window.matchMedia(
@@ -118,7 +137,7 @@ export function ScrollScrub() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative h-[560vh]">
+    <section ref={sectionRef} className="relative h-[760vh]">
       <div className="forme-hero sticky top-0 h-screen w-full overflow-hidden bg-black">
         {/* Full-bleed cinematic scrub */}
         <canvas
@@ -151,13 +170,38 @@ export function ScrollScrub() {
           ref={introRef}
           className="pointer-events-none absolute inset-0 z-20 flex flex-col items-center justify-center px-6 text-center"
         >
-          <p className="label mb-7">Deficit Deadlift</p>
+          <p className="label mb-7">Day one</p>
           <h1 className="display text-[clamp(2.6rem,7vw,6.5rem)]">
             Are you ready to
             <br />
             <em className="text-forme-gold">start your workout?</em>
           </h1>
           <div className="mt-9 h-px w-24 bg-forme-bone/50" />
+        </div>
+
+        {/* Dialogue — she (right) speaks first, he (left) answers.
+            Placeholder lines; swap for the real script. */}
+        <div
+          ref={sheRef}
+          className="pointer-events-none absolute right-[5%] top-[15%] z-20 w-[min(70vw,22rem)] opacity-0 sm:right-[10%]"
+        >
+          <div className="relative rounded-[1.6rem] bg-white px-6 py-4 text-center shadow-2xl ring-1 ring-black/10">
+            <p className="body-sans text-base font-semibold text-[#1c1a16] sm:text-xl">
+              We&apos;re done here.
+            </p>
+            <span className="absolute -bottom-2 left-1/2 size-4 -translate-x-1/2 rotate-45 bg-white" />
+          </div>
+        </div>
+        <div
+          ref={heRef}
+          className="pointer-events-none absolute left-[5%] top-[31%] z-20 w-[min(70vw,22rem)] opacity-0 sm:left-[9%]"
+        >
+          <div className="relative rounded-[1.6rem] bg-white px-6 py-4 text-center shadow-2xl ring-1 ring-black/10">
+            <p className="body-sans text-base font-semibold text-[#1c1a16] sm:text-xl">
+              I&apos;m just getting started.
+            </p>
+            <span className="absolute -bottom-2 left-1/2 size-4 -translate-x-1/2 rotate-45 bg-white" />
+          </div>
         </div>
 
         <div
