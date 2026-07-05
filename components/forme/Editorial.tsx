@@ -59,7 +59,7 @@ export function Footer() {
           The art of the lift.
         </h2>
         <a
-          href="/app"
+          href="/pricing"
           className="body-sans mt-12 inline-block rounded-full border border-forme-ink px-10 py-4 text-xs uppercase tracking-[0.3em] text-forme-ink transition-colors hover:bg-forme-ink hover:text-forme-bone"
         >
           About our app

@@ -22,12 +22,16 @@ export function SmoothScroll() {
 
     const onClick = (e: MouseEvent) => {
       const link = (e.target as HTMLElement).closest<HTMLAnchorElement>(
-        'a[href^="#"]',
+        'a[href*="#"]',
       );
       if (!link) return;
-      const id = link.getAttribute("href");
-      if (!id || id === "#") return;
-      const target = document.querySelector(id);
+      const url = new URL(link.href, location.href);
+      // only smooth-scroll hash links that point somewhere on the current page
+      // (e.g. "#features" or "/#download" while already on "/")
+      if (url.pathname !== location.pathname || !url.hash || url.hash === "#") {
+        return;
+      }
+      const target = document.querySelector(url.hash);
       if (!target) return;
       e.preventDefault();
       lenis.scrollTo(target as HTMLElement, { offset: -72 });

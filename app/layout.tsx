@@ -8,9 +8,14 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Pocket Fit — Your Connected Health Coach",
+  title: "Pocket Fit — AI workouts around your real life",
   description:
-    "Pocket Fit brings your wearables, lab results, and nutrition together into one clear picture — with a private AI coach that helps you act on it.",
+    "Pocket Fit builds personalized, AI-generated workout programs around your goals, equipment, and schedule. Live on iOS and Android.",
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

@@ -74,6 +74,161 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Review marquee (two rows, opposite directions, pause on hover) */
+@keyframes rvScrollL {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes rvScrollR {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.rv-anim-l {
+  animation: rvScrollL 46s linear infinite;
+}
+.rv-anim-r {
+  animation: rvScrollR 52s linear infinite;
+}
+.rv-pause:hover .rv-anim-l,
+.rv-pause:hover .rv-anim-r {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-anim-l,
+  .rv-anim-r {
+    animation: none;
+  }
+}
+
+/* Feature grid floating component cards */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+.animate-bob {
+  animation: bob 7s ease-in-out infinite;
+}
+.animate-bob-1 {
+  animation: bob 7.8s ease-in-out -1.4s infinite;
+}
+.animate-bob-2 {
+  animation: bob 8.4s ease-in-out -2.8s infinite;
+}
+.animate-floatA {
+  animation: floatA 7s ease-in-out infinite;
+}
+.animate-floatB {
+  animation: floatB 8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-bob,
+  .animate-bob-1,
+  .animate-bob-2,
+  .animate-floatA,
+  .animate-floatB {
+    animation: none;
+  }
+}
+
+/* Generic scroll reveal (home page) — bevel-style eased fade/slide-up */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Pricing detail-panel slide-in */
+@keyframes panelInRight {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes panelInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  [class*="panelIn"] {
+    animation: none !important;
+  }
+}
+
+/* FAQ header entrance */
+@keyframes faqHeadIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.faq-head {
+  animation: faqHeadIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-head {
+    animation: none;
+  }
+}
+
 /* ---------- FORME scroll page (scoped under .forme-scope) ---------- */
 
 /* Lenis smooth scroll (global mechanics, only active when /forme mounts it) */
