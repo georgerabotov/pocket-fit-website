@@ -17,24 +17,20 @@ const CSS = String.raw`.pf-fs{
 .pf-fs{scroll-behavior:smooth}
 .pf-fs{font-family:"Nunito",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5}
 .pf-fs .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
-.pf-fs /* ===== section shell ===== */
-  .features{padding:96px 0 110px}
+.pf-fs .features{padding:96px 0 110px}
 .pf-fs .sec-head{max-width:720px;margin:0 auto 52px;text-align:center}
 .pf-fs .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);background:var(--indigo-soft);padding:7px 14px;border-radius:99px;margin-bottom:20px}
 .pf-fs .sec-head h2{font-family:"Archivo",sans-serif;font-weight:900;letter-spacing:-.03em;line-height:1.0;font-size:clamp(34px,4.6vw,56px)}
 .pf-fs .sec-head p{font-size:clamp(17px,2vw,20px);color:var(--ink2);font-weight:500;margin-top:16px;max-width:560px;margin-left:auto;margin-right:auto}
-.pf-fs /* ===== card grid ===== */
-  .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pf-fs .fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .pf-fs .fcard{position:relative;border-radius:30px;overflow:hidden;min-height:540px;padding:40px 40px 44px;isolation:isolate;display:flex;flex-direction:column}
 .pf-fs .fcard .cap{position:relative;z-index:3;flex:0 0 auto}
 .pf-fs .fcard h3{font-family:"Archivo",sans-serif;font-weight:900;font-size:32px;letter-spacing:-.02em;line-height:1;color:var(--ink)}
 .pf-fs .fcard p{font-size:16.5px;font-weight:600;color:var(--ink2);margin-top:14px;max-width:290px;line-height:1.45}
-.pf-fs /* tints */
-  .fcard.t-train{background:linear-gradient(180deg,#EEEDFB 0%,#E4E3F8 100%)}
+.pf-fs .fcard.t-train{background:linear-gradient(180deg,#EEEDFB 0%,#E4E3F8 100%)}
 .pf-fs .fcard.t-progress{background:linear-gradient(180deg,#E7F5F4 0%,#DAEFEE 100%)}
 .pf-fs .fcard.t-transform{background:linear-gradient(180deg,#EDECFC 0%,#DCD8FA 55%,#CFC9F7 100%)}
-.pf-fs /* soft radial glows behind components */
-  .fcard .glow{position:absolute;left:50%;bottom:2%;width:120%;height:56%;transform:translateX(-50%);z-index:1;border-radius:50%;filter:blur(34px);opacity:.6}
+.pf-fs .fcard .glow{position:absolute;left:50%;bottom:2%;width:120%;height:56%;transform:translateX(-50%);z-index:1;border-radius:50%;filter:blur(34px);opacity:.6}
 .pf-fs .fcard.t-train .glow{background:radial-gradient(closest-side,rgba(93,91,208,.24),transparent)}
 .pf-fs .fcard.t-progress .glow{background:radial-gradient(closest-side,rgba(92,192,191,.30),transparent)}
 .pf-fs .fcard.t-transform .glow{background:radial-gradient(closest-side,rgba(120,110,255,.40),transparent)}
@@ -45,15 +41,13 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .fcard.t-budget .glow{background:radial-gradient(closest-side,rgba(93,91,208,.24),transparent)}
 .pf-fs .fcard.t-share .glow{background:radial-gradient(closest-side,rgba(120,110,255,.40),transparent)}
 .pf-fs .fgrid.row2{margin-top:20px}
-.pf-fs /* ===== floating component card ===== */
-  .compwrap{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;margin-top:26px}
+.pf-fs .compwrap{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;margin-top:26px}
 .pf-fs .compcard{position:relative;width:100%;max-width:296px;background:#fff;border-radius:24px;padding:20px;box-shadow:0 30px 60px rgba(40,36,90,.18),0 4px 12px rgba(40,36,90,.06);font-family:"Nunito",sans-serif}
 .pf-fs .compcard.float{animation:bob 7s ease-in-out infinite}
 .pf-fs .compcard.float.s1{animation-delay:-1.4s;animation-duration:7.8s}
 .pf-fs .compcard.float.s2{animation-delay:-2.8s;animation-duration:8.4s}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.pf-fs /* --- TRAIN component (session) --- */
-  .cc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.pf-fs .cc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .pf-fs .cc-tag{font-weight:900;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--indigo)}
 .pf-fs .cc-dur{font-weight:800;font-size:11px;color:var(--indigo-ink);background:var(--indigo-soft);padding:4px 10px;border-radius:99px}
 .pf-fs .cc-title{font-family:"Archivo",sans-serif;font-weight:900;font-size:22px;letter-spacing:-.02em;color:#0A0A0F}
@@ -65,8 +59,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .cc-chk{width:22px;height:22px;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
 .pf-fs .cc-list li.done .cc-chk{background:var(--indigo);color:#fff}
 .pf-fs .cc-list li.pending .cc-chk{border:2px solid rgba(0,0,0,.16)}
-.pf-fs /* --- interactive session views --- */
-  .view{display:none}
+.pf-fs .view{display:none}
 .pf-fs .view.on{display:block;animation:vin .34s cubic-bezier(.19,1,.22,1)}
 @keyframes vin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .pf-fs .ex-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
@@ -90,8 +83,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .exrow.done .sbox{background:#2DB278;border-color:#2DB278}
 .pf-fs .cc-next{margin-top:16px;width:100%;background:linear-gradient(150deg,#6260E0,#4D4BC0);color:#fff;border:none;border-radius:14px;padding:14px;font-family:"Nunito";font-weight:900;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 10px 22px rgba(77,75,192,.32);cursor:pointer;opacity:.4;pointer-events:none;transition:.25s}
 .pf-fs .cc-next.ready{opacity:1;pointer-events:auto;background:linear-gradient(150deg,#2DB278,#1F8A5B);box-shadow:0 10px 22px rgba(31,138,91,.3)}
-.pf-fs /* done view */
-  .v-done{text-align:center;padding:8px 0 4px}
+.pf-fs .v-done{text-align:center;padding:8px 0 4px}
 .pf-fs .done-badge{width:76px;height:76px;border-radius:50%;margin:6px auto 16px;background:linear-gradient(150deg,#6260E0,#4D4BC0);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(77,75,192,.4);animation:pop .5s cubic-bezier(.2,1.4,.4,1)}
 @keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
 .pf-fs .done-t{font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;letter-spacing:-.02em;color:#0A0A0F}
@@ -101,8 +93,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .done-stats .m .k{font-weight:800;font-size:10px;color:rgba(0,0,0,.42)}
 .pf-fs .done-stats .m .v{font-family:"Archivo",sans-serif;font-weight:900;font-size:18px;color:#0A0A0F;margin-top:3px}
 .pf-fs .cc-reset{margin-top:16px;background:none;border:none;font-family:"Nunito";font-weight:800;font-size:12.5px;color:var(--indigo);cursor:pointer}
-.pf-fs /* --- PROGRESS component (chart) --- */
-  .cc-head2{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.pf-fs .cc-head2{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
 .pf-fs .cc-h2t{font-weight:900;font-size:14px;color:#0A0A0F}
 .pf-fs .cc-up{font-weight:900;font-size:12px;color:#2E9E8F;background:rgba(92,192,191,.18);padding:4px 9px;border-radius:99px;display:flex;align-items:center;gap:3px}
 .pf-fs .cc-big{font-family:"Archivo",sans-serif;font-weight:900;font-size:30px;color:#0A0A0F;letter-spacing:-.03em;margin-top:6px}
@@ -111,8 +102,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .cc-stats2 .m{flex:1;background:#F7F7FB;border-radius:14px;padding:11px 13px}
 .pf-fs .cc-stats2 .m .k{font-weight:800;font-size:10.5px;color:rgba(0,0,0,.42)}
 .pf-fs .cc-stats2 .m .v{font-family:"Archivo",sans-serif;font-weight:900;font-size:17px;color:#0A0A0F;margin-top:3px;letter-spacing:-.02em}
-.pf-fs /* --- TRANSFORM component (dark character) --- */
-  .compcard.dark{background:linear-gradient(165deg,#221C3E,#141024);padding:22px 20px 24px}
+.pf-fs .compcard.dark{background:linear-gradient(165deg,#221C3E,#141024);padding:22px 20px 24px}
 .pf-fs .cc-tlv{font-family:"Archivo",sans-serif;font-weight:900;font-size:11px;letter-spacing:.14em;color:#9b9cfd;text-align:center}
 .pf-fs .cc-av{position:relative;display:flex;flex-direction:column;align-items:center;margin-top:6px}
 .pf-fs .cc-av .avglow{position:absolute;width:190px;height:190px;border-radius:50%;background:radial-gradient(closest-side,rgba(120,110,255,.5),transparent);top:44%;transform:translateY(-50%)}
@@ -121,8 +111,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .cc-bar{width:100%;height:8px;border-radius:99px;background:rgba(255,255,255,.14);margin-top:14px;overflow:hidden}
 .pf-fs .cc-bar i{display:block;height:100%;width:62%;border-radius:99px;background:linear-gradient(90deg,#9b9cfd,#5CC0BF)}
 .pf-fs .cc-note{font-weight:800;font-size:11px;color:rgba(255,255,255,.6);margin-top:10px;text-align:center}
-.pf-fs /* ===== wide nutrition card ===== */
-  .wide{margin-top:20px;position:relative;border-radius:30px;overflow:hidden;min-height:520px;background:linear-gradient(120deg,#EFEDFC 0%,#E7E4FB 45%,#E9E0F4 100%);display:grid;grid-template-columns:1.02fr 1fr;align-items:center}
+.pf-fs .wide{margin-top:20px;position:relative;border-radius:30px;overflow:hidden;min-height:520px;background:linear-gradient(120deg,#EFEDFC 0%,#E7E4FB 45%,#E9E0F4 100%);display:grid;grid-template-columns:1.02fr 1fr;align-items:center}
 .pf-fs .wide .copy{padding:64px 20px 64px 60px;position:relative;z-index:3}
 .pf-fs .wide h2{font-family:"Archivo",sans-serif;font-weight:900;letter-spacing:-.03em;line-height:.98;font-size:clamp(38px,4.4vw,58px);color:var(--ink)}
 .pf-fs .wide p{font-size:18px;font-weight:600;color:var(--ink2);margin-top:20px;max-width:400px;line-height:1.45}
@@ -130,8 +119,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .wide .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(242,169,59,.22)}
 .pf-fs .wide .stage{position:relative;height:100%;min-height:520px}
 .pf-fs .wide .glow{position:absolute;right:6%;top:50%;width:520px;height:520px;transform:translateY(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(120,110,255,.28),transparent);z-index:0}
-.pf-fs /* floating cropped UI panels */
-  .panel{position:absolute;background:#fff;border-radius:22px;box-shadow:0 24px 60px rgba(40,36,90,.20),0 2px 6px rgba(40,36,90,.06);z-index:2}
+.pf-fs .panel{position:absolute;background:#fff;border-radius:22px;box-shadow:0 24px 60px rgba(40,36,90,.20),0 2px 6px rgba(40,36,90,.06);z-index:2}
 .pf-fs .panel .ph{font-weight:900;font-size:14px;color:#0A0A0F;display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .pf-fs .panel .ph .g{font-weight:800;font-size:11px;color:rgba(0,0,0,.4)}
 .pf-fs .ring{position:relative;border-radius:50%;flex:0 0 auto;display:flex;align-items:center;justify-content:center;background:conic-gradient(var(--rc,#5CC0BF) calc(var(--p,50)*1%),rgba(0,0,0,.08) 0)}
@@ -139,8 +127,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .ring b{position:relative;font-weight:900;color:#0A0A0F}
 @property --p{syntax:"<number>";inherits:true;initial-value:0}
 .pf-fs .ring{transition:--p .85s cubic-bezier(.19,1,.22,1)}
-.pf-fs /* scan flow */
-  .scanwrap{margin-top:16px;padding-top:15px;border-top:1px solid rgba(0,0,0,.06)}
+.pf-fs .scanwrap{margin-top:16px;padding-top:15px;border-top:1px solid rgba(0,0,0,.06)}
 .pf-fs .scanstate{display:none}
 .pf-fs .scanstate.on{display:block;animation:vin .35s cubic-bezier(.19,1,.22,1)}
 .pf-fs .scanbtn{width:100%;display:flex;align-items:center;justify-content:center;gap:9px;background:linear-gradient(150deg,#6260E0,#4D4BC0);color:#fff;border:none;border-radius:14px;padding:13px;font-family:"Nunito";font-weight:900;font-size:13.5px;cursor:pointer;box-shadow:0 10px 22px rgba(77,75,192,.3);transition:.2s;-webkit-tap-highlight-color:transparent}
@@ -164,13 +151,11 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .est .tiles .t{flex:1;text-align:center;background:#F7F7FB;border-radius:11px;padding:8px 2px}
 .pf-fs .est .tiles .t b{display:block;font-family:"Archivo",sans-serif;font-weight:900;font-size:15px;line-height:1}
 .pf-fs .est .tiles .t span{font-weight:800;font-size:8.5px;color:rgba(0,0,0,.42);letter-spacing:.03em}
-.pf-fs /* macros panel */
-  .p-macros{width:330px;top:64px;left:2%;padding:20px 22px;animation:float1 7s ease-in-out infinite}
+.pf-fs .p-macros{width:330px;top:64px;left:2%;padding:20px 22px;animation:float1 7s ease-in-out infinite}
 .pf-fs .macros{display:flex;justify-content:space-around;text-align:center}
 .pf-fs .macros .mac b{display:block;font-weight:900;font-size:13px;color:#0A0A0F;margin-top:9px}
 .pf-fs .macros .mac span{font-weight:800;font-size:10px;color:rgba(0,0,0,.42)}
-.pf-fs /* fuel header */
-  .fuel-h{margin-bottom:16px}
+.pf-fs .fuel-h{margin-bottom:16px}
 .pf-fs .fuel-lab{font-weight:800;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:rgba(0,0,0,.4)}
 .pf-fs .fuel-num{display:flex;align-items:baseline;gap:6px;margin-top:3px}
 .pf-fs .fuel-num b{font-family:"Archivo",sans-serif;font-weight:900;font-size:27px;color:#0A0A0F;line-height:1;transition:color .3s ease}
@@ -180,8 +165,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .meal .mt{font-weight:900;font-size:14px;color:#0A0A0F}
 .pf-fs .meal .ms{font-weight:700;font-size:11.5px;color:rgba(0,0,0,.5);margin-top:2px}
 .pf-fs .meal .kc{margin-left:auto;font-weight:900;font-size:13px;color:#5D5BD0}
-.pf-fs /* budget panel */
-  .p-budget{width:300px;bottom:56px;right:1%;padding:20px 22px;animation:float2 8s ease-in-out infinite}
+.pf-fs .p-budget{width:300px;bottom:56px;right:1%;padding:20px 22px;animation:float2 8s ease-in-out infinite}
 .pf-fs .netrow{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:6px}
 .pf-fs .netbig{font-weight:900;font-size:26px;color:#0A0A0F;letter-spacing:-.02em}
 .pf-fs .netbig .u{font-size:13px;color:var(--turq)}
@@ -191,8 +175,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .scale{cursor:pointer;touch-action:none}
 .pf-fs .scale i{position:absolute;top:50%;left:56%;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #5CC0BF;transform:translate(-50%,-50%);box-shadow:0 2px 6px rgba(0,0,0,.2);transition:border-color .18s ease}
 .pf-fs #budgetCard .netbig{transition:none}
-.pf-fs /* ===== share card ===== */
-  .sh-title{font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;letter-spacing:-.02em;color:#fff;text-align:center;margin-top:8px}
+.pf-fs .sh-title{font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;letter-spacing:-.02em;color:#fff;text-align:center;margin-top:8px}
 .pf-fs .sh-sub{font-weight:800;font-size:11.5px;color:rgba(255,255,255,.6);text-align:center;margin-top:4px}
 .pf-fs .sh-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 4px}
 .pf-fs .sh-stats>div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);border-radius:13px;padding:11px 6px;text-align:center}
@@ -209,8 +192,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .sh-btn{width:100%;margin-top:14px;border:0;border-radius:14px;padding:13px 0;font-family:"Nunito",sans-serif;font-weight:900;font-size:14.5px;color:#fff;cursor:pointer;background:linear-gradient(135deg,#7C6FFF,#5D5BD0);box-shadow:0 8px 22px rgba(93,91,208,.4);transition:transform .14s ease}
 .pf-fs .sh-btn:active{transform:scale(.97)}
 .pf-fs .sh-btn.done{background:linear-gradient(135deg,#5CC0BF,#2E9E8F);box-shadow:0 8px 22px rgba(46,158,143,.4)}
-.pf-fs /* ===== body budget (energy ledger, .pf-fs app-accurate) ===== */
-  .bb-top{display:flex;align-items:center;gap:15px}
+.pf-fs .bb-top{display:flex;align-items:center;gap:15px}
 .pf-fs .bb-ring{flex:0 0 auto}
 .pf-fs .bb-score{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;line-height:1}
 .pf-fs .bb-score b{font-family:"Archivo",sans-serif;font-weight:900;font-size:24px;color:#0A0A0F}
@@ -228,8 +210,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .bb-chips button.on .ic{background:var(--col,#5D5BD0);border-color:var(--col,#5D5BD0);color:#fff}
 .pf-fs .bb-chips button.on .lb{color:rgba(0,0,0,.72)}
 .pf-fs .bb-chips button:active{transform:scale(.94)}
-.pf-fs /* ===== share-card generator (app-accurate) ===== */
-  .sg-h{font-weight:900;font-size:14px;text-align:center;margin-bottom:12px;background:linear-gradient(90deg,#7C6FFF,#5D5BD0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.pf-fs .sg-h{font-weight:900;font-size:14px;text-align:center;margin-bottom:12px;background:linear-gradient(90deg,#7C6FFF,#5D5BD0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .pf-fs .sg-seg{display:flex;background:#F0F0F5;border-radius:10px;padding:3px;margin:12px 0;gap:2px}
 .pf-fs .sg-seg button{flex:1;border:0;background:none;border-radius:8px;padding:7px 0;font-family:"Nunito",sans-serif;font-weight:800;font-size:12px;color:rgba(0,0,0,.5);cursor:pointer;transition:all .18s ease}
 .pf-fs .sg-seg button.on{background:#fff;color:#5D5BD0;box-shadow:0 1px 3px rgba(0,0,0,.12)}
@@ -251,8 +232,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .sg-foot{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:1px}
 .pf-fs .sg-brand{font-weight:900;font-size:10px;letter-spacing:.08em}
 .pf-fs .sg-date{font-weight:600;font-size:8.5px}
-.pf-fs /* light/dark text colours */
-  .sg-card.light .sg-lab, .pf-fs .sg-card.light .sg-date{color:rgba(0,0,0,.42)}
+.pf-fs .sg-card.light .sg-lab, .pf-fs .sg-card.light .sg-date{color:rgba(0,0,0,.42)}
 .pf-fs .sg-card.light .sg-name, .pf-fs .sg-card.light .sg-stat .v, .pf-fs .sg-card.light .sg-ex, .pf-fs .sg-card.light .sg-brand, .pf-fs .sg-card.light .sg-pill{color:#0A0A0F}
 .pf-fs .sg-card.light .sg-pill{background:rgba(0,0,0,.06)}
 .pf-fs .sg-card.dark .sg-lab, .pf-fs .sg-card.dark .sg-date{color:rgba(255,255,255,.55)}
@@ -272,26 +252,18 @@ const CSS = String.raw`.pf-fs{
 @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 @media (prefers-reduced-motion: reduce){.pf-fs .p-macros, .pf-fs .p-budget, .pf-fs .compcard.float{animation:none}}
-.pf-fs /* reveal */
-  .rise{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
+.pf-fs .rise{opacity:0;transform:translateY(38px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
 .pf-fs .rise.in{opacity:1;transform:none}
 .pf-fs .rise.d1{transition-delay:.08s}
 .pf-fs .rise.d2{transition-delay:.16s}
 .pf-fs .rise.d3{transition-delay:.24s}
-.pf-fs /* ===== responsive ===== */
-  @media (max-width:960px){
-    .fgrid{grid-template-columns:1fr;max-width:420px;margin:0 auto}
-    .fcard{min-height:520px}
-    .wide{grid-template-columns:1fr;min-height:auto}
-    .wide .copy{padding:52px 32px 20px}
-    .wide .stage{min-height:520px}
-    .p-macros{left:50%;transform:translateX(-50%);top:24px}
-    .p-macros.f{animation:none}
-    .p-budget{right:auto;left:50%;transform:translateX(-30%);bottom:32px}
-    .p-budget.f{animation:none}
-  }
-@media (max-width:520px){.pf-fs .p-macros{width:290px}
-.pf-fs .p-budget{width:270px;transform:translateX(-20%)}}`;
+@media (max-width:960px){
+.pf-fs .features{padding:64px 0 72px}
+.pf-fs .fgrid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+.pf-fs .fgrid.row2{margin-top:20px}
+.pf-fs .fcard{min-height:auto;padding:34px 30px 36px}}
+@media (max-width:520px){
+.pf-fs .fcard{padding:30px 24px 32px}}`;
 
 const MARKUP = String.raw`<section class="features">
   <div class="wrap">
