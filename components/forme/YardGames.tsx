@@ -89,7 +89,7 @@ export function YardGames() {
           className="pointer-events-none absolute left-[5vw] top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2.5"
           style={{ opacity: 0 }}
         >
-          <div className="size-16 overflow-hidden rounded-full border-[3px] border-white shadow-[0_16px_34px_-10px_rgba(30,26,20,0.55)] sm:size-24">
+          <div className="size-28 overflow-hidden rounded-full border-4 border-white shadow-[0_22px_48px_-12px_rgba(30,26,20,0.6)] sm:size-44 lg:size-52">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/founder-georgi.jpg"
@@ -99,7 +99,7 @@ export function YardGames() {
             />
           </div>
           <span
-            className="font-[family-name:var(--font-cormorant)] text-lg italic sm:text-xl"
+            className="font-[family-name:var(--font-cormorant)] text-xl italic sm:text-2xl"
             style={{ color: "var(--color-forme-ink)" }}
           >
             that was me
