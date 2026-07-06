@@ -112,6 +112,17 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .cc-bar{width:100%;height:8px;border-radius:99px;background:rgba(255,255,255,.14);margin-top:14px;overflow:hidden}
 .pf-fs .cc-bar i{display:block;height:100%;width:62%;border-radius:99px;background:linear-gradient(90deg,#9b9cfd,#5CC0BF)}
 .pf-fs .cc-note{font-weight:800;font-size:11px;color:rgba(255,255,255,.6);margin-top:10px;text-align:center}
+.pf-fs .tf-chev{position:absolute;top:44%;transform:translateY(-50%);width:22px;height:22px;color:rgba(255,255,255,.4);z-index:2;pointer-events:none}
+.pf-fs .tf-l{left:0}
+.pf-fs .tf-r{right:0;animation:tfNudge 1.7s ease-in-out infinite}
+@keyframes tfNudge{0%,100%{transform:translate(0,-50%)}50%{transform:translate(4px,-50%)}}
+.pf-fs .pchart{position:relative;margin-top:8px}
+.pf-fs .pguide{position:absolute;top:0;bottom:0;width:2px;background:rgba(92,192,191,.55);transform:translateX(-50%);pointer-events:none;opacity:0;transition:opacity .2s ease,left .25s cubic-bezier(.19,1,.22,1)}
+.pf-fs .pdotel{position:absolute;width:13px;height:13px;border-radius:50%;background:#5CC0BF;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.22);transform:translate(-50%,-50%);pointer-events:none;transition:left .25s cubic-bezier(.19,1,.22,1),top .25s cubic-bezier(.19,1,.22,1)}
+.pf-fs .ptip{position:absolute;transform:translate(-50%,calc(-100% - 15px));background:#15151c;color:#fff;border-radius:12px;padding:7px 13px;text-align:center;pointer-events:none;white-space:nowrap;box-shadow:0 10px 24px -6px rgba(0,0,0,.4);opacity:0;transition:opacity .2s ease,left .25s cubic-bezier(.19,1,.22,1),top .25s cubic-bezier(.19,1,.22,1)}
+.pf-fs .ptip.show,.pf-fs .pguide.show{opacity:1}
+.pf-fs .ptip b{display:block;font-family:"Archivo",sans-serif;font-weight:900;font-size:15px;line-height:1;letter-spacing:-.01em}
+.pf-fs .ptip span{display:block;font-weight:800;font-size:10.5px;color:rgba(255,255,255,.6);margin-top:3px}
 .pf-fs .wide{margin-top:20px;position:relative;border-radius:30px;overflow:hidden;min-height:520px;background:linear-gradient(120deg,#EFEDFC 0%,#E7E4FB 45%,#E9E0F4 100%);display:grid;grid-template-columns:1.02fr 1fr;align-items:center}
 .pf-fs .wide .copy{padding:64px 20px 64px 60px;position:relative;z-index:3}
 .pf-fs .wide h2{font-family:"Archivo",sans-serif;font-weight:900;letter-spacing:-.03em;line-height:.98;font-size:clamp(38px,4.4vw,58px);color:var(--ink)}
@@ -341,22 +352,26 @@ const MARKUP = String.raw`<section class="features">
           <div class="compcard float s1" id="progCard">
             <div class="cc-head2">
               <span class="cc-h2t">Bench press · top set</span>
-              <span class="cc-up"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#2E9E8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>+5 kg</span>
+              <span class="cc-up"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#2E9E8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg><span id="progUp">+2.5 kg</span></span>
             </div>
-            <div class="cc-big"><span id="progVal">82.5</span> <span>kg</span><span id="progWk" style="font-family:'Nunito';font-size:11px;font-weight:800;color:rgba(0,0,0,.35);letter-spacing:0;margin-left:7px">This week</span></div>
-            <svg viewBox="0 0 260 130" style="width:100%;height:118px;margin-top:6px" preserveAspectRatio="none">
-              <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5CC0BF" stop-opacity=".30"></stop><stop offset="1" stop-color="#5CC0BF" stop-opacity="0"></stop></linearGradient></defs>
-              <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24 L240 130 L6 130 Z" fill="url(#cg)"></path>
-              <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24" fill="none" stroke="#5CC0BF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <circle id="progDot" cx="240" cy="24" r="5.5" fill="#5CC0BF" stroke="#fff" stroke-width="2.5"></circle>
-              <circle class="pt" data-w="70" data-wk="Week 1" cx="6" cy="104" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="72.5" data-wk="Week 2" cx="44" cy="98" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="75" data-wk="Week 3" cx="82" cy="84" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="74" data-wk="Week 4" cx="120" cy="88" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="77.5" data-wk="Week 5" cx="158" cy="62" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="80" data-wk="Week 6" cx="196" cy="50" r="12" fill="transparent" style="cursor:pointer"></circle>
-              <circle class="pt" data-w="82.5" data-wk="This week" cx="240" cy="24" r="12" fill="transparent" style="cursor:pointer"></circle>
-            </svg>
+            <div class="cc-big"><span id="progVal">82.5</span> <span>kg</span></div>
+            <div class="pchart" id="progChart">
+              <svg viewBox="0 0 260 130" style="width:100%;height:118px;display:block" preserveAspectRatio="none">
+                <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5CC0BF" stop-opacity=".30"></stop><stop offset="1" stop-color="#5CC0BF" stop-opacity="0"></stop></linearGradient></defs>
+                <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24 L240 130 L6 130 Z" fill="url(#cg)"></path>
+                <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24" fill="none" stroke="#5CC0BF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <circle class="pt" data-w="70" data-wk="Week 1" data-d="" cx="6" cy="104" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="72.5" data-wk="Week 2" data-d="2.5" cx="44" cy="98" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="75" data-wk="Week 3" data-d="2.5" cx="82" cy="84" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="74" data-wk="Week 4" data-d="-1" cx="120" cy="88" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="78" data-wk="Week 5" data-d="4" cx="158" cy="62" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="80" data-wk="Week 6" data-d="2" cx="196" cy="50" r="14" fill="transparent" style="cursor:pointer"></circle>
+                <circle class="pt" data-w="82.5" data-wk="This week" data-d="2.5" cx="240" cy="24" r="14" fill="transparent" style="cursor:pointer"></circle>
+              </svg>
+              <div class="pguide"></div>
+              <div class="pdotel"></div>
+              <div class="ptip"><b id="ptipW">82.5 kg</b><span id="ptipK">This week</span></div>
+            </div>
             <div class="cc-stats2">
               <div class="m"><div class="k">Weekly volume</div><div class="v">6.4k ↑</div></div>
               <div class="m"><div class="k">Week streak</div><div class="v">18 🔥</div></div>
@@ -377,7 +392,9 @@ const MARKUP = String.raw`<section class="features">
             <div class="cc-tlv" id="tfLevel">LEVEL 6 UNLOCKED</div>
             <div class="cc-av">
               <div class="avglow"></div>
+              <svg class="tf-chev tf-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg>
               <img id="tfImg" src="/journey/kai6.png" alt="Character avatar">
+              <svg class="tf-chev tf-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
             </div>
             <div class="cc-mth" id="tfMonths" style="text-align:center">6 months stronger</div>
             <div class="cc-bar"><i id="tfBar"></i></div>
@@ -696,22 +713,33 @@ export function FeatureShowcase() {
       render();
     })();
 
-    // interactive progress chart — hover/tap a point to read that week's top set
+    // interactive progress chart — hover/tap a point for a tooltip of that week's top set
     (function () {
       const card = q("#progCard");
       if (!card) return;
-      const val = card.querySelector("#progVal"), wk = card.querySelector("#progWk"), dot = card.querySelector("#progDot");
-      const pts = card.querySelectorAll(".pt");
+      const chart = card.querySelector("#progChart");
+      const val = card.querySelector("#progVal"), up = card.querySelector("#progUp");
+      const guide = chart.querySelector(".pguide"), dot = chart.querySelector(".pdotel");
+      const tip = chart.querySelector(".ptip"), tipW = chart.querySelector("#ptipW"), tipK = chart.querySelector("#ptipK");
+      const pts = [...card.querySelectorAll(".pt")];
+      const VBW = 260, VBH = 130;
       const select = (el: any) => {
+        const cx = +el.getAttribute("cx"), cy = +el.getAttribute("cy");
+        const xp = (cx / VBW) * 100, yp = (cy / VBH) * 100;
+        guide.style.left = xp + "%";
+        dot.style.left = xp + "%"; dot.style.top = yp + "%";
+        tip.style.left = xp + "%"; tip.style.top = yp + "%";
+        tipW.textContent = el.dataset.w + " kg"; tipK.textContent = el.dataset.wk;
         val.textContent = el.dataset.w;
-        wk.textContent = el.dataset.wk;
-        dot.setAttribute("cx", el.getAttribute("cx"));
-        dot.setAttribute("cy", el.getAttribute("cy"));
+        const d = el.dataset.d;
+        if (up) up.textContent = d === "" ? "start" : (+d >= 0 ? "+" : "") + d + " kg";
+        guide.classList.add("show"); tip.classList.add("show");
       };
       pts.forEach((p: any) => {
         p.addEventListener("mouseenter", () => select(p));
         p.addEventListener("click", () => select(p));
       });
+      select(pts[pts.length - 1]); // default: this week
     })();
 
     // interactive transform — tap the card to level the character up
