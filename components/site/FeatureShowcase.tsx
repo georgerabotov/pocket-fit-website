@@ -35,6 +35,7 @@ const CSS = String.raw`.pf-fs{
 .pf-fs .fcard.t-progress .glow{background:radial-gradient(closest-side,rgba(92,192,191,.30),transparent)}
 .pf-fs .fcard.t-transform .glow{background:radial-gradient(closest-side,rgba(120,110,255,.40),transparent)}
 .pf-fs .fcard.t-food{background:linear-gradient(180deg,#E7F5F4 0%,#DAEFEE 100%)}
+.pf-fs .soon{position:absolute;top:26px;right:26px;z-index:4;font-family:"Nunito",sans-serif;font-weight:900;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#fff;padding:6px 12px;border-radius:99px;background:linear-gradient(135deg,#5CC0BF,#2E9E8F);box-shadow:0 8px 18px -6px rgba(46,158,143,.5)}
 .pf-fs .fcard.t-budget{background:linear-gradient(180deg,#EEEDFB 0%,#E4E3F8 100%)}
 .pf-fs .fcard.t-share{background:linear-gradient(180deg,#EDECFC 0%,#DCD8FA 55%,#CFC9F7 100%)}
 .pf-fs .fcard.t-food .glow{background:radial-gradient(closest-side,rgba(92,192,191,.30),transparent)}
@@ -337,17 +338,24 @@ const MARKUP = String.raw`<section class="features">
         </div>
         <div class="glow"></div>
         <div class="compwrap">
-          <div class="compcard float s1">
+          <div class="compcard float s1" id="progCard">
             <div class="cc-head2">
               <span class="cc-h2t">Bench press · top set</span>
               <span class="cc-up"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="#2E9E8F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg>+5 kg</span>
             </div>
-            <div class="cc-big">82.5 <span>kg</span></div>
+            <div class="cc-big"><span id="progVal">82.5</span> <span>kg</span><span id="progWk" style="font-family:'Nunito';font-size:11px;font-weight:800;color:rgba(0,0,0,.35);letter-spacing:0;margin-left:7px">This week</span></div>
             <svg viewBox="0 0 260 130" style="width:100%;height:118px;margin-top:6px" preserveAspectRatio="none">
               <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5CC0BF" stop-opacity=".30"></stop><stop offset="1" stop-color="#5CC0BF" stop-opacity="0"></stop></linearGradient></defs>
               <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24 L240 130 L6 130 Z" fill="url(#cg)"></path>
               <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24" fill="none" stroke="#5CC0BF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              <circle cx="240" cy="24" r="5.5" fill="#5CC0BF" stroke="#fff" stroke-width="2.5"></circle>
+              <circle id="progDot" cx="240" cy="24" r="5.5" fill="#5CC0BF" stroke="#fff" stroke-width="2.5"></circle>
+              <circle class="pt" data-w="70" data-wk="Week 1" cx="6" cy="104" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="72.5" data-wk="Week 2" cx="44" cy="98" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="75" data-wk="Week 3" cx="82" cy="84" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="74" data-wk="Week 4" cx="120" cy="88" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="77.5" data-wk="Week 5" cx="158" cy="62" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="80" data-wk="Week 6" cx="196" cy="50" r="12" fill="transparent" style="cursor:pointer"></circle>
+              <circle class="pt" data-w="82.5" data-wk="This week" cx="240" cy="24" r="12" fill="transparent" style="cursor:pointer"></circle>
             </svg>
             <div class="cc-stats2">
               <div class="m"><div class="k">Weekly volume</div><div class="v">6.4k ↑</div></div>
@@ -365,15 +373,15 @@ const MARKUP = String.raw`<section class="features">
         </div>
         <div class="glow"></div>
         <div class="compwrap">
-          <div class="compcard dark float s2">
-            <div class="cc-tlv">LEVEL 6 UNLOCKED</div>
+          <div class="compcard dark float s2" id="transformCard">
+            <div class="cc-tlv" id="tfLevel">LEVEL 6 UNLOCKED</div>
             <div class="cc-av">
               <div class="avglow"></div>
-              <img src="/journey/kai6.png" alt="Character avatar at month 6">
+              <img id="tfImg" src="/journey/kai6.png" alt="Character avatar">
             </div>
-            <div class="cc-mth" style="text-align:center">6 months stronger</div>
-            <div class="cc-bar"><i></i></div>
-            <div class="cc-note">4 more workouts to Level 7</div>
+            <div class="cc-mth" id="tfMonths" style="text-align:center">6 months stronger</div>
+            <div class="cc-bar"><i id="tfBar"></i></div>
+            <div class="cc-note" id="tfNote">Tap to reach Level 7</div>
           </div>
         </div>
       </article>
@@ -385,6 +393,7 @@ const MARKUP = String.raw`<section class="features">
 
       <!-- FUEL -->
       <article class="fcard t-food rise">
+        <span class="soon">Coming soon</span>
         <div class="cap">
           <h3>Fuel</h3>
           <p>Scan your plate or a barcode, confirm the macros, done — no red numbers, no shame.</p>
@@ -685,6 +694,45 @@ export function FeatureShowcase() {
         b.classList.add("on"); tab = b.dataset.t; render();
       }));
       render();
+    })();
+
+    // interactive progress chart — hover/tap a point to read that week's top set
+    (function () {
+      const card = q("#progCard");
+      if (!card) return;
+      const val = card.querySelector("#progVal"), wk = card.querySelector("#progWk"), dot = card.querySelector("#progDot");
+      const pts = card.querySelectorAll(".pt");
+      const select = (el: any) => {
+        val.textContent = el.dataset.w;
+        wk.textContent = el.dataset.wk;
+        dot.setAttribute("cx", el.getAttribute("cx"));
+        dot.setAttribute("cy", el.getAttribute("cy"));
+      };
+      pts.forEach((p: any) => {
+        p.addEventListener("mouseenter", () => select(p));
+        p.addEventListener("click", () => select(p));
+      });
+    })();
+
+    // interactive transform — tap the card to level the character up
+    (function () {
+      const card = q("#transformCard");
+      if (!card) return;
+      const lv = card.querySelector("#tfLevel"), img = card.querySelector("#tfImg"),
+        mth = card.querySelector("#tfMonths"), bar = card.querySelector("#tfBar"), note = card.querySelector("#tfNote");
+      const N = 12;
+      let i = 5;
+      const draw = () => {
+        const lvl = i + 1;
+        lv.textContent = "LEVEL " + lvl + (lvl === N ? " — MAXED" : " UNLOCKED");
+        img.src = "/journey/kai" + lvl + ".png";
+        mth.textContent = lvl + " month" + (lvl > 1 ? "s" : "") + " stronger";
+        bar.style.width = 8 + 92 * (i / (N - 1)) + "%";
+        note.textContent = lvl < N ? "Tap to reach Level " + (lvl + 1) : "Maxed out — tap to restart";
+      };
+      card.style.cursor = "pointer";
+      card.addEventListener("click", () => { i = (i + 1) % N; draw(); });
+      draw();
     })();
 
     return () => cleanups.forEach((fn) => fn());
