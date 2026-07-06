@@ -103,6 +103,19 @@ html[data-nav="dark"] .nav-glass a[href="/#download"]:hover {
   color: #fff !important;
 }
 
+/* Pulsing ring behind the Kai/Maia coach avatars */
+@keyframes coachPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 0;
+  }
+}
+
 /* Spinning multi-colour ring highlighting the "Our Story" nav item */
 @property --story-angle {
   syntax: "<angle>";

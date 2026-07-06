@@ -177,6 +177,82 @@ const ACCENT: Record<"kai" | "maia", string> = {
   maia: "#14b8a6",
 };
 
+const GLOW: Record<"kai" | "maia", string> = {
+  kai: "rgba(124,108,255,0.45)",
+  maia: "rgba(20,184,166,0.42)",
+};
+
+function CoachAvatar({ coach }: { coach: "kai" | "maia" }) {
+  return (
+    <div className="relative flex flex-col items-center gap-3">
+      <div className="relative grid size-24 place-items-center">
+        {/* soft coloured glow + slow pulse ring */}
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-full blur-xl"
+          style={{ background: GLOW[coach], opacity: 0.7 }}
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 rounded-full border-2 [animation:coachPulse_2.8s_ease-in-out_infinite]"
+          style={{ borderColor: ACCENT[coach] }}
+        />
+        <div className="relative grid size-24 place-items-end justify-items-center overflow-hidden rounded-full bg-white shadow-[0_18px_44px_-14px_rgba(0,0,0,0.4)] ring-1 ring-black/5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={COACHES[coach].img} alt={COACHES[coach].name} className="h-[94%] w-auto object-contain" />
+        </div>
+      </div>
+      <span className="text-sm font-bold" style={{ color: ACCENT[coach] }}>
+        {COACHES[coach].name}
+      </span>
+    </div>
+  );
+}
+
+function CoachVideo({ coach }: { coach: "kai" | "maia" }) {
+  return (
+    <div className="w-full max-w-[320px] shrink-0 overflow-hidden rounded-[22px] bg-white shadow-[0_34px_80px_-30px_rgba(0,0,0,0.5)] ring-1 ring-black/5 lg:w-[300px] xl:w-[330px]">
+      {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+      <video
+        src={COACHES[coach].demo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="aspect-video w-full object-cover"
+      />
+      <div className="flex items-center justify-center gap-2 py-2.5">
+        <span className="size-1.5 rounded-full" style={{ background: ACCENT[coach] }} />
+        <span className="text-[11px] font-bold tracking-wide text-stone-500">
+          {COACHES[coach].name} · {DEMO_EXERCISE}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/* short hand-drawn curved arrow: dir "left" points toward the left video,
+   "right" is mirrored to point right */
+function Arrow({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 84 46"
+      className="h-11 w-16 shrink-0 text-stone-300"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={dir === "right" ? { transform: "scaleX(-1)" } : undefined}
+    >
+      <path d="M78 12 C 54 34, 32 34, 10 24" />
+      <path d="M10 24 L 24 15" />
+      <path d="M10 24 L 21 36" />
+    </svg>
+  );
+}
+
 export function AiIntelligence() {
   const frames = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
@@ -257,59 +333,26 @@ export function AiIntelligence() {
             own 24/7 AI trainers who even show you how each exercise is done.
           </p>
 
-          {/* hand-drawn curly arrow leading down into the coach demos */}
-          <div className="mt-6 flex justify-center" aria-hidden>
-            <svg
-              viewBox="0 0 200 100"
-              className="h-16 w-auto text-stone-300"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ transform: "rotate(14deg)" }}
-            >
-              <path d="M14 40 C6 26 30 20 34 38 C37 52 18 54 22 40 C26 28 40 30 52 46 C60 58 44 64 40 50 C37 40 54 38 66 50 C92 76 140 78 180 52" />
-              <path d="M180 52 L163 45" />
-              <path d="M180 52 L171 69" />
-            </svg>
+          {/* desktop: two coach icons in the middle, each pointing out to its
+              own demo video — Kai to the left, Maia to the right */}
+          <div className="mt-14 hidden w-full items-center justify-center gap-4 lg:flex xl:gap-6">
+            <CoachVideo coach="kai" />
+            <Arrow dir="left" />
+            <div className="flex shrink-0 items-center gap-5">
+              <CoachAvatar coach="kai" />
+              <CoachAvatar coach="maia" />
+            </div>
+            <Arrow dir="right" />
+            <CoachVideo coach="maia" />
           </div>
 
-          {/* both coaches + both demos, shown together with matched styling */}
-          <div className="mt-3 grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+          {/* mobile / tablet: stacked icon + video per coach */}
+          <div className="mt-10 grid w-full max-w-md grid-cols-1 gap-9 lg:hidden">
             {(["kai", "maia"] as const).map((k) => (
-              <figure
-                key={k}
-                className="overflow-hidden rounded-[24px] bg-stone-50 shadow-[0_26px_60px_-30px_rgba(0,0,0,0.4)] ring-1 ring-black/5"
-              >
-                <figcaption className="flex items-center gap-3 px-4 pb-3 pt-4">
-                  <div className="grid size-11 place-items-end justify-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={COACHES[k].img} alt={COACHES[k].name} className="h-[120%] w-auto object-contain" />
-                  </div>
-                  <div className="text-left leading-tight">
-                    <p className="text-sm font-bold text-stone-900">{COACHES[k].name}</p>
-                    <p className="text-[11px] font-semibold" style={{ color: ACCENT[k] }}>
-                      {DEMO_EXERCISE}
-                    </p>
-                  </div>
-                  <span className="ml-auto flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-stone-400">
-                    <span className="size-1.5 rounded-full" style={{ background: ACCENT[k] }} />
-                    Demo
-                  </span>
-                </figcaption>
-                <div className="px-4 pb-4">
-                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-                  <video
-                    src={COACHES[k].demo}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="aspect-video w-full rounded-[16px] object-cover"
-                  />
-                </div>
-              </figure>
+              <div key={k} className="flex flex-col items-center gap-4">
+                <CoachAvatar coach={k} />
+                <CoachVideo coach={k} />
+              </div>
             ))}
           </div>
         </div>
