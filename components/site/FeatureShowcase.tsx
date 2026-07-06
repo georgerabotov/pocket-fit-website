@@ -358,6 +358,7 @@ const MARKUP = String.raw`<section class="features">
             <div class="pchart" id="progChart">
               <svg viewBox="0 0 260 130" style="width:100%;height:118px;display:block" preserveAspectRatio="none">
                 <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5CC0BF" stop-opacity=".30"></stop><stop offset="1" stop-color="#5CC0BF" stop-opacity="0"></stop></linearGradient></defs>
+                <rect x="0" y="0" width="260" height="130" fill="transparent" style="cursor:pointer"></rect>
                 <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24 L240 130 L6 130 Z" fill="url(#cg)"></path>
                 <path d="M6 104 L44 98 L82 84 L120 88 L158 62 L196 50 L240 24" fill="none" stroke="#5CC0BF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
                 <circle class="pt" data-w="70" data-wk="Week 1" data-d="" cx="6" cy="104" r="14" fill="transparent" style="cursor:pointer"></circle>
@@ -735,10 +736,19 @@ export function FeatureShowcase() {
         if (up) up.textContent = d === "" ? "start" : (+d >= 0 ? "+" : "") + d + " kg";
         guide.classList.add("show"); tip.classList.add("show");
       };
-      pts.forEach((p: any) => {
-        p.addEventListener("mouseenter", () => select(p));
-        p.addEventListener("click", () => select(p));
-      });
+      // tap/hover anywhere on the graph → snap to the nearest week
+      const nearest = (clientX: number) => {
+        const r = chart.getBoundingClientRect();
+        const x = ((clientX - r.left) / r.width) * VBW;
+        let best = pts[0], bd = Infinity;
+        for (const p of pts) {
+          const d = Math.abs(+(p as any).getAttribute("cx") - x);
+          if (d < bd) { bd = d; best = p; }
+        }
+        return best;
+      };
+      chart.addEventListener("pointerdown", (e: any) => select(nearest(e.clientX)));
+      chart.addEventListener("pointermove", (e: any) => select(nearest(e.clientX)));
       select(pts[pts.length - 1]); // default: this week
     })();
 
