@@ -5,7 +5,13 @@
 
 import { useRef } from "react";
 
-export function HeroCharacter() {
+export function HeroCharacter({
+  className = "absolute bottom-0 left-0 z-0",
+  videoClassName = "h-[150px] w-auto sm:h-[210px] lg:h-[320px] xl:h-[400px]",
+}: {
+  className?: string;
+  videoClassName?: string;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   const replay = () => {
     const v = ref.current;
@@ -19,7 +25,7 @@ export function HeroCharacter() {
       aria-label="Replay intro animation"
       onMouseEnter={replay}
       onClick={replay}
-      className="absolute bottom-0 left-0 z-0 block cursor-pointer select-none"
+      className={`block cursor-pointer select-none ${className}`}
     >
       {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
       <video
@@ -30,7 +36,7 @@ export function HeroCharacter() {
         playsInline
         preload="auto"
         aria-hidden
-        className="h-[150px] w-auto select-none sm:h-[210px] lg:h-[320px] xl:h-[400px]"
+        className={`select-none ${videoClassName}`}
       />
     </button>
   );

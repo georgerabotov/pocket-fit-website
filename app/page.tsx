@@ -63,8 +63,10 @@ export default function Home() {
             className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(60%_60%_at_50%_0%,#ede9fe,transparent)]"
           />
 
-          {/* Character pushes the phone in - hover (desktop) / tap (mobile) to replay */}
-          <HeroCharacter />
+          {/* Character pushes the phone in - hover to replay. Desktop only here;
+              on mobile it lives under the Apple Watch pill so it doesn't overlap
+              the hero copy. */}
+          <HeroCharacter className="absolute bottom-0 left-0 z-0 hidden sm:block" />
 
           {/* Hero copy */}
           <Section className="relative z-10 pb-16 pt-28 text-center sm:pb-24 sm:pt-32">
@@ -127,6 +129,14 @@ export default function Home() {
               </svg>
               Apple Watch
             </span>
+          </div>
+
+          {/* mobile: character pushes the phone in here, clear of the hero copy */}
+          <div className="mt-8 flex justify-center overflow-hidden sm:hidden">
+            <HeroCharacter
+              className="relative z-0"
+              videoClassName="h-[240px] w-auto"
+            />
           </div>
         </Section>
 
