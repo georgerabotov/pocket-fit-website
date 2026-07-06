@@ -753,11 +753,41 @@ export default function Badges({
   dark: boolean;
   onSelect: (id: string | null) => void;
 }) {
+  // WebGL contexts get dropped (GPU pressure, tab backgrounding, driver hiccups).
+  // preventDefault lets three.js restore in place; if the browser refuses to
+  // bring it back, bump the key to remount the Canvas with a fresh context so
+  // the cards never stay gone.
+  const [glKey, setGlKey] = useState(0);
+
   return (
     <Canvas
+      key={glKey}
       camera={{ position: [0, 1.15, 22], fov: FOV }}
-      gl={{ alpha: true, antialias: true }}
+      dpr={[1, 1.5]}
+      gl={{ alpha: true, antialias: true, powerPreference: "default" }}
       onPointerMissed={() => onSelect(null)}
+      onCreated={({ gl }) => {
+        const el = gl.domElement;
+        let restored = true;
+        el.addEventListener(
+          "webglcontextlost",
+          (e) => {
+            e.preventDefault();
+            restored = false;
+            window.setTimeout(() => {
+              if (!restored) setGlKey((k) => k + 1);
+            }, 400);
+          },
+          false,
+        );
+        el.addEventListener(
+          "webglcontextrestored",
+          () => {
+            restored = true;
+          },
+          false,
+        );
+      }}
     >
       <CameraRig
         count={plans.length}
@@ -783,7 +813,7 @@ export default function Badges({
           );
         })}
       </Physics>
-      <Environment resolution={256}>
+      <Environment resolution={128}>
         <Lightformer
           intensity={2}
           position={[0, 4, 6]}

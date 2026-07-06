@@ -2,6 +2,7 @@
    Stylised in-app components (no screenshots). */
 
 import { ProgressChart } from "@/components/site/ProgressChart";
+import { TransformMock } from "@/components/site/TransformMock";
 
 const H = "font-[family-name:var(--font-fraunces)]";
 
@@ -109,44 +110,6 @@ function ProgressMock() {
             </div>
           </div>
         ))}
-      </div>
-    </div>
-  );
-}
-
-function TransformMock() {
-  return (
-    <div className="animate-bob-2 w-full max-w-[296px] rounded-3xl bg-gradient-to-b from-[#221C3E] to-[#141024] px-5 pb-6 pt-[22px] shadow-[0_30px_60px_rgba(40,36,90,0.18),0_4px_12px_rgba(40,36,90,0.06)]">
-      <div className={`${H} text-center text-[11px] font-black tracking-[0.14em] text-[#9b9cfd]`}>
-        LEVEL 6 UNLOCKED
-      </div>
-      <div className="relative mt-1.5 flex flex-col items-center">
-        <div
-          className="absolute rounded-full"
-          style={{
-            width: 190,
-            height: 190,
-            top: "44%",
-            transform: "translateY(-50%)",
-            background:
-              "radial-gradient(closest-side,rgba(120,110,255,.5),transparent)",
-          }}
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/journey/kai6.png"
-          alt="Character avatar at month 6"
-          className="relative h-[196px] w-auto [filter:drop-shadow(0_18px_30px_rgba(0,0,0,0.5))]"
-        />
-      </div>
-      <div className={`${H} relative mt-0.5 text-center text-[18px] font-black text-white`}>
-        6 months stronger
-      </div>
-      <div className="mt-3.5 h-2 w-full overflow-hidden rounded-full bg-white/[0.14]">
-        <div className="h-full w-[62%] rounded-full bg-gradient-to-r from-[#9b9cfd] to-[#5CC0BF]" />
-      </div>
-      <div className="mt-2.5 text-center text-[11px] font-extrabold text-white/60">
-        4 more workouts to Level 7
       </div>
     </div>
   );

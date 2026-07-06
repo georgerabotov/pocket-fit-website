@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { APP_STORE, FEATURES, PLANS, type Plan } from "./plans";
 
@@ -219,6 +219,12 @@ function LightSwitch({
 export default function LanyardPricing() {
   const [selected, setSelected] = useState<string | null>(null);
   const [dark, setDark] = useState(false);
+
+  // let the (glass) site nav re-theme itself over the dark pricing backdrop
+  useEffect(() => {
+    document.documentElement.setAttribute("data-nav", dark ? "dark" : "light");
+    return () => document.documentElement.removeAttribute("data-nav");
+  }, [dark]);
   const idx = PLANS.findIndex((p) => p.id === selected);
   const active = idx >= 0 ? PLANS[idx] : null;
   // place the panel opposite the selected pass so it stays visible

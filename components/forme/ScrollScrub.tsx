@@ -8,6 +8,15 @@ const FRAME_COUNT = 183;
 const framePath = (i: number) =>
   `/frames/frame_${String(i).padStart(3, "0")}.jpg`;
 
+// The woman's parting lines — shown one at a time as the two meet. Each entry
+// is [fadeInStart, fadeInEnd, fadeOutStart, fadeOutEnd] in scroll progress, so
+// one balloon fully disappears before the next appears.
+const HER_LINES: { text: string; win: [number, number, number, number] }[] = [
+  { text: "We're done here.", win: [0.55, 0.585, 0.63, 0.66] },
+  { text: "I train, you game, we're so done!", win: [0.67, 0.7, 0.75, 0.78] },
+  { text: "Good luck with the controller.", win: [0.79, 0.82, 0.88, 0.91] },
+];
+
 const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 const smoothstep = (a: number, b: number, x: number) => {
   const t = clamp((x - a) / (b - a), 0, 1);
@@ -20,8 +29,7 @@ export function ScrollScrub() {
   const introRef = useRef<HTMLDivElement>(null);
   const cueRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
-  const sheRef = useRef<HTMLDivElement>(null);
-  const heRef = useRef<HTMLDivElement>(null);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
@@ -93,22 +101,16 @@ export function ScrollScrub() {
       if (cue) cue.style.opacity = String(1 - smoothstep(0, 0.06, p));
       if (bar) bar.style.transform = `scaleX(${p})`;
 
-      // dialogue at the face-to-face beat (vid2 end -> vid3), gone before he
-      // walks in. She speaks first, then he answers.
-      const fade = (inA: number, inB: number) =>
-        smoothstep(inA, inB, p) * (1 - smoothstep(0.86, 0.9, p));
-      const she = sheRef.current;
-      const he = heRef.current;
-      if (she) {
-        const s = fade(0.55, 0.6);
-        she.style.opacity = String(s);
-        she.style.transform = `translateY(${14 * (1 - s)}px)`;
-      }
-      if (he) {
-        const s = fade(0.67, 0.72);
-        he.style.opacity = String(s);
-        he.style.transform = `translateY(${14 * (1 - s)}px)`;
-      }
+      // the woman's parting lines at the face-to-face beat, one at a time
+      lineRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const w = HER_LINES[i].win;
+        const s =
+          smoothstep(w[0], w[1], p) * (1 - smoothstep(w[2], w[3], p));
+        el.style.opacity = String(s);
+        // translate(-50%) centres the balloon over the girl's head
+        el.style.transform = `translate(-50%, ${14 * (1 - s)}px)`;
+      });
     };
 
     const reduce = window.matchMedia(
@@ -159,7 +161,7 @@ export function ScrollScrub() {
         <div className="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 pt-7 sm:px-12">
           <Link href="/" className="display text-2xl tracking-tight">Pocket Fit</Link>
           <Link
-            href="/pricing"
+            href="/"
             className="body-sans rounded-full border border-forme-bone/50 bg-white/10 px-5 py-2.5 text-[0.7rem] uppercase tracking-[0.22em] text-forme-bone backdrop-blur-sm transition-colors hover:bg-forme-bone hover:text-forme-ink"
           >
             About our app
@@ -179,30 +181,25 @@ export function ScrollScrub() {
           <div className="mt-9 h-px w-24 bg-forme-bone/50" />
         </div>
 
-        {/* Dialogue - she (right) speaks first, he (left) answers.
-            Placeholder lines; swap for the real script. */}
-        <div
-          ref={sheRef}
-          className="pointer-events-none absolute right-[5%] top-[15%] z-20 w-[min(70vw,22rem)] opacity-0 sm:right-[10%]"
-        >
-          <div className="relative rounded-[1.6rem] bg-white px-6 py-4 text-center shadow-2xl ring-1 ring-black/10">
-            <p className="body-sans text-base font-semibold text-[#1c1a16] sm:text-xl">
-              We&apos;re done here.
-            </p>
-            <span className="absolute -bottom-2 left-1/2 size-4 -translate-x-1/2 rotate-45 bg-white" />
+        {/* The woman's parting lines — shown one at a time on her side (right).
+            The guy says nothing. */}
+        {HER_LINES.map((l, i) => (
+          <div
+            key={i}
+            ref={(el) => {
+              lineRefs.current[i] = el;
+            }}
+            className="pointer-events-none absolute left-[55%] top-[35%] z-20 w-[min(74vw,17rem)] opacity-0 sm:left-[56%]"
+          >
+            <div className="relative rounded-[1.7rem] bg-white px-6 py-5 text-center shadow-[0_30px_70px_-15px_rgba(0,0,0,0.65)] ring-1 ring-black/10">
+              <p className="body-sans text-lg font-bold leading-snug text-[#1c1a16] sm:text-xl">
+                {l.text}
+              </p>
+              {/* tail points straight down to the girl's head */}
+              <span className="absolute -bottom-2 left-1/2 size-5 -translate-x-1/2 rotate-45 bg-white" />
+            </div>
           </div>
-        </div>
-        <div
-          ref={heRef}
-          className="pointer-events-none absolute left-[5%] top-[31%] z-20 w-[min(70vw,22rem)] opacity-0 sm:left-[9%]"
-        >
-          <div className="relative rounded-[1.6rem] bg-white px-6 py-4 text-center shadow-2xl ring-1 ring-black/10">
-            <p className="body-sans text-base font-semibold text-[#1c1a16] sm:text-xl">
-              I&apos;m just getting started.
-            </p>
-            <span className="absolute -bottom-2 left-1/2 size-4 -translate-x-1/2 rotate-45 bg-white" />
-          </div>
-        </div>
+        ))}
 
         <div
           ref={cueRef}

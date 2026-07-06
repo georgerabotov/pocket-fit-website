@@ -106,7 +106,7 @@ export function SiteNav() {
           className="pointer-events-auto fixed inset-0 -z-10 cursor-default md:hidden"
         />
       ) : null}
-      <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-white/50 bg-white/45 p-1.5 pl-2 shadow-[0_10px_40px_-8px_rgba(23,23,31,0.28)] ring-1 ring-inset ring-white/40 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/40">
+      <nav className="nav-glass pointer-events-auto flex items-center gap-1 rounded-full border border-white/50 bg-white/45 p-1.5 pl-2 shadow-[0_10px_40px_-8px_rgba(23,23,31,0.28)] ring-1 ring-inset ring-white/40 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/40">
         {/* Logo → home, with a "Home" tooltip */}
         <div className="group relative flex items-center rounded-full py-1 pl-1 pr-2">
           {isHome ? (

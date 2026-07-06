@@ -6,14 +6,17 @@
    shows *inside* a card - never in the gaps between them.
    Phone screens are placeholders - drop a screenshot into a section's `img`. */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const H = "font-[family-name:var(--font-fraunces)]";
 
-const COACHES: Record<string, { name: string; img: string }> = {
-  kai: { name: "Kai", img: "/journey/kai6.png" },
-  maia: { name: "Maia", img: "/journey/fit-female.png" },
+const COACHES: Record<string, { name: string; img: string; demo: string }> = {
+  kai: { name: "Kai", img: "/journey/kai6.png", demo: "/intelligence/demo-kai.mp4" },
+  maia: { name: "Maia", img: "/journey/fit-female.png", demo: "/intelligence/demo-maia.mp4" },
 };
+
+// exercise shown in the coach demo pop-up
+const DEMO_EXERCISE = "Flat bench press";
 
 type Section = {
   id: string;
@@ -169,31 +172,20 @@ function PhoneFrame({
   );
 }
 
-function CoachOrb({ coach, glow }: { coach: "kai" | "maia"; glow: string }) {
-  const c = COACHES[coach];
-  return (
-    <div className="flex flex-col items-center gap-2.5">
-      <div className="relative grid size-24 place-items-center">
-        <div
-          aria-hidden
-          className="absolute inset-2 rounded-full blur-xl"
-          style={{ background: glow, opacity: 0.45 }}
-        />
-        <div className="relative grid size-20 place-items-end justify-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5 shadow-[0_12px_30px_-10px_rgba(0,0,0,0.3)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={c.img} alt={c.name} className="h-[76px] w-auto object-contain" />
-        </div>
-      </div>
-      <span className="rounded-full bg-stone-100 px-3.5 py-1 text-[13px] font-semibold text-stone-700 ring-1 ring-inset ring-black/5">
-        {c.name}
-      </span>
-    </div>
-  );
-}
+const GLOW: Record<"kai" | "maia", string> = {
+  kai: "rgba(124,108,255,0.55)",
+  maia: "rgba(20,184,166,0.5)",
+};
+
+const ACCENT: Record<"kai" | "maia", string> = {
+  kai: "#7c6cff",
+  maia: "#14b8a6",
+};
 
 export function AiIntelligence() {
   const frames = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
+  const [coach, setCoach] = useState<"kai" | "maia">("kai");
 
   useEffect(() => {
     let raf = 0;
@@ -259,21 +251,92 @@ export function AiIntelligence() {
       />
 
       <div className="relative mx-auto max-w-[1200px] px-6">
-        {/* header - coaches + title */}
+        {/* header - big selectable avatar + title */}
         <div className="flex flex-col items-center text-center">
-          <div className="flex items-end gap-8">
-            <CoachOrb coach="kai" glow="rgba(124,108,255,0.9)" />
-            <CoachOrb coach="maia" glow="rgba(20,184,166,0.85)" />
+          {/* big avatar (crossfades between Kai & Maia) */}
+          <div className="relative grid size-40 place-items-center sm:size-48">
+            <div
+              aria-hidden
+              className="absolute inset-1 rounded-full blur-2xl transition-[background] duration-500"
+              style={{ background: GLOW[coach], opacity: 0.7 }}
+            />
+            <div className="relative grid size-36 place-items-end justify-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5 shadow-[0_22px_55px_-16px_rgba(0,0,0,0.35)] sm:size-44">
+              {(["kai", "maia"] as const).map((k) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={k}
+                  src={COACHES[k].img}
+                  alt={COACHES[k].name}
+                  className="col-start-1 row-start-1 h-[90%] w-auto object-contain transition-opacity duration-500"
+                  style={{ opacity: coach === k ? 1 : 0 }}
+                />
+              ))}
+            </div>
           </div>
-          <h2 className={`${H} mt-8 text-4xl font-semibold tracking-tight sm:text-5xl`}>
+
+          {/* Kai / Maia selector - switches which side shows the form demo */}
+          <div className="mt-6 inline-flex rounded-full bg-stone-100 p-1 ring-1 ring-inset ring-black/5">
+            {(["kai", "maia"] as const).map((k) => (
+              <button
+                key={k}
+                type="button"
+                onClick={() => setCoach(k)}
+                aria-pressed={coach === k}
+                className={`rounded-full px-7 py-2 text-sm font-semibold transition-colors ${
+                  coach === k
+                    ? "bg-white text-stone-900 shadow-sm"
+                    : "text-stone-500 hover:text-stone-800"
+                }`}
+              >
+                {COACHES[k].name}
+              </button>
+            ))}
+          </div>
+
+          <p className="mt-3 text-xs font-medium text-stone-400">
+            {COACHES[coach].name} showing you the {DEMO_EXERCISE.toLowerCase()}
+          </p>
+
+          <h2 className={`${H} mt-7 text-4xl font-semibold tracking-tight sm:text-5xl`}>
             <span className="text-stone-400">Go deeper with</span>
             <br />
             <span className="text-stone-900">Pocket Fit Intelligence</span>
           </h2>
           <p className="mt-4 max-w-md text-base text-stone-500">
             Personalized guidance and actionable advice from Kai and Maia - your
-            own 24/7 AI trainers.
+            own 24/7 AI trainers who even show you how each exercise is done.
           </p>
+
+          {/* form demo - stacked under the copy on mobile/tablet */}
+          <div key={`m-${coach}`} className="mt-9 w-full max-w-[320px] [animation:demoFade_0.5s_ease-both] lg:hidden">
+            <div className="overflow-hidden rounded-[22px] bg-black shadow-[0_30px_70px_-24px_rgba(0,0,0,0.5)] ring-1 ring-black/10">
+              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+              <video src={COACHES[coach].demo} autoPlay muted loop playsInline className="aspect-video w-full object-cover" />
+              <div className="flex items-center justify-center gap-2 px-3.5 py-2.5">
+                <span className="inline-block size-1.5 rounded-full" style={{ background: ACCENT[coach] }} />
+                <span className="text-[11px] font-semibold tracking-wide text-white/90">{COACHES[coach].name} · {DEMO_EXERCISE}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <style dangerouslySetInnerHTML={{ __html: "@keyframes demoFade{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}" }} />
+
+        {/* form demo - one at a time, beside the header: Kai on the left, Maia on the right */}
+        <div
+          key={`d-${coach}`}
+          className={`pointer-events-none absolute top-2 z-10 hidden w-[290px] [animation:demoFade_0.5s_ease-both] lg:block ${
+            coach === "kai" ? "left-0" : "right-0"
+          }`}
+        >
+          <div className="overflow-hidden rounded-[22px] bg-black shadow-[0_34px_80px_-26px_rgba(0,0,0,0.55)] ring-1 ring-black/10">
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <video src={COACHES[coach].demo} autoPlay muted loop playsInline className="aspect-video w-full object-cover" />
+            <div className="flex items-center justify-center gap-2 px-3.5 py-2.5">
+              <span className="inline-block size-1.5 rounded-full" style={{ background: ACCENT[coach] }} />
+              <span className="text-[11px] font-semibold tracking-wide text-white/90">{COACHES[coach].name} · {DEMO_EXERCISE}</span>
+            </div>
+          </div>
         </div>
 
         {/* cards + one pinned, mask-clipped phone */}

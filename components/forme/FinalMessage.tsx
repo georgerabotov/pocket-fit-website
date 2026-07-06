@@ -10,7 +10,7 @@ const QUOTES: { t: string; sig?: string }[] = [
   {
     t: "I wish this will inspire a lot of people, and I hope that everyone starts believing in themselves and that everything is possible.",
   },
-  { t: "If I have done it, then everyone can." },
+  { t: "If I have done it, then everyone can. This is why I built Pocket Fit." },
   {
     t: "It's all about discipline, rather than motivation. We go through our ups and downs in life, but we should never give up.",
   },

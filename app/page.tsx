@@ -4,6 +4,7 @@ import { Fraunces, Jost } from "next/font/google";
 import { SiteNav } from "@/components/site/SiteNav";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { StoreBadges } from "@/components/site/StoreBadges";
+import { HeroCharacter } from "@/components/site/HeroCharacter";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Reveal } from "@/components/site/Reveal";
 import { CylinderCarousel } from "@/components/site/CylinderCarousel";
@@ -62,30 +63,8 @@ export default function Home() {
             className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(60%_60%_at_50%_0%,#ede9fe,transparent)]"
           />
 
-          {/* Branch - top right, looping, blended (no background) */}
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            src="/hero.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden
-            className="pointer-events-none absolute -right-6 top-2 z-0 w-[46%] max-w-xl brightness-[1.07] contrast-[1.22] mix-blend-multiply [mask-image:radial-gradient(72%_72%_at_58%_46%,#000_50%,transparent_82%)] [-webkit-mask-image:radial-gradient(72%_72%_at_58%_46%,#000_50%,transparent_82%)] sm:top-0"
-          />
-
-          {/* Character pushes the phone in - plays once */}
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          <video
-            src="/hero-character.mp4"
-            autoPlay
-            muted
-            playsInline
-            preload="auto"
-            aria-hidden
-            className="pointer-events-none absolute bottom-0 left-0 z-0 hidden h-[320px] w-auto select-none lg:block xl:h-[400px]"
-          />
+          {/* Character pushes the phone in - hover (desktop) / tap (mobile) to replay */}
+          <HeroCharacter />
 
           {/* Hero copy */}
           <Section className="relative z-10 pb-16 pt-28 text-center sm:pb-24 sm:pt-32">
@@ -99,7 +78,7 @@ export default function Home() {
             <h1
               data-reveal
               style={{ transitionDelay: "80ms" }}
-              className="reveal mx-auto mt-5 max-w-2xl font-[family-name:var(--font-fraunces)] text-3xl font-semibold leading-[1.08] tracking-tight text-stone-900 sm:text-4xl"
+              className="reveal mx-auto mt-5 max-w-2xl font-[family-name:var(--font-jost)] text-4xl font-semibold leading-[1.06] tracking-[-0.02em] text-stone-900 sm:text-5xl"
             >
               Workouts that fit your real life.
             </h1>

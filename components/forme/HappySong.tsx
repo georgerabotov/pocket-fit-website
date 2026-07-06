@@ -29,8 +29,22 @@ declare global {
 
 export function HappySong() {
   const playerRef = useRef<YTPlayer | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const [passed, setPassed] = useState(false);
+
+  // once you scroll past the band, stick a mini-player at the top
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => setPassed(!e.isIntersecting && e.boundingClientRect.top < 0),
+      { threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -73,8 +87,61 @@ export function HappySong() {
   };
 
   return (
-    <section className="relative flex min-h-[36vh] items-center justify-center overflow-hidden px-6 py-16 text-center">
-      <style dangerouslySetInnerHTML={{ __html: "@keyframes hsPing{0%{transform:scale(1);opacity:.4}70%,100%{transform:scale(1.35);opacity:0}}" }} />
+    <section ref={sectionRef} className="relative flex min-h-[36vh] items-center justify-center overflow-hidden px-6 py-16 text-center">
+      <style dangerouslySetInnerHTML={{ __html: "@keyframes hsPing{0%{transform:scale(1);opacity:.4}70%,100%{transform:scale(1.35);opacity:0}}@keyframes hsBar{0%,100%{transform:scaleY(0.35)}50%{transform:scaleY(1)}}" }} />
+
+      {/* sticky mini-player — appears once you scroll past the band, keeps the song controllable through the finale */}
+      <div
+        aria-hidden={!passed}
+        className="fixed left-4 top-4 z-40 transition-all duration-300"
+        style={{
+          opacity: passed ? 1 : 0,
+          transform: passed ? "translateY(0)" : "translateY(-12px)",
+          pointerEvents: passed ? "auto" : "none",
+        }}
+      >
+        <div
+          className="flex items-center gap-2.5 rounded-full py-1.5 pl-1.5 pr-4 shadow-[0_10px_30px_-8px_rgba(0,0,0,0.45)] ring-1 ring-white/10 backdrop-blur"
+          style={{ background: "rgba(26,22,18,0.82)" }}
+        >
+          <button
+            type="button"
+            onClick={toggle}
+            disabled={!ready}
+            aria-label={playing ? "Pause happy song" : "Play happy song"}
+            className="grid size-9 place-items-center rounded-full transition-transform hover:scale-105 disabled:opacity-50"
+            style={{ background: "var(--color-forme-bone)", color: "var(--color-forme-ink)" }}
+          >
+            {playing ? (
+              <svg viewBox="0 0 24 24" className="size-3.5" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+            ) : (
+              <svg viewBox="0 0 24 24" className="size-4" fill="currentColor"><path d="M8 5.5v13l11-6.5z" /></svg>
+            )}
+          </button>
+
+          {/* animated equalizer while playing, static note otherwise */}
+          <span className="flex h-4 items-end gap-[3px]" aria-hidden>
+            {[0, 1, 2].map((i) => (
+              <span
+                key={i}
+                className="w-[3px] rounded-full"
+                style={{
+                  height: "100%",
+                  background: "var(--color-forme-bone)",
+                  transformOrigin: "bottom",
+                  opacity: playing ? 0.9 : 0.4,
+                  animation: playing ? `hsBar 0.9s ease-in-out ${i * 0.15}s infinite` : "none",
+                  transform: playing ? undefined : "scaleY(0.4)",
+                }}
+              />
+            ))}
+          </span>
+
+          <span className="text-[0.7rem] font-medium tracking-wide" style={{ color: "var(--color-forme-bone)" }}>
+            {playing ? "Never Going Home" : "Play the song"}
+          </span>
+        </div>
+      </div>
 
       {/* hidden audio player */}
       <div aria-hidden style={{ position: "fixed", left: "-9999px", bottom: 0, width: 1, height: 1, overflow: "hidden", pointerEvents: "none" }}>

@@ -74,6 +74,35 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Dark-aware glass nav (used over the pricing "lights off" dark backdrop) */
+html[data-nav="dark"] .nav-glass {
+  background: rgba(26, 26, 32, 0.6) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 12px 44px -8px rgba(0, 0, 0, 0.55) !important;
+  --tw-ring-color: rgba(255, 255, 255, 0.14);
+}
+html[data-nav="dark"] .nav-glass a[data-active="false"],
+html[data-nav="dark"] .nav-glass a[href^="http"],
+html[data-nav="dark"] .nav-glass button[aria-label="Menu"] {
+  color: rgba(240, 240, 246, 0.82) !important;
+}
+html[data-nav="dark"] .nav-glass a[data-active="false"]:hover,
+html[data-nav="dark"] .nav-glass a[href^="http"]:hover {
+  color: #fff !important;
+}
+html[data-nav="dark"] .nav-glass img[alt="Pocket Fit"] {
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+html[data-nav="dark"] .nav-glass a[href="/#download"] {
+  background: #f4f4f7 !important;
+  color: #14141a !important;
+}
+html[data-nav="dark"] .nav-glass a[href="/#download"]:hover {
+  background: #7c3aed !important;
+  color: #fff !important;
+}
+
 /* Review marquee (two rows, opposite directions, pause on hover) */
 @keyframes rvScrollL {
   from {
