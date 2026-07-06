@@ -396,6 +396,8 @@ function Band({
   dimmed,
   selected,
   onSelect,
+  onGrab,
+  onRelease,
 }: {
   plan: Plan;
   index: number;
@@ -404,6 +406,8 @@ function Band({
   dimmed: boolean;
   selected: boolean;
   onSelect: (id: string | null) => void;
+  onGrab: () => void;
+  onRelease: () => void;
 }) {
   const fixed = useRef<RapierRigidBody>(null);
   const j1 = useRef<RapierRigidBody>(null);
@@ -625,6 +629,7 @@ function Band({
             onPointerOut={() => setHovered(false)}
             onPointerDown={(e) => {
               e.stopPropagation();
+              onGrab();
               down.current = { x: e.clientX, y: e.clientY, t: e.timeStamp };
               try {
                 (e.target as Element).setPointerCapture?.(e.pointerId);
@@ -639,6 +644,7 @@ function Band({
             }}
             onPointerUp={(e) => {
               e.stopPropagation();
+              onRelease();
               try {
                 (e.target as Element).releasePointerCapture?.(e.pointerId);
               } catch {}
@@ -648,8 +654,8 @@ function Band({
               down.current = null;
               if (
                 d &&
-                Math.hypot(e.clientX - d.x, e.clientY - d.y) < 6 &&
-                e.timeStamp - d.t < 400
+                Math.hypot(e.clientX - d.x, e.clientY - d.y) < 12 &&
+                e.timeStamp - d.t < 500
               ) {
                 // while a pass is zoomed in, any click that isn't a drag
                 // returns to the row instead of jumping straight to another pass
@@ -758,6 +764,9 @@ export default function Badges({
   // bring it back, bump the key to remount the Canvas with a fresh context so
   // the cards never stay gone.
   const [glKey, setGlKey] = useState(0);
+  // true while a finger is down on a card, so we know a gesture belongs to the
+  // card (drag/tap) and must not be turned into a page scroll
+  const onCard = useRef(false);
 
   return (
     <Canvas
@@ -768,10 +777,36 @@ export default function Badges({
       onPointerMissed={() => onSelect(null)}
       onCreated={({ gl }) => {
         const el = gl.domElement;
-        // let vertical swipes scroll the page (to the footer) while taps and
-        // horizontal drags still reach the cards — default 'auto' let the
-        // browser swallow touch pointer events, so nothing was interactive
-        el.style.touchAction = "pan-y";
+        // Cards own the whole gesture: hold-and-drag works in any direction and
+        // taps reliably open the breakdown (no browser scroll/zoom stealing the
+        // pointer). We re-add page scrolling by hand, but only for swipes that
+        // did NOT start on a card.
+        el.style.touchAction = "none";
+        let sy = 0;
+        el.addEventListener(
+          "touchstart",
+          (e) => {
+            sy = e.touches[0]?.clientY ?? 0;
+          },
+          { passive: true },
+        );
+        el.addEventListener(
+          "touchmove",
+          (e) => {
+            if (onCard.current || e.touches.length !== 1) return;
+            const y = e.touches[0].clientY;
+            window.scrollBy(0, sy - y);
+            sy = y;
+          },
+          { passive: true },
+        );
+        el.addEventListener(
+          "touchend",
+          () => {
+            onCard.current = false;
+          },
+          { passive: true },
+        );
         let restored = true;
         el.addEventListener(
           "webglcontextlost",
@@ -813,6 +848,8 @@ export default function Badges({
               selected={selected === plan.id}
               dimmed={selected !== null && selected !== plan.id}
               onSelect={onSelect}
+              onGrab={() => (onCard.current = true)}
+              onRelease={() => (onCard.current = false)}
             />
           );
         })}
