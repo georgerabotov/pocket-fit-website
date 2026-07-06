@@ -814,7 +814,10 @@ export default function Badges({
             e.preventDefault();
             restored = false;
             window.setTimeout(() => {
-              if (!restored) setGlKey((k) => k + 1);
+              // don't remount for a context that was lost because its canvas is
+              // being torn down (e.g. StrictMode's dev double-mount) — only if
+              // this canvas is still live and genuinely stuck
+              if (!restored && el.isConnected) setGlKey((k) => k + 1);
             }, 400);
           },
           false,
