@@ -358,7 +358,7 @@ export function AiIntelligence() {
         </div>
 
         {/* cards + one pinned, mask-clipped phone */}
-        <div className="relative mt-16">
+        <div className="relative mt-24">
           {/* pinned phone (desktop) */}
           <div className="pointer-events-none absolute -top-[90vh] -bottom-[90vh] right-[5%] z-20 hidden w-[280px] lg:block">
             <div className="sticky top-[50vh] -translate-y-1/2">
