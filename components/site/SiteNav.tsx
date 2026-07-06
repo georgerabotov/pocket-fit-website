@@ -161,11 +161,12 @@ export function SiteNav() {
 
           {links.map((l) => {
             const active = isActive(pathname, l.href);
+            const featured = "featured" in l && l.featured;
             const cls = `relative z-10 select-none rounded-full px-3 py-2 text-sm transition-colors ${
               active
                 ? "cursor-grab font-semibold text-violet-700"
                 : "font-medium text-stone-600 hover:text-stone-900"
-            }`;
+            } ${featured ? "story-glow" : ""}`;
             return "external" in l && l.external ? (
               <a key={l.href} href={l.href} className={cls}>
                 {l.label}
@@ -179,12 +180,6 @@ export function SiteNav() {
                 className={cls}
               >
                 {l.label}
-                {"featured" in l && l.featured && !active ? (
-                  <span
-                    aria-hidden
-                    className="absolute -right-0.5 top-1.5 size-1.5 rounded-full bg-violet-500 ring-2 ring-white/80"
-                  />
-                ) : null}
               </Link>
             );
           })}
@@ -238,15 +233,12 @@ export function SiteNav() {
         </Link>
         {links.map((l) => {
           const active = isActive(pathname, l.href);
+          const featured = "featured" in l && l.featured;
           const cls = `flex items-center justify-center gap-1.5 rounded-2xl px-4 py-3 text-center text-[15px] transition-colors ${
             active
               ? "bg-white font-semibold text-violet-700 shadow-sm"
               : "font-medium text-stone-700 hover:bg-white/70"
-          }`;
-          const dot =
-            "featured" in l && l.featured && !active ? (
-              <span className="size-1.5 rounded-full bg-violet-500" />
-            ) : null;
+          } ${featured ? "story-glow" : ""}`;
           return "external" in l && l.external ? (
             <a key={l.href} href={l.href} className={cls}>
               {l.label}
@@ -255,7 +247,6 @@ export function SiteNav() {
           ) : (
             <Link key={l.href} href={l.href} className={cls}>
               {l.label}
-              {dot}
             </Link>
           );
         })}

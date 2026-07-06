@@ -6,7 +6,7 @@
    shows *inside* a card - never in the gaps between them.
    Phone screens are placeholders - drop a screenshot into a section's `img`. */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const H = "font-[family-name:var(--font-fraunces)]";
 
@@ -172,11 +172,6 @@ function PhoneFrame({
   );
 }
 
-const GLOW: Record<"kai" | "maia", string> = {
-  kai: "rgba(124,108,255,0.55)",
-  maia: "rgba(20,184,166,0.5)",
-};
-
 const ACCENT: Record<"kai" | "maia", string> = {
   kai: "#7c6cff",
   maia: "#14b8a6",
@@ -185,7 +180,6 @@ const ACCENT: Record<"kai" | "maia", string> = {
 export function AiIntelligence() {
   const frames = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
-  const [coach, setCoach] = useState<"kai" | "maia">("kai");
 
   useEffect(() => {
     let raf = 0;
@@ -251,52 +245,8 @@ export function AiIntelligence() {
       />
 
       <div className="relative mx-auto max-w-[1200px] px-6">
-        {/* header - big selectable avatar + title */}
+        {/* header - title + both coach demos */}
         <div className="flex flex-col items-center text-center">
-          {/* big avatar (crossfades between Kai & Maia) */}
-          <div className="relative grid size-40 place-items-center sm:size-48">
-            <div
-              aria-hidden
-              className="absolute inset-1 rounded-full blur-2xl transition-[background] duration-500"
-              style={{ background: GLOW[coach], opacity: 0.7 }}
-            />
-            <div className="relative grid size-36 place-items-end justify-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5 shadow-[0_22px_55px_-16px_rgba(0,0,0,0.35)] sm:size-44">
-              {(["kai", "maia"] as const).map((k) => (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={k}
-                  src={COACHES[k].img}
-                  alt={COACHES[k].name}
-                  className="col-start-1 row-start-1 h-[90%] w-auto object-contain transition-opacity duration-500"
-                  style={{ opacity: coach === k ? 1 : 0 }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Kai / Maia selector - switches which side shows the form demo */}
-          <div className="mt-6 inline-flex rounded-full bg-stone-100 p-1 ring-1 ring-inset ring-black/5">
-            {(["kai", "maia"] as const).map((k) => (
-              <button
-                key={k}
-                type="button"
-                onClick={() => setCoach(k)}
-                aria-pressed={coach === k}
-                className={`rounded-full px-7 py-2 text-sm font-semibold transition-colors ${
-                  coach === k
-                    ? "bg-white text-stone-900 shadow-sm"
-                    : "text-stone-500 hover:text-stone-800"
-                }`}
-              >
-                {COACHES[k].name}
-              </button>
-            ))}
-          </div>
-
-          <p className="mt-3 text-xs font-medium text-stone-400">
-            {COACHES[coach].name} showing you the {DEMO_EXERCISE.toLowerCase()}
-          </p>
-
           <h2 className={`${H} mt-7 text-4xl font-semibold tracking-tight sm:text-5xl`}>
             <span className="text-stone-400">Go deeper with</span>
             <br />
@@ -307,42 +257,67 @@ export function AiIntelligence() {
             own 24/7 AI trainers who even show you how each exercise is done.
           </p>
 
-          {/* form demo - stacked under the copy on mobile/tablet */}
-          <div key={`m-${coach}`} className="mt-9 w-full max-w-[320px] [animation:demoFade_0.5s_ease-both] lg:hidden">
-            <div className="overflow-hidden rounded-[22px] bg-black shadow-[0_30px_70px_-24px_rgba(0,0,0,0.5)] ring-1 ring-black/10">
-              {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-              <video src={COACHES[coach].demo} autoPlay muted loop playsInline className="aspect-video w-full object-cover" />
-              <div className="flex items-center justify-center gap-2 px-3.5 py-2.5">
-                <span className="inline-block size-1.5 rounded-full" style={{ background: ACCENT[coach] }} />
-                <span className="text-[11px] font-semibold tracking-wide text-white/90">{COACHES[coach].name} · {DEMO_EXERCISE}</span>
-              </div>
-            </div>
+          {/* hand-drawn curly arrow leading down into the coach demos */}
+          <div className="mt-6 flex justify-center" aria-hidden>
+            <svg
+              viewBox="0 0 200 100"
+              className="h-16 w-auto text-stone-300"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ transform: "rotate(14deg)" }}
+            >
+              <path d="M14 40 C6 26 30 20 34 38 C37 52 18 54 22 40 C26 28 40 30 52 46 C60 58 44 64 40 50 C37 40 54 38 66 50 C92 76 140 78 180 52" />
+              <path d="M180 52 L163 45" />
+              <path d="M180 52 L171 69" />
+            </svg>
           </div>
-        </div>
 
-        <style dangerouslySetInnerHTML={{ __html: "@keyframes demoFade{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:none}}" }} />
-
-        {/* form demo - one at a time, beside the header: Kai on the left, Maia on the right */}
-        <div
-          key={`d-${coach}`}
-          className={`pointer-events-none absolute top-2 z-10 hidden w-[290px] [animation:demoFade_0.5s_ease-both] lg:block ${
-            coach === "kai" ? "left-0" : "right-0"
-          }`}
-        >
-          <div className="overflow-hidden rounded-[22px] bg-black shadow-[0_34px_80px_-26px_rgba(0,0,0,0.55)] ring-1 ring-black/10">
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-            <video src={COACHES[coach].demo} autoPlay muted loop playsInline className="aspect-video w-full object-cover" />
-            <div className="flex items-center justify-center gap-2 px-3.5 py-2.5">
-              <span className="inline-block size-1.5 rounded-full" style={{ background: ACCENT[coach] }} />
-              <span className="text-[11px] font-semibold tracking-wide text-white/90">{COACHES[coach].name} · {DEMO_EXERCISE}</span>
-            </div>
+          {/* both coaches + both demos, shown together with matched styling */}
+          <div className="mt-3 grid w-full max-w-2xl grid-cols-1 gap-5 sm:grid-cols-2">
+            {(["kai", "maia"] as const).map((k) => (
+              <figure
+                key={k}
+                className="overflow-hidden rounded-[24px] bg-stone-50 shadow-[0_26px_60px_-30px_rgba(0,0,0,0.4)] ring-1 ring-black/5"
+              >
+                <figcaption className="flex items-center gap-3 px-4 pb-3 pt-4">
+                  <div className="grid size-11 place-items-end justify-items-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={COACHES[k].img} alt={COACHES[k].name} className="h-[120%] w-auto object-contain" />
+                  </div>
+                  <div className="text-left leading-tight">
+                    <p className="text-sm font-bold text-stone-900">{COACHES[k].name}</p>
+                    <p className="text-[11px] font-semibold" style={{ color: ACCENT[k] }}>
+                      {DEMO_EXERCISE}
+                    </p>
+                  </div>
+                  <span className="ml-auto flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-stone-400">
+                    <span className="size-1.5 rounded-full" style={{ background: ACCENT[k] }} />
+                    Demo
+                  </span>
+                </figcaption>
+                <div className="px-4 pb-4">
+                  {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+                  <video
+                    src={COACHES[k].demo}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="aspect-video w-full rounded-[16px] object-cover"
+                  />
+                </div>
+              </figure>
+            ))}
           </div>
         </div>
 
         {/* cards + one pinned, mask-clipped phone */}
         <div className="relative mt-16">
           {/* pinned phone (desktop) */}
-          <div className="pointer-events-none absolute -top-[90vh] -bottom-[90vh] right-[6%] z-20 hidden w-[220px] lg:block">
+          <div className="pointer-events-none absolute -top-[90vh] -bottom-[90vh] right-[5%] z-20 hidden w-[280px] lg:block">
             <div className="sticky top-[50vh] -translate-y-1/2">
               <div className="relative w-full">
                 {SECTIONS.map((s, i) => (
@@ -380,7 +355,7 @@ export function AiIntelligence() {
                 </div>
 
                 {/* phone for mobile / tablet (one per card) */}
-                <div className="mx-auto mt-8 w-[200px] lg:hidden">
+                <div className="mx-auto mt-8 w-[248px] lg:hidden">
                   <PhoneFrame s={s} className="relative" />
                 </div>
               </div>

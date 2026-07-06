@@ -44,7 +44,7 @@ export function PrivacySection() {
       <div className="mx-auto max-w-6xl px-5">
         <div
           data-reveal
-          className="reveal relative overflow-hidden rounded-[2.25rem] px-6 py-20 text-center shadow-[0_40px_90px_-40px_rgba(49,24,96,0.65)] sm:py-24"
+          className="reveal relative overflow-hidden rounded-[2.25rem] px-6 py-16 text-center shadow-[0_40px_90px_-40px_rgba(49,24,96,0.65)]"
           style={{
             background:
               "radial-gradient(120% 130% at 12% 92%, rgba(139,92,246,0.5), transparent 46%), radial-gradient(120% 120% at 88% 6%, rgba(124,58,237,0.45), transparent 42%), linear-gradient(160deg,#170f2b 0%,#0b0716 55%,#0e0a1e 100%)",
