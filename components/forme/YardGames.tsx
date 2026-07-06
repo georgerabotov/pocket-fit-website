@@ -17,6 +17,7 @@ const N = PHOTOS.length;
 export function YardGames() {
   const sectionRef = useRef<HTMLElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
+  const meRef = useRef<HTMLDivElement>(null);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -44,9 +45,12 @@ export function YardGames() {
 
       // fade the heading out once the last photo has left, so the section
       // flows cleanly into the next one instead of sitting on an empty screen
-      if (labelRef.current) {
-        labelRef.current.style.opacity = String(
-          Math.max(0, Math.min(1, 1 - (p - 0.82) / 0.13)),
+      const labelOpacity = Math.max(0, Math.min(1, 1 - (p - 0.82) / 0.13));
+      if (labelRef.current) labelRef.current.style.opacity = String(labelOpacity);
+      // the "that was me" avatar fades in on entry and out with the label
+      if (meRef.current) {
+        meRef.current.style.opacity = String(
+          Math.min(labelOpacity, Math.min(1, p / 0.06)),
         );
       }
     };
@@ -77,6 +81,29 @@ export function YardGames() {
         >
           <p className="label">The Yard Games</p>
           <h2 className="display mt-3 text-3xl sm:text-5xl">Where the work led.</h2>
+        </div>
+
+        {/* "that was me" - founder avatar on the left */}
+        <div
+          ref={meRef}
+          className="pointer-events-none absolute left-[5vw] top-1/2 z-20 flex -translate-y-1/2 flex-col items-center gap-2.5"
+          style={{ opacity: 0 }}
+        >
+          <div className="size-16 overflow-hidden rounded-full border-[3px] border-white shadow-[0_16px_34px_-10px_rgba(30,26,20,0.55)] sm:size-24">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/founder-georgi.jpg"
+              alt="Georgi, founder of Pocket Fit"
+              draggable={false}
+              className="h-full w-full select-none object-cover"
+            />
+          </div>
+          <span
+            className="font-[family-name:var(--font-cormorant)] text-lg italic sm:text-xl"
+            style={{ color: "var(--color-forme-ink)" }}
+          >
+            that was me
+          </span>
         </div>
 
         {/* stacked deck */}
