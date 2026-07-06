@@ -250,8 +250,13 @@ export default function LanyardPricing() {
         }}
       />
 
-      {/* 3D canvas */}
-      <div className="absolute inset-0 z-0">
+      {/* 3D canvas - on mobile there's no room for the enlarged card beside the
+          panel, so hide it when a plan is open and let the text stand alone */}
+      <div
+        className={`absolute inset-0 z-0 transition-opacity duration-300 sm:opacity-100 ${
+          active ? "pointer-events-none opacity-0 sm:pointer-events-auto" : "opacity-100"
+        }`}
+      >
         <Badges
           plans={PLANS}
           selected={selected}
