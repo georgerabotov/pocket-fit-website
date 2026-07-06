@@ -98,29 +98,27 @@ export function CylinderCarousel() {
         const dx = e.clientX - startX.current;
         const dy = e.clientY - startY.current;
         if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
-        if (Math.abs(dy) > Math.abs(dx)) {
-          pending.current = false; // vertical intent → release to page scroll
+        if (Math.abs(dy) >= Math.abs(dx)) {
+          pending.current = false; // vertical intent → let the page scroll
           return;
         }
+        // horizontal → spin. Note: we deliberately do NOT setPointerCapture,
+        // because capturing a pointer disables the browser's native touch
+        // scrolling, which would trap vertical swipes. touch-action: pan-y lets
+        // the browser hand us horizontal moves while keeping vertical for scroll.
         pending.current = false;
         dragging.current = true;
         setIsDragging(true);
-        try {
-          el.setPointerCapture(e.pointerId);
-        } catch {}
       }
       if (!dragging.current) return;
       rot.current = startRot.current + (e.clientX - startX.current) * 0.28;
     };
 
-    const endDrag = (e: PointerEvent) => {
+    const endDrag = () => {
       pending.current = false;
       if (!dragging.current) return;
       dragging.current = false;
       setIsDragging(false);
-      try {
-        el.releasePointerCapture(e.pointerId);
-      } catch {}
     };
 
     const onDown = (e: PointerEvent) => {
