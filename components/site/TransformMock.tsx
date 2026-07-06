@@ -18,12 +18,38 @@ export function TransformMock() {
       type="button"
       onClick={next}
       aria-label="Advance the transformation"
-      className="animate-bob-2 block w-full max-w-[296px] cursor-pointer rounded-3xl bg-gradient-to-b from-[#221C3E] to-[#141024] px-5 pb-6 pt-[22px] text-center shadow-[0_30px_60px_rgba(40,36,90,0.18),0_4px_12px_rgba(40,36,90,0.06)] transition-transform active:scale-[0.99]"
+      className="group animate-bob-2 block w-full max-w-[296px] cursor-pointer rounded-3xl bg-gradient-to-b from-[#221C3E] to-[#141024] px-5 pb-6 pt-[22px] text-center shadow-[0_30px_60px_rgba(40,36,90,0.18),0_4px_12px_rgba(40,36,90,0.06)] transition-transform active:scale-[0.99]"
     >
+      <style dangerouslySetInnerHTML={{ __html: "@keyframes tmNudge{0%,100%{transform:translate(0,-50%)}50%{transform:translate(4px,-50%)}}" }} />
       <div className={`${H} text-[11px] font-black tracking-[0.14em] text-[#9b9cfd]`}>
         LEVEL {lvl} {lvl === N ? "— MAXED" : "UNLOCKED"}
       </div>
       <div className="relative mt-1.5 flex flex-col items-center">
+        {/* subtle tap-through affordance */}
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          className="pointer-events-none absolute left-0 top-1/2 z-10 size-6 -translate-y-1/2 text-white/20 transition-colors duration-200 group-hover:text-white/40"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M15 6l-6 6 6 6" />
+        </svg>
+        <svg
+          aria-hidden
+          viewBox="0 0 24 24"
+          className="pointer-events-none absolute right-0 top-1/2 z-10 size-6 text-white/40 transition-colors duration-200 [animation:tmNudge_1.7s_ease-in-out_infinite] group-hover:text-white/70"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M9 6l6 6-6 6" />
+        </svg>
         <div
           className="absolute rounded-full"
           style={{
