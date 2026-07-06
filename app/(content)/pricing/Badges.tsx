@@ -768,6 +768,10 @@ export default function Badges({
       onPointerMissed={() => onSelect(null)}
       onCreated={({ gl }) => {
         const el = gl.domElement;
+        // let vertical swipes scroll the page (to the footer) while taps and
+        // horizontal drags still reach the cards — default 'auto' let the
+        // browser swallow touch pointer events, so nothing was interactive
+        el.style.touchAction = "pan-y";
         let restored = true;
         el.addEventListener(
           "webglcontextlost",

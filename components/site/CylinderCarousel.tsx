@@ -39,8 +39,10 @@ export function CylinderCarousel() {
   const cards = useRef<(HTMLDivElement | null)[]>([]);
   const rot = useRef(0);
   const dragging = useRef(false);
+  const pending = useRef(false); // pointer down, direction not yet decided
   const hovering = useRef(false);
   const startX = useRef(0);
+  const startY = useRef(0);
   const startRot = useRef(0);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -90,11 +92,29 @@ export function CylinderCarousel() {
     if (!el) return;
 
     const onMove = (e: PointerEvent) => {
+      // decide gesture direction on first meaningful move: horizontal spins the
+      // ring, vertical is left to the browser so the page can scroll past it
+      if (pending.current) {
+        const dx = e.clientX - startX.current;
+        const dy = e.clientY - startY.current;
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        if (Math.abs(dy) > Math.abs(dx)) {
+          pending.current = false; // vertical intent → release to page scroll
+          return;
+        }
+        pending.current = false;
+        dragging.current = true;
+        setIsDragging(true);
+        try {
+          el.setPointerCapture(e.pointerId);
+        } catch {}
+      }
       if (!dragging.current) return;
       rot.current = startRot.current + (e.clientX - startX.current) * 0.28;
     };
 
     const endDrag = (e: PointerEvent) => {
+      pending.current = false;
       if (!dragging.current) return;
       dragging.current = false;
       setIsDragging(false);
@@ -105,12 +125,10 @@ export function CylinderCarousel() {
 
     const onDown = (e: PointerEvent) => {
       if (e.button !== 0) return;
-      dragging.current = true;
-      setIsDragging(true);
+      pending.current = true;
       startX.current = e.clientX;
+      startY.current = e.clientY;
       startRot.current = rot.current;
-      el.setPointerCapture(e.pointerId);
-      e.preventDefault();
     };
 
     el.addEventListener("pointerdown", onDown);
@@ -130,7 +148,7 @@ export function CylinderCarousel() {
     <div
       ref={containerRef}
       className="relative h-[400px] w-full select-none overflow-hidden [perspective:1600px]"
-      style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "none" }}
+      style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "pan-y" }}
       onPointerEnter={() => (hovering.current = true)}
       onPointerLeave={() => (hovering.current = false)}
     >
