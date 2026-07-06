@@ -6,6 +6,10 @@ import { WorkoutCurl } from "@/components/forme/WorkoutCurl";
 import { LockerJourney } from "@/components/forme/LockerJourney";
 import { OneYearLater } from "@/components/forme/OneYearLater";
 import { Journey } from "@/components/forme/Journey";
+import { WeighIn } from "@/components/forme/WeighIn";
+import { HappySong } from "@/components/forme/HappySong";
+import { YardGames } from "@/components/forme/YardGames";
+import { FinalMessage } from "@/components/forme/FinalMessage";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -34,6 +38,10 @@ export default function OurStory() {
       <LockerJourney />
       <OneYearLater />
       <Journey />
+      <WeighIn />
+      <HappySong />
+      <YardGames />
+      <FinalMessage />
     </main>
   );
 }
