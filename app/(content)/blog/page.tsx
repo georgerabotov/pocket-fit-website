@@ -3,9 +3,9 @@ import Link from "next/link";
 import content from "@/lib/pocketContent.json";
 
 export const metadata: Metadata = {
-  title: "Blog — Pocket Fit",
+  title: "Blog - Pocket Fit",
   description:
-    "Smarter training, AI fitness, and getting real results — from the Pocket Fit team.",
+    "Smarter training, AI fitness, and getting real results - from the Pocket Fit team.",
 };
 
 export default function BlogIndex() {

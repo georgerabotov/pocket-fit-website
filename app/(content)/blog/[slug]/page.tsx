@@ -16,8 +16,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = content.blog.find((p) => p.slug === slug);
-  if (!post) return { title: "Blog — Pocket Fit" };
-  return { title: `${post.title} — Pocket Fit`, description: post.description };
+  if (!post) return { title: "Blog - Pocket Fit" };
+  return { title: `${post.title} - Pocket Fit`, description: post.description };
 }
 
 export default async function BlogPost({

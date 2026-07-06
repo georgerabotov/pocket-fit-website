@@ -31,7 +31,7 @@ export const PLANS: Plan[] = [
     name: "Yearly",
     price: "$59.99",
     period: "/ year",
-    note: "Save 50% vs paying monthly — that's $119.88/year at $9.99/mo. £59.99 / €59.99",
+    note: "Save 50% vs paying monthly - that's $119.88/year at $9.99/mo. £59.99 / €59.99",
     badge: "Save 50%",
     cta: "Get Started",
     accent: "amber",
@@ -52,7 +52,7 @@ export const PLANS: Plan[] = [
     accent: "teal",
     comingSoon: true,
     tagline:
-      "AI-powered nutrition and meal tracking, built to match your training. A separate Pocket Fit Food membership — launching soon.",
+      "AI-powered nutrition and meal tracking, built to match your training. A separate Pocket Fit Food membership - launching soon.",
   },
   {
     id: "hardcore",

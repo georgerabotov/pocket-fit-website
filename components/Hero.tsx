@@ -27,7 +27,7 @@ export function Hero() {
           </h1>
           <p className="mx-auto mt-5 max-w-md text-lg text-ink-soft lg:mx-0">
             Pocket Fit brings your wearables, lab results, and meals together into one
-            clear daily picture — then a private AI coach helps you act on it.
+            clear daily picture - then a private AI coach helps you act on it.
           </p>
 
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:items-start">

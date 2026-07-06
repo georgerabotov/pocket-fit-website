@@ -1,4 +1,4 @@
-/* Feature grid — Train · Progress · Transform, plus a wide nutrition card.
+/* Feature grid - Train · Progress · Transform, plus a wide nutrition card.
    Stylised in-app components (no screenshots). */
 
 import { ProgressChart } from "@/components/site/ProgressChart";
@@ -52,7 +52,7 @@ function TrainMock() {
         Push Day A
       </div>
       <div className="mt-1 text-[12.5px] font-bold text-black/40">
-        Ready when you are — just press go.
+        Ready when you are - just press go.
       </div>
       <button className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-[#6260E0] to-[#4D4BC0] py-3.5 text-[14.5px] font-black text-white shadow-[0_10px_22px_rgba(77,75,192,0.32)]">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
@@ -157,7 +157,7 @@ function TransformMock() {
 const CARDS = [
   {
     t: "Train",
-    d: "Today's session is already built and scheduled — progressive overload handled for you.",
+    d: "Today's session is already built and scheduled - progressive overload handled for you.",
     grad: "linear-gradient(180deg,#EEEDFB 0%,#E4E3F8 100%)",
     glow: "radial-gradient(closest-side,rgba(93,91,208,.24),transparent)",
     Mock: TrainMock,
@@ -232,7 +232,7 @@ export function FeatureShowcase() {
           </h2>
           <p className="mt-5 max-w-[400px] text-[18px] font-semibold leading-[1.45] text-[#3a3950]">
             Scan your plate or a barcode, confirm the macros, done. Rings fill
-            like fuel — no red numbers, no shame, just what&rsquo;s powering your
+            like fuel - no red numbers, no shame, just what&rsquo;s powering your
             training.
           </p>
         </div>

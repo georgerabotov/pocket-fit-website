@@ -26,7 +26,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Pocket Fit — AI workouts around your real life",
+  title: "Pocket Fit - AI workouts around your real life",
   description:
     "Pocket Fit is a simple fitness app that builds personalized, AI-generated workout programs around your goals, equipment, and schedule. Live now on iOS and Android.",
 };
@@ -62,7 +62,7 @@ export default function Home() {
             className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(60%_60%_at_50%_0%,#ede9fe,transparent)]"
           />
 
-          {/* Branch — top right, looping, blended (no background) */}
+          {/* Branch - top right, looping, blended (no background) */}
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             src="/hero.mp4"
@@ -75,7 +75,7 @@ export default function Home() {
             className="pointer-events-none absolute -right-6 top-2 z-0 w-[46%] max-w-xl brightness-[1.07] contrast-[1.22] mix-blend-multiply [mask-image:radial-gradient(72%_72%_at_58%_46%,#000_50%,transparent_82%)] [-webkit-mask-image:radial-gradient(72%_72%_at_58%_46%,#000_50%,transparent_82%)] sm:top-0"
           />
 
-          {/* Character pushes the phone in — plays once */}
+          {/* Character pushes the phone in - plays once */}
           {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
           <video
             src="/hero-character.mp4"
@@ -131,7 +131,7 @@ export default function Home() {
           </Section>
         </div>
 
-        {/* Works with — Apple Watch */}
+        {/* Works with - Apple Watch */}
         <Section className="pb-16 text-center">
           <div
             data-reveal
@@ -184,7 +184,7 @@ export default function Home() {
         {/* AI coach intelligence (pinned-phone scroller) */}
         <AiIntelligence />
 
-        {/* And that's not all — feature list that switches phone screens */}
+        {/* And that's not all - feature list that switches phone screens */}
         <MoreFeatures />
 
         {/* Community carousel */}
@@ -209,7 +209,7 @@ export default function Home() {
               className="reveal mx-auto mt-4 max-w-md text-base text-stone-500"
             >
               Share every session, cheer each other on, and stay accountable.
-              Pocket Fit is just getting started — grab your spot in the first
+              Pocket Fit is just getting started - grab your spot in the first
               wave. Drag to spin.
             </p>
           </div>
@@ -242,7 +242,7 @@ export default function Home() {
             className="reveal mx-auto mt-4 max-w-md text-stone-500"
           >
             Full access from{" "}
-            <span className="font-semibold text-stone-900">$9.99/mo</span> — or
+            <span className="font-semibold text-stone-900">$9.99/mo</span> - or
             save 50% at{" "}
             <span className="font-semibold text-stone-900">$59.99/year</span>.
           </p>
@@ -270,7 +270,7 @@ export default function Home() {
             data-reveal
             className="reveal relative scroll-mt-24 overflow-hidden rounded-3xl bg-stone-900 px-6 py-16 text-center"
           >
-            {/* Spinning orbit video background (2× — smooth on 24fps source) */}
+            {/* Spinning orbit video background (2× - smooth on 24fps source) */}
             <RateVideo
               rate={2}
               src="/orbit.mp4"

@@ -1,22 +1,22 @@
 "use client";
 
-/* Two-row App Store review marquee — top row scrolls right→left, bottom row
+/* Two-row App Store review marquee - top row scrolls right→left, bottom row
    left→right, both pause on hover. Ported from the standalone mockup. */
 
 type Review = { t: string; b: string; n: string; h: string; g: string };
 
 const A: Review[] = [
-  { t: "10/10 gym app", b: "Absolutely love what Pocket Fit offers, especially being able to share my gym wins of the day — there's no other app like it. It's so easy to get a quick workout made, the AI planner is super helpful. Great job!!", n: "frhfitt", h: "16 Mar", g: "linear-gradient(135deg,#7472E5,#3F3DBA)" },
+  { t: "10/10 gym app", b: "Absolutely love what Pocket Fit offers, especially being able to share my gym wins of the day - there's no other app like it. It's so easy to get a quick workout made, the AI planner is super helpful. Great job!!", n: "frhfitt", h: "16 Mar", g: "linear-gradient(135deg,#7472E5,#3F3DBA)" },
   { t: "Absolute game-changer", b: "Had to train at home without the equipment I needed. Instead of skipping, I asked the chatbot and it replaced the exercise just for that session. Super clean and intuitive, and I love the dark mode themes.", n: "Gabriela Ev", h: "20 Jan", g: "linear-gradient(135deg,#5CC0BF,#2E9E8F)" },
   { t: "Best workout app on the market!", b: "Very simple and easy to use. It takes away the hard work of creating a workout schedule with the AI chatbot, which can instantly create one for you. Great for all levels of fitness. Would highly recommend!", n: "Vanessa_Gill", h: "30 Mar", g: "linear-gradient(135deg,#F2A93B,#E07B39)" },
-  { t: "Game changer", b: "I've used a lot of different fitness apps, both paid and free, and this is hands down miles above all the others. I can't recommend this app enough — try it out, you won't be disappointed.", n: "Josh-uk", h: "16 Mar", g: "linear-gradient(135deg,#6260E0,#4D4BC0)" },
+  { t: "Game changer", b: "I've used a lot of different fitness apps, both paid and free, and this is hands down miles above all the others. I can't recommend this app enough - try it out, you won't be disappointed.", n: "Josh-uk", h: "16 Mar", g: "linear-gradient(135deg,#6260E0,#4D4BC0)" },
   { t: "Great app", b: "GREAT workout app! Helps me stay organized and accountable. I really enjoy how easy it is to navigate as well. So far everything is great with this app! Great download.", n: "Toddgainzz", h: "21 Mar", g: "linear-gradient(135deg,#5CC0BF,#3AA0C0)" },
 ];
 
 const B: Review[] = [
-  { t: "Honestly impressed!", b: "Absolutely amazing. What I like most is how personalised it is — the app generates workouts specifically tailored to your needs, goals and level. It truly feels like having a personal trainer in your pocket.", n: "Vanessa Kyosina", h: "25 Jan", g: "linear-gradient(135deg,#E0607F,#C03F6A)" },
+  { t: "Honestly impressed!", b: "Absolutely amazing. What I like most is how personalised it is - the app generates workouts specifically tailored to your needs, goals and level. It truly feels like having a personal trainer in your pocket.", n: "Vanessa Kyosina", h: "25 Jan", g: "linear-gradient(135deg,#E0607F,#C03F6A)" },
   { t: "The only tracker you'll ever need", b: "So enjoyable to log and track your progress. I use it for my powerlifting workouts and having everything modular and easy to edit is amazing. Seeing historical data and sharing sessions to social is a nice touch!", n: "tsaneviv", h: "16 Feb", g: "linear-gradient(135deg,#6260E0,#8A5CE0)" },
-  { t: "Highly recommend", b: "Super cool tracker app! I had a program already — all I did was put my notes in the chat and it created the program for me, including weight, reps, sets, everything. Very simple and straightforward to use.", n: "Pocket-Squats-User", h: "1 Apr", g: "linear-gradient(135deg,#F2A93B,#E8862B)" },
+  { t: "Highly recommend", b: "Super cool tracker app! I had a program already - all I did was put my notes in the chat and it created the program for me, including weight, reps, sets, everything. Very simple and straightforward to use.", n: "Pocket-Squats-User", h: "1 Apr", g: "linear-gradient(135deg,#F2A93B,#E8862B)" },
   { t: "Solid!!", b: "Really solid. Clean design, easy to use, and the workouts actually make sense instead of being overcomplicated. Great for staying consistent without feeling overwhelmed. Definitely recommend.", n: "dslavov23", h: "21 Jan", g: "linear-gradient(135deg,#7472E5,#5A57D8)" },
   { t: "Best fitness app", b: "My fitness journey is so much better ever since I started using this app. It keeps me consistent and the progress tracking genuinely motivates me to keep showing up.", n: "prettypreeta", h: "19 Mar", g: "linear-gradient(135deg,#5CC0BF,#48A0B8)" },
 ];

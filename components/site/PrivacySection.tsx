@@ -1,4 +1,4 @@
-/* "Built for privacy" data disclaimer — slick dark-green card with a lock
+/* "Built for privacy" data disclaimer - slick dark-green card with a lock
    watermark, plus the platforms we're built on (AWS · Apple · Android). */
 
 function ShieldBadge() {
@@ -78,7 +78,7 @@ export function PrivacySection() {
               Built for privacy
             </h2>
             <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-white/55">
-              Your data is yours. We never sell it — and we protect it with
+              Your data is yours. We never sell it - and we protect it with
               encryption and industry-standard security, every step of the way.
             </p>
 

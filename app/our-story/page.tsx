@@ -20,7 +20,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  title: "Our Story — Pocket Fit",
+  title: "Our Story - Pocket Fit",
   description: "Our story. A scroll-driven study of movement.",
 };
 

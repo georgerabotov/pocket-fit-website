@@ -4,24 +4,24 @@ import { useEffect, useRef, useState } from "react";
 
 // NOTE: the questions are migrated verbatim from pocket-fit.app. The answers
 // there are loaded client-side and were not present in the page source, so
-// these answers are written to match the app and the other pages — swap them
+// these answers are written to match the app and the other pages - swap them
 // for the exact copy if it differs.
 const FAQ: { q: string; a: string }[] = [
   {
     q: "What is Pocket Fit and how does it work?",
-    a: "Pocket Fit is an AI fitness app that builds a personalized workout program around your real life. Tell it your goals, experience, schedule, and the equipment you have, and it generates a plan that adapts as you train — then guides you through each session with live exercise tracking.",
+    a: "Pocket Fit is an AI fitness app that builds a personalized workout program around your real life. Tell it your goals, experience, schedule, and the equipment you have, and it generates a plan that adapts as you train - then guides you through each session with live exercise tracking.",
   },
   {
     q: "Who is Pocket Fit for?",
-    a: "Anyone who wants structured, effective training without hiring a personal trainer — from complete beginners taking their first session to experienced lifters who want smarter programming. It works whether you train at a full gym, at home, or somewhere in between.",
+    a: "Anyone who wants structured, effective training without hiring a personal trainer - from complete beginners taking their first session to experienced lifters who want smarter programming. It works whether you train at a full gym, at home, or somewhere in between.",
   },
   {
     q: "How is Pocket Fit different from other fitness apps?",
-    a: "Most apps hand you a static plan and leave you to follow it. Pocket Fit generates a program tailored to you and keeps adapting it to your progress, schedule, and the equipment available — with an AI coach you can talk to and live tracking built in.",
+    a: "Most apps hand you a static plan and leave you to follow it. Pocket Fit generates a program tailored to you and keeps adapting it to your progress, schedule, and the equipment available - with an AI coach you can talk to and live tracking built in.",
   },
   {
     q: "Do I need gym equipment to use Pocket Fit?",
-    a: "No. Pocket Fit builds your workouts around whatever you have — a fully kitted gym, a few dumbbells at home, or just your bodyweight. Update your available equipment any time and your plan adjusts.",
+    a: "No. Pocket Fit builds your workouts around whatever you have - a fully kitted gym, a few dumbbells at home, or just your bodyweight. Update your available equipment any time and your plan adjusts.",
   },
   {
     q: "How do I get started with Pocket Fit?",
@@ -29,7 +29,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "Is Pocket Fit free to use?",
-    a: "You can get started for free. A subscription unlocks full access — personalized AI programs, live workouts with tracking, scheduling, advanced analytics, and the AI coach. See the Pricing page for current plans.",
+    a: "You can get started for free. A subscription unlocks full access - personalized AI programs, live workouts with tracking, scheduling, advanced analytics, and the AI coach. See the Pricing page for current plans.",
   },
   {
     q: "How does Pocket Fit protect my data and privacy?",
@@ -41,7 +41,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: "How does Pocket Fit track my progress?",
-    a: "Pocket Fit logs your workouts as you go and gives you advanced analytics — including body weight and exercise progression over time — so you can see exactly how you’re improving and your plan can adapt to it.",
+    a: "Pocket Fit logs your workouts as you go and gives you advanced analytics - including body weight and exercise progression over time - so you can see exactly how you’re improving and your plan can adapt to it.",
   },
 ];
 
@@ -166,7 +166,7 @@ function Item({
 
 export default function FaqPage() {
   const listRef = useReveal<HTMLDivElement>();
-  // single-open accordion — opening one closes the previous
+  // single-open accordion - opening one closes the previous
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   // slide the coaches out of the way once you reach the footer
   const [nearFooter, setNearFooter] = useState(false);
@@ -190,7 +190,7 @@ export default function FaqPage() {
 
   return (
     <div className="relative">
-      {/* Interactive coaches — fixed to the viewport corners on wide screens */}
+      {/* Interactive coaches - fixed to the viewport corners on wide screens */}
       <div className={coachWrap("left")}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/journey/fit-female.png" alt="" aria-hidden className={coachImg} />

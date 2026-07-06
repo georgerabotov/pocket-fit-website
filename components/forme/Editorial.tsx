@@ -10,7 +10,7 @@ export function Editorial() {
             data-reveal
             className="display text-[clamp(1.8rem,4vw,3.2rem)] leading-tight text-forme-espresso"
           >
-            Strength is not loud. It is composed — a single, deliberate line
+            Strength is not loud. It is composed - a single, deliberate line
             drawn from the floor to full extension, then returned with the same
             intention it began.
           </p>

@@ -1,6 +1,6 @@
 "use client";
 
-/* "And that's not all" — feature list that switches phone screens.
+/* "And that's not all" - feature list that switches phone screens.
    Ported verbatim from the standalone mockup (scoped under .mf-scope).
    Placeholder character images use /journey/kai*.png. */
 
@@ -16,7 +16,7 @@ const MF_CSS = `@import url('https://fonts.googleapis.com/css2?family=Archivo:wg
 .mf-scope *{box-sizing:border-box;margin:0;padding:0}
 .mf-scope{font-family:"Nunito",system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.5}
 .mf-scope #reveal{opacity:1;transform:none;will-change:auto}
-.mf-scope .sect{max-width:1040px;margin:0 auto;padding:64px 40px 76px;display:grid;grid-template-columns:1fr 1.02fr;gap:48px;align-items:center}
+.mf-scope .sect{max-width:1040px;margin:0 auto;padding:64px 40px 76px;display:grid;grid-template-columns:1fr 1.02fr;gap:48px;align-items:center;overflow-x:clip}
 .mf-scope /* ==== left column ==== */
   .lead h2{font-family:"Archivo",sans-serif;font-weight:900;letter-spacing:-.035em;line-height:.98;font-size:clamp(34px,4vw,54px)}
 .mf-scope .lead .sub{font-size:clamp(15px,1.7vw,18px);color:var(--ink3);font-weight:600;margin:12px 0 24px}
@@ -255,7 +255,7 @@ const MF_CSS = `@import url('https://fonts.googleapis.com/css2?family=Archivo:wg
 .mf-scope .composer .snd{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--indigo),var(--indigo-ink));display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#fff}
 .mf-scope .rise{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
 .mf-scope .rise.in{opacity:1;transform:none}
-@media (max-width:940px){.mf-scope .sect{grid-template-columns:1fr;gap:48px}.mf-scope .rightcol{order:-1}}
+@media (max-width:760px){.mf-scope .sect{grid-template-columns:1fr;gap:10px;padding:56px 20px 60px}.mf-scope .rightcol{order:0}.mf-scope .tphone{transform:scale(.82);transform-origin:top center;margin-bottom:-116px}}
 @media (prefers-reduced-motion:reduce){.mf-scope *{animation:none!important}}
 `;
 
@@ -267,7 +267,7 @@ const MF_HTML = `<section class="sect">
     <div class="flist" id="flist">
 
       <button class="fitem on" data-scr="s-train">
-        <div class="txt"><h3>Personalized training</h3><div class="d">A program built around your goal, equipment and level — that adapts every week as you train.</div></div>
+        <div class="txt"><h3>Personalized training</h3><div class="d">A program built around your goal, equipment and level - that adapts every week as you train.</div></div>
         <span class="arw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
       </button>
 
@@ -277,7 +277,7 @@ const MF_HTML = `<section class="sect">
       </button>
 
       <button class="fitem" data-scr="s-food">
-        <div class="txt"><h3>Food</h3><div class="d">Scan your plate or a barcode, confirm the macros, done. Fuel your training — no shame, no red numbers.</div></div>
+        <div class="txt"><h3>Food</h3><div class="d">Scan your plate or a barcode, confirm the macros, done. Fuel your training - no shame, no red numbers.</div></div>
         <span class="arw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
       </button>
 
@@ -292,7 +292,7 @@ const MF_HTML = `<section class="sect">
       </button>
 
       <button class="fitem" data-scr="s-chat">
-        <div class="txt"><h3>AI chatbot</h3><div class="d">Log a set, ask what's next, or get a swap — just talk to it. It knows your whole plan.</div></div>
+        <div class="txt"><h3>AI chatbot</h3><div class="d">Log a set, ask what's next, or get a swap - just talk to it. It knows your whole plan.</div></div>
         <span class="arw"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
       </button>
 
@@ -316,7 +316,7 @@ const MF_HTML = `<section class="sect">
           <div class="sess">
             <div class="st"><span class="tag2">TODAY · TOTAL BODY · HIIT</span><span class="movp">MOVED TO TODAY</span><span class="dur">38 min</span></div>
             <h4>Full Body Burn</h4>
-            <div class="subx">Today's deposit is ready — Full Body Burn, just press go.</div>
+            <div class="subx">Today's deposit is ready - Full Body Burn, just press go.</div>
             <div class="gorow">
               <div class="go"><svg width="15" height="15" viewBox="0 0 24 24" fill="#413F92"><path d="M8 5.5v13l11-6.5z"></path></svg>Start workout</div>
               <div class="gocal"><svg width="19" height="19" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"></rect><path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg></div>
@@ -358,7 +358,7 @@ const MF_HTML = `<section class="sect">
           <div class="shead"><div class="t">Food<small>1,540 kcal left today</small></div><div style="display:flex;align-items:center;gap:6px;background:#141024;color:#fff;font-weight:900;font-size:12.5px;padding:9px 14px;border-radius:99px;flex:0 0 auto"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path></svg>Log</div></div>
           <div class="card">
             <div class="lbl" style="color:#5D5BD0;margin-bottom:7px">Today's fuel</div>
-            <div style="font-weight:800;font-size:13px;color:#0A0A0F;line-height:1.35;margin-bottom:14px">Building nicely. Keep depositing — your body's stocking up for the day.</div>
+            <div style="font-weight:800;font-size:13px;color:#0A0A0F;line-height:1.35;margin-bottom:14px">Building nicely. Keep depositing - your body's stocking up for the day.</div>
             <div class="macros">
               <div class="mac"><div class="ring" style="--p:50;--rc:#5D5BD0;width:66px;height:66px"><b style="font-size:17px">64</b></div><b>/ 129g</b><span>PROTEIN</span></div>
               <div class="mac"><div class="ring" style="--p:66;--rc:#5CC0BF;width:66px;height:66px"><b style="font-size:17px">91</b></div><b>/ 137g</b><span>CARBS</span></div>
@@ -408,7 +408,7 @@ const MF_HTML = `<section class="sect">
               <button data-mo="3" data-img="kai9" class="on">3 mo</button>
               <button data-mo="6" data-img="kai12">6 mo</button>
             </div>
-            <div class="phint" id="proj-hint"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6z"></path></svg>AI projection of your 3-month self — drag to reveal</div>
+            <div class="phint" id="proj-hint"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 5.4L19 9l-5.4 1.6L12 16l-1.6-5.4L5 9l5.4-1.6z"></path></svg>AI projection of your 3-month self - drag to reveal</div>
             <div class="pcta"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 19V7M6 13l6-6 6 6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>Upload a photo</div>
           </div>
           <div class="appnav"><div class="bar"><button class="tb"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h2M19 12h2M7 8v8M17 8v8M7 12h10" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"></path></svg><span>Workouts</span></button><button class="tb"><svg viewBox="0 0 24 24" fill="none"><path d="M12 7c-1.5-2.5-5-2.6-6.5 0C4 9.5 5 15 8 18c1.2 1.2 2.3 1 4 1s2.8.2 4-1c3-3 4-8.5 2.5-11-1.5-2.6-5-2.5-6.5 0z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path><path d="M12 7c0-2 .8-3.5 2.5-4.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><span>Food</span></button><button class="tb"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="2"></circle><circle cx="17" cy="9.5" r="2.4" stroke="currentColor" stroke-width="2"></circle><path d="M3.5 19c.6-3.2 3-5 5.5-5s4.9 1.8 5.5 5M15.5 14.2c2.2.1 3.6 1.7 4.2 4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg><span>Social</span></button><button class="tb on"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5M4 19h16M8 16v-4M12 16V8M16 16v-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Stats</span></button></div></div>
@@ -455,7 +455,7 @@ const MF_HTML = `<section class="sect">
           </div>
           <div style="border-radius:18px;padding:15px;color:#fff;background:linear-gradient(135deg,#5CC0BF,#2E9E8F);box-shadow:0 12px 24px rgba(46,158,143,.28);display:flex;align-items:center;gap:12px">
             <div style="width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#5D5BD0,#413F92);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex:0 0 auto">J</div>
-            <div style="flex:1;min-width:0"><div style="font-weight:900;font-size:9.5px;letter-spacing:.1em;opacity:.85">● TRAINING RIGHT NOW</div><div style="font-weight:900;font-size:14px;margin-top:3px">Jess Lin</div><div style="font-weight:700;font-size:11.5px;opacity:.9;margin-top:1px">is training right now — train with them</div></div>
+            <div style="flex:1;min-width:0"><div style="font-weight:900;font-size:9.5px;letter-spacing:.1em;opacity:.85">● TRAINING RIGHT NOW</div><div style="font-weight:900;font-size:14px;margin-top:3px">Jess Lin</div><div style="font-weight:700;font-size:11.5px;opacity:.9;margin-top:1px">is training right now - train with them</div></div>
             <div style="background:#fff;color:#2E9E8F;font-weight:900;font-size:12.5px;padding:8px 16px;border-radius:99px;flex:0 0 auto">Join</div>
           </div>
           <div class="feed">
@@ -556,7 +556,7 @@ export function MoreFeatures() {
           if (after) after.src = "/journey/" + img + ".png";
           const mo = btn.dataset.mo;
           if (tag) tag.innerHTML = SPARK + "+" + mo + " mo";
-          if (hint) hint.innerHTML = SPARK + "AI projection of your " + mo + "-month self — drag to reveal";
+          if (hint) hint.innerHTML = SPARK + "AI projection of your " + mo + "-month self - drag to reveal";
         };
         btn.addEventListener("click", f);
         cleaners.push(() => btn.removeEventListener("click", f));

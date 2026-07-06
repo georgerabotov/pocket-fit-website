@@ -23,6 +23,7 @@ export function SiteNav() {
   const listRef = useRef<HTMLDivElement>(null);
   const [pill, setPill] = useState<{ left: number; width: number } | null>(null);
   const [drag, setDrag] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
   const ds = useRef({ active: false, grabDX: 0, moved: false, left: 0 });
 
   useEffect(() => {
@@ -31,6 +32,9 @@ export function SiteNav() {
     );
     setPill(el ? { left: el.offsetLeft, width: el.offsetWidth } : null);
   }, [pathname]);
+
+  // close the mobile menu on navigation
+  useEffect(() => setOpen(false), [pathname]);
 
   const onDown = (e: React.PointerEvent) => {
     if (!pill || !listRef.current) return;
@@ -92,7 +96,16 @@ export function SiteNav() {
   const isHome = pathname === "/";
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-3 z-50 flex justify-center px-4">
+    <div className="pointer-events-none fixed inset-x-0 top-3 z-50 flex flex-col items-center px-4">
+      {/* click-away backdrop for the mobile menu */}
+      {open ? (
+        <button
+          aria-hidden
+          tabIndex={-1}
+          onClick={() => setOpen(false)}
+          className="pointer-events-auto fixed inset-0 -z-10 cursor-default md:hidden"
+        />
+      ) : null}
       <nav className="pointer-events-auto flex items-center gap-1 rounded-full border border-white/50 bg-white/45 p-1.5 pl-2 shadow-[0_10px_40px_-8px_rgba(23,23,31,0.28)] ring-1 ring-inset ring-white/40 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-white/40">
         {/* Logo → home, with a "Home" tooltip */}
         <div className="group relative flex items-center rounded-full py-1 pl-1 pr-2">
@@ -104,7 +117,7 @@ export function SiteNav() {
           ) : null}
           <Link
             href="/"
-            aria-label="Pocket Fit — home"
+            aria-label="Pocket Fit - home"
             aria-current={isHome ? "page" : undefined}
             className="relative z-10 flex items-center"
           >
@@ -177,13 +190,76 @@ export function SiteNav() {
           })}
         </div>
 
+        {/* mobile menu toggle */}
+        <button
+          type="button"
+          aria-label="Menu"
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+          className="ml-1 grid size-10 place-items-center rounded-full text-stone-700 transition-colors hover:bg-white/60 md:hidden"
+        >
+          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
+        </button>
+
         <a
           href="/#download"
-          className="ml-1 rounded-full bg-stone-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-violet-700"
+          className="ml-1 rounded-full bg-stone-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-violet-700 sm:px-5"
         >
           Download
         </a>
       </nav>
+
+      {/* mobile dropdown menu */}
+      <div
+        className={`pointer-events-auto mt-2 w-[min(20rem,calc(100vw-2rem))] origin-top overflow-hidden rounded-3xl border border-white/50 bg-white/70 p-2 shadow-[0_20px_50px_-12px_rgba(23,23,31,0.35)] ring-1 ring-inset ring-white/40 backdrop-blur-xl backdrop-saturate-150 transition-all duration-200 md:hidden ${
+          open
+            ? "translate-y-0 scale-100 opacity-100"
+            : "pointer-events-none -translate-y-2 scale-95 opacity-0"
+        }`}
+      >
+        <Link
+          href="/"
+          className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 text-center text-[15px] transition-colors ${
+            isHome
+              ? "bg-white font-semibold text-violet-700 shadow-sm"
+              : "font-medium text-stone-700 hover:bg-white/70"
+          }`}
+        >
+          <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 10.5 12 3l9 7.5M5 9.5V21h14V9.5" />
+          </svg>
+          Home
+        </Link>
+        {links.map((l) => {
+          const active = isActive(pathname, l.href);
+          const cls = `flex items-center justify-center gap-1.5 rounded-2xl px-4 py-3 text-center text-[15px] transition-colors ${
+            active
+              ? "bg-white font-semibold text-violet-700 shadow-sm"
+              : "font-medium text-stone-700 hover:bg-white/70"
+          }`;
+          const dot =
+            "featured" in l && l.featured && !active ? (
+              <span className="size-1.5 rounded-full bg-violet-500" />
+            ) : null;
+          return "external" in l && l.external ? (
+            <a key={l.href} href={l.href} className={cls}>
+              {l.label}
+              <span className="text-stone-400">↗</span>
+            </a>
+          ) : (
+            <Link key={l.href} href={l.href} className={cls}>
+              {l.label}
+              {dot}
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }

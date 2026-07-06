@@ -1,7 +1,7 @@
 import { Bolt, Heart, Bell, Book, Dumbbell, Sparkle, Check, Clock } from "./icons";
 import { Ring } from "./screens";
 
-/** Strain detail screen — single effort score + supporting graph. */
+/** Strain detail screen - single effort score + supporting graph. */
 export function StrainScreen() {
   const bars = [30, 42, 38, 55, 48, 70, 62, 80, 58, 44, 36, 50];
   return (
@@ -30,7 +30,7 @@ export function StrainScreen() {
   );
 }
 
-/** Recovery detail screen — readiness + HRV. */
+/** Recovery detail screen - readiness + HRV. */
 export function RecoveryScreen() {
   return (
     <div className="flex h-full flex-col gap-3 bg-mist p-4 pt-10">
@@ -67,7 +67,7 @@ export function ProactiveScreen() {
       <div className="rounded-2xl bg-cloud p-3 shadow-sm">
         <p className="text-[11px] font-semibold">Daily summary · 8:00</p>
         <p className="mt-1 text-[11px] text-ink-soft">
-          Solid recovery and a light strain day yesterday — a good window for an
+          Solid recovery and a light strain day yesterday - a good window for an
           interval session.
         </p>
       </div>
@@ -77,7 +77,7 @@ export function ProactiveScreen() {
         </span>
         <div className="text-[11px]">
           <p className="font-semibold">3:00 PM</p>
-          <p className="text-ink-soft">Time for water — you&apos;re 600ml behind.</p>
+          <p className="text-ink-soft">Time for water - you&apos;re 600ml behind.</p>
         </div>
       </div>
       <div className="rounded-2xl bg-ink p-3 text-[11px] text-cloud shadow-sm">

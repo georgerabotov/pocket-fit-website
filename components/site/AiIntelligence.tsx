@@ -3,10 +3,10 @@
 /* AI coach feature section (Kai & Maia). One pinned phone stays centred while
    the cards scroll past; its screen crossfades per section. The phone is
    masked in real time to whichever rectangle(s) it overlaps, so it only ever
-   shows *inside* a card — never in the gaps between them.
-   Phone screens are placeholders — drop a screenshot into a section's `img`. */
+   shows *inside* a card - never in the gaps between them.
+   Phone screens are placeholders - drop a screenshot into a section's `img`. */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const H = "font-[family-name:var(--font-fraunces)]";
 
@@ -30,20 +30,22 @@ const SECTIONS: Section[] = [
   {
     id: "data",
     title: "An AI trainer that\nknows your data",
-    desc: "Kai and Maia reference your real workouts, recovery, and history — every answer is grounded in your own numbers, not generic advice.",
+    desc: "Kai and Maia reference your real workouts, recovery, and history - every answer is grounded in your own numbers, not generic advice.",
     accent: "#7c6cff",
     grad: "from-indigo-50 to-violet-100",
     coach: "kai",
     sample: "Why am I not feeling rested today?",
+    img: "/intelligence/chatbot-1.png",
   },
   {
     id: "log",
     title: "Log by chat\nor voice",
-    desc: "Just say it — “Bench 80 for 5” or a quick voice note — and your session is logged. No forms, no tapping through menus.",
+    desc: "Just say it - “Bench 80 for 5” or a quick voice note - and your session is logged. No forms, no tapping through menus.",
     accent: "#f0563a",
     grad: "from-rose-50 to-orange-50",
     coach: "maia",
-    sample: "Log bench press — 80kg for 5 reps",
+    sample: "Log bench press - 80kg for 5 reps",
+    img: "/intelligence/chatbot-2.png",
   },
   {
     id: "adjust",
@@ -52,7 +54,8 @@ const SECTIONS: Section[] = [
     accent: "#14b8a6",
     grad: "from-sky-50 to-violet-50",
     coach: "kai",
-    sample: "Swap deadlifts today — my back is sore",
+    sample: "Swap deadlifts today - my back is sore",
+    img: "/intelligence/chatbot-3.png",
   },
   {
     id: "learn",
@@ -67,6 +70,15 @@ const SECTIONS: Section[] = [
 
 function PhoneScreen({ s }: { s: Section }) {
   const coach = COACHES[s.coach];
+  // Real screenshot → render full-bleed (it already has its own chrome)
+  if (s.img) {
+    return (
+      <div className="absolute inset-0 bg-white">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={s.img} alt="" className="h-full w-full object-cover" />
+      </div>
+    );
+  }
   return (
     <div className="absolute inset-0 flex flex-col bg-gradient-to-b from-white to-stone-50">
       <div className="flex items-center justify-between px-5 pt-3 text-[10px] font-semibold text-stone-800">
@@ -132,29 +144,26 @@ function PhoneScreen({ s }: { s: Section }) {
   );
 }
 
-function PhoneBody({
-  active,
+/* A phone frame showing a single section's screen. Stacked one per rectangle
+   and masked to that rectangle's band, so each rectangle reveals its own
+   screen - even when the phone straddles two rectangles. */
+function PhoneFrame({
+  s,
   frameRef,
+  className = "",
 }: {
-  active: number;
+  s: Section;
   frameRef?: React.Ref<HTMLDivElement>;
+  className?: string;
 }) {
   return (
     <div
       ref={frameRef}
-      className="relative w-full rounded-[2.2rem] border border-black/50 bg-black p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)]"
+      className={`w-full rounded-[2.2rem] border border-black/50 bg-black p-2 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45)] ${className}`}
     >
       <div className="absolute left-1/2 top-2.5 z-20 h-4 w-16 -translate-x-1/2 rounded-full bg-black" />
       <div className="relative aspect-[9/19.3] overflow-hidden rounded-[1.7rem] bg-white">
-        {SECTIONS.map((s, i) => (
-          <div
-            key={s.id}
-            className="absolute inset-0 transition-opacity duration-500"
-            style={{ opacity: active === i ? 1 : 0 }}
-          >
-            <PhoneScreen s={s} />
-          </div>
-        ))}
+        <PhoneScreen s={s} />
       </div>
     </div>
   );
@@ -183,8 +192,7 @@ function CoachOrb({ coach, glow }: { coach: "kai" | "maia"; glow: string }) {
 }
 
 export function AiIntelligence() {
-  const [active, setActive] = useState(0);
-  const frameRef = useRef<HTMLDivElement>(null);
+  const frames = useRef<(HTMLDivElement | null)[]>([]);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -195,54 +203,35 @@ export function AiIntelligence() {
     };
     const update = () => {
       raf = 0;
-      const el = frameRef.current;
-      if (!el) return;
-      const pr = el.getBoundingClientRect();
+      const el0 = frames.current[0];
+      if (!el0) return;
+      const pr = el0.getBoundingClientRect(); // all layers share the same rect
       const Hpx = pr.height;
       if (Hpx === 0) return;
 
-      // phone stays pinned at viewport centre; mask it to whichever
-      // rectangle(s) it overlaps, hidden outside them and in the gaps
-      const intervals: [number, number][] = [];
-      let bestIdx = 0;
-      let bestOverlap = -1;
+      // Each rectangle's phone layer is masked to only the band where the phone
+      // overlaps THAT rectangle - so every rectangle shows its own screen, even
+      // when the phone straddles two of them.
       cards.current.forEach((c, i) => {
+        const f = frames.current[i];
+        if (!f) return;
         const r = c?.getBoundingClientRect();
-        if (!r) return;
-        const top = Math.max(pr.top, r.top);
-        const bot = Math.min(pr.bottom, r.bottom);
-        if (bot > top) {
-          intervals.push([top - pr.top, bot - pr.top]);
-          if (bot - top > bestOverlap) {
-            bestOverlap = bot - top;
-            bestIdx = i;
-          }
+        if (!r) {
+          f.style.opacity = "0";
+          return;
         }
+        const top = Math.max(pr.top, r.top) - pr.top;
+        const bot = Math.min(pr.bottom, r.bottom) - pr.top;
+        if (bot <= top) {
+          f.style.opacity = "0";
+          return;
+        }
+        f.style.opacity = "1";
+        setMask(
+          f,
+          `linear-gradient(to bottom, transparent 0px, transparent ${top}px, #000 ${top}px, #000 ${bot}px, transparent ${bot}px, transparent ${Hpx}px)`,
+        );
       });
-
-      if (intervals.length === 0) {
-        el.style.opacity = "0";
-        return;
-      }
-      el.style.opacity = "1";
-
-      intervals.sort((a, b) => a[0] - b[0]);
-      const merged: [number, number][] = [];
-      for (const iv of intervals) {
-        const last = merged[merged.length - 1];
-        if (last && iv[0] <= last[1] + 0.5) last[1] = Math.max(last[1], iv[1]);
-        else merged.push([iv[0], iv[1]]);
-      }
-      const stops: string[] = [];
-      let cur = 0;
-      for (const [s, e] of merged) {
-        stops.push(`transparent ${cur}px`, `transparent ${s}px`, `#000 ${s}px`, `#000 ${e}px`);
-        cur = e;
-      }
-      stops.push(`transparent ${cur}px`, `transparent ${Hpx}px`);
-      setMask(el, `linear-gradient(to bottom, ${stops.join(",")})`);
-
-      setActive((p) => (p === bestIdx ? p : bestIdx));
     };
 
     const onScroll = () => {
@@ -262,7 +251,7 @@ export function AiIntelligence() {
     <section className="relative border-t border-stone-100 bg-white py-24">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-6 h-64 w-[42rem] -translate-x-1/2 rounded-full blur-[100px]"
+        className="pointer-events-none absolute left-1/2 top-6 h-64 w-[42rem] max-w-full -translate-x-1/2 rounded-full blur-[100px]"
         style={{
           background:
             "radial-gradient(closest-side,rgba(124,108,255,0.16),rgba(20,184,166,0.08),transparent)",
@@ -270,7 +259,7 @@ export function AiIntelligence() {
       />
 
       <div className="relative mx-auto max-w-[1200px] px-6">
-        {/* header — coaches + title */}
+        {/* header - coaches + title */}
         <div className="flex flex-col items-center text-center">
           <div className="flex items-end gap-8">
             <CoachOrb coach="kai" glow="rgba(124,108,255,0.9)" />
@@ -282,7 +271,7 @@ export function AiIntelligence() {
             <span className="text-stone-900">Pocket Fit Intelligence</span>
           </h2>
           <p className="mt-4 max-w-md text-base text-stone-500">
-            Personalized guidance and actionable advice from Kai and Maia — your
+            Personalized guidance and actionable advice from Kai and Maia - your
             own 24/7 AI trainers.
           </p>
         </div>
@@ -292,7 +281,18 @@ export function AiIntelligence() {
           {/* pinned phone (desktop) */}
           <div className="pointer-events-none absolute -top-[90vh] -bottom-[90vh] right-[6%] z-20 hidden w-[220px] lg:block">
             <div className="sticky top-[50vh] -translate-y-1/2">
-              <PhoneBody active={active} frameRef={frameRef} />
+              <div className="relative w-full">
+                {SECTIONS.map((s, i) => (
+                  <PhoneFrame
+                    key={s.id}
+                    s={s}
+                    frameRef={(el) => {
+                      frames.current[i] = el;
+                    }}
+                    className={i === 0 ? "relative" : "absolute inset-0"}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -318,7 +318,7 @@ export function AiIntelligence() {
 
                 {/* phone for mobile / tablet (one per card) */}
                 <div className="mx-auto mt-8 w-[200px] lg:hidden">
-                  <PhoneBody active={i} />
+                  <PhoneFrame s={s} className="relative" />
                 </div>
               </div>
             ))}

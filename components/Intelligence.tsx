@@ -20,7 +20,7 @@ export function Intelligence() {
         <FeatureBlock
           eyebrow="Get answers"
           title="Answers from your own data."
-          body="Ask anything about how you feel and get a reply grounded in your sleep, HRV, and recent training — not generic advice."
+          body="Ask anything about how you feel and get a reply grounded in your sleep, HRV, and recent training - not generic advice."
           screen={<ChatScreen />}
         />
         <FeatureBlock

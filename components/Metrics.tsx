@@ -55,7 +55,7 @@ export function Metrics() {
           flip
           eyebrow="Nutrition"
           title="Understand what you eat."
-          body="Scan a barcode or snap a plate to log macros and micronutrients in seconds — no tedious manual entry."
+          body="Scan a barcode or snap a plate to log macros and micronutrients in seconds - no tedious manual entry."
           screen={<NutritionScreen />}
           cards={[
             { label: "Logged today", value: "312 kcal" },

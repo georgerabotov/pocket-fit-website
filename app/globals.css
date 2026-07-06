@@ -26,7 +26,7 @@
 
   --radius-card: 1.5rem;
 
-  /* FORME scroll page — namespaced bone/editorial palette */
+  /* FORME scroll page - namespaced bone/editorial palette */
   --color-forme-bone: #f3ede2;
   --color-forme-bone-deep: #ece4d6;
   --color-forme-ink: #1c1a16;
@@ -161,7 +161,7 @@ body {
   }
 }
 
-/* Generic scroll reveal (home page) — bevel-style eased fade/slide-up */
+/* Generic scroll reveal (home page) - bevel-style eased fade/slide-up */
 .reveal {
   opacity: 0;
   transform: translateY(34px);
@@ -265,7 +265,7 @@ html.lenis body {
   letter-spacing: -0.01em;
 }
 
-/* Cinematic hero — light text over full-bleed footage */
+/* Cinematic hero - light text over full-bleed footage */
 .forme-hero {
   color: var(--color-forme-bone);
 }

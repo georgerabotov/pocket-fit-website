@@ -8,16 +8,16 @@ type Story = {
 };
 
 const STORIES: Story[] = [
-  { src: "/crew/story-01.png", alt: "Pocket Fit story shared by @melisande.lize — Back Day workout" },
-  { src: "/crew/story-02.png", alt: "Pocket Fit story shared by @brayam.m13 — Full Body Day 2 workout" },
-  { src: "/crew/story-03.png", alt: "Pocket Fit workout complete share — Quad focus session" },
-  { src: "/crew/story-04.png", alt: "Pocket Fit story shared by @fitstyleamaka — workout complete" },
-  { src: "/crew/story-05.png", alt: "Pocket Fit story shared by @jessechvce_gains — Upper Day workout" },
-  { src: "/crew/story-06.png", alt: "Pocket Fit story shared by @hanna.13 — Upper Day workout" },
-  { src: "/crew/story-07.png", alt: "Pocket Fit story collage — community workout shares" },
-  { src: "/crew/story-08.png", alt: "Pocket Fit story — Still locked in, Lower 1 workout" },
-  { src: "/crew/story-09.png", alt: "Pocket Fit story shared by @fivefoottren — Back + Biceps workout" },
-  { src: "/crew/story-10.png", alt: "Pocket Fit story shared by @lil.merms — Full Body Day 1 workout" },
+  { src: "/crew/story-01.png", alt: "Pocket Fit story shared by @melisande.lize - Back Day workout" },
+  { src: "/crew/story-02.png", alt: "Pocket Fit story shared by @brayam.m13 - Full Body Day 2 workout" },
+  { src: "/crew/story-03.png", alt: "Pocket Fit workout complete share - Quad focus session" },
+  { src: "/crew/story-04.png", alt: "Pocket Fit story shared by @fitstyleamaka - workout complete" },
+  { src: "/crew/story-05.png", alt: "Pocket Fit story shared by @jessechvce_gains - Upper Day workout" },
+  { src: "/crew/story-06.png", alt: "Pocket Fit story shared by @hanna.13 - Upper Day workout" },
+  { src: "/crew/story-07.png", alt: "Pocket Fit story collage - community workout shares" },
+  { src: "/crew/story-08.png", alt: "Pocket Fit story - Still locked in, Lower 1 workout" },
+  { src: "/crew/story-09.png", alt: "Pocket Fit story shared by @fivefoottren - Back + Biceps workout" },
+  { src: "/crew/story-10.png", alt: "Pocket Fit story shared by @lil.merms - Full Body Day 1 workout" },
 ];
 
 function StoryCard({ s }: { s: Story }) {

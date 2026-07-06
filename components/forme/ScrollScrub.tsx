@@ -39,7 +39,7 @@ export function ScrollScrub() {
       ctx.clearRect(0, 0, cw, ch);
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = "high";
-      // object-fit: cover, bottom-anchored — full-bleed with no seam. Any
+      // object-fit: cover, bottom-anchored - full-bleed with no seam. Any
       // vertical overflow is cropped from the TOP (sky), so the subjects at
       // the bottom of the frame are always kept in view. Horizontal overflow
       // stays centered.
@@ -145,7 +145,7 @@ export function ScrollScrub() {
           className="absolute inset-0 h-full w-full"
         />
 
-        {/* Legibility scrim — darkens top/bottom for the overlaid text, and
+        {/* Legibility scrim - darkens top/bottom for the overlaid text, and
             eases the final frame into the bone editorial section below. */}
         <div
           aria-hidden
@@ -179,7 +179,7 @@ export function ScrollScrub() {
           <div className="mt-9 h-px w-24 bg-forme-bone/50" />
         </div>
 
-        {/* Dialogue — she (right) speaks first, he (left) answers.
+        {/* Dialogue - she (right) speaks first, he (left) answers.
             Placeholder lines; swap for the real script. */}
         <div
           ref={sheRef}

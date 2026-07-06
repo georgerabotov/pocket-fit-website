@@ -142,7 +142,7 @@ export function Journey() {
               </div>
               <div className="cap">
                 {cur === N - 1
-                  ? "Journey complete — transformed"
+                  ? "Journey complete - transformed"
                   : `Next evolution at Level ${level + 1}`}
               </div>
             </div>

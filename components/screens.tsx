@@ -114,7 +114,7 @@ export function SleepScreen() {
       </div>
       <div className="rounded-2xl bg-cloud p-3 text-xs shadow-sm">
         <p className="font-semibold">Sleep efficiency</p>
-        <p className="text-ink-soft">94% — time asleep vs. time in bed</p>
+        <p className="text-ink-soft">94% - time asleep vs. time in bed</p>
       </div>
     </div>
   );

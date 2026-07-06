@@ -254,7 +254,7 @@ export default function LanyardPricing() {
         />
       </div>
 
-      {/* light switch — sits between the middle chains */}
+      {/* light switch - sits between the middle chains */}
       {!active && <LightSwitch dark={dark} onToggle={() => setDark((d) => !d)} />}
 
       {/* isolate panel */}

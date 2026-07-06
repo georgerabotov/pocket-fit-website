@@ -8,7 +8,7 @@ export function FinalCta() {
           Ready when you are.
         </h2>
         <p className="mx-auto mt-4 max-w-md text-lg text-ink-soft">
-          Start with one step. Connect a device, log a meal, ask a question —
+          Start with one step. Connect a device, log a meal, ask a question -
           Pocket Fit builds your picture from there.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

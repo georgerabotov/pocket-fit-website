@@ -3,7 +3,7 @@ import { LegalDoc } from "@/components/site/LegalDoc";
 import content from "@/lib/pocketContent.json";
 
 export const metadata: Metadata = {
-  title: "Terms and Conditions — Pocket Fit",
+  title: "Terms and Conditions - Pocket Fit",
   description: "The terms that govern your use of the Pocket Fit app.",
 };
 
