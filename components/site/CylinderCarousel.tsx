@@ -145,7 +145,7 @@ export function CylinderCarousel() {
   return (
     <div
       ref={containerRef}
-      className="relative h-[400px] w-full select-none overflow-hidden [perspective:1600px]"
+      className="relative h-[430px] w-full select-none overflow-hidden [perspective:1600px]"
       style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "pan-y" }}
       onPointerEnter={() => (hovering.current = true)}
       onPointerLeave={() => (hovering.current = false)}
@@ -160,7 +160,7 @@ export function CylinderCarousel() {
             ref={(el) => {
               cards.current[i] = el;
             }}
-            className="pointer-events-none absolute left-0 top-0 h-[320px] w-[188px]"
+            className="pointer-events-none absolute left-0 top-0 h-[344px] w-[202px]"
             style={{
               transform: `translate(-50%, -50%) rotateY(${i * step}deg) translateZ(${radius}px)`,
             }}

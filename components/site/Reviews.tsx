@@ -85,7 +85,7 @@ export function Reviews() {
         <h2
           data-reveal
           style={{ transitionDelay: "80ms" }}
-          className="reveal mt-4 font-[family-name:var(--font-fraunces)] text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl"
+          className="reveal mt-4 font-[family-name:var(--font-fraunces)] text-2xl font-semibold tracking-tight text-stone-900 sm:text-4xl"
         >
           Thousands of five-star workouts
         </h2>
