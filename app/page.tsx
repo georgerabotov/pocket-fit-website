@@ -140,35 +140,8 @@ export default function Home() {
           </div>
         </Section>
 
-        {/* Feature grid */}
-        <Section className="border-t border-stone-100 py-20">
-          <div className="mx-auto max-w-[720px] text-center">
-            <span
-              data-reveal
-              className="reveal inline-flex items-center rounded-full bg-violet-100 px-3.5 py-1.5 text-[13px] font-extrabold uppercase tracking-[0.12em] text-violet-700"
-            >
-              One app, every part of the work
-            </span>
-            <h2
-              data-reveal
-              style={{ transitionDelay: "80ms" }}
-              className="reveal mt-5 font-[family-name:var(--font-fraunces)] text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl"
-            >
-              See the whole picture
-            </h2>
-            <p
-              data-reveal
-              style={{ transitionDelay: "140ms" }}
-              className="reveal mx-auto mt-4 max-w-[560px] text-lg font-medium text-stone-500"
-            >
-              Pocket Fit plans your training, tracks every lift, and turns real
-              effort into a body you can watch change.
-            </p>
-          </div>
-          <div className="mt-14">
-            <FeatureShowcase />
-          </div>
-        </Section>
+        {/* Feature grid - "See the whole picture" */}
+        <FeatureShowcase />
 
         {/* AI coach intelligence (pinned-phone scroller) */}
         <AiIntelligence />
