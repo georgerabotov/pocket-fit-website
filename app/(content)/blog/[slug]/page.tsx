@@ -14,6 +14,8 @@ type BlogPost = {
   image?: string;
   paragraphs?: string[];
   body?: string;
+  seoTitle?: string;
+  metaDescription?: string;
 };
 
 const posts = content.blog as unknown as BlogPost[];
@@ -31,8 +33,8 @@ export async function generateMetadata({
   const post = posts.find((p) => p.slug === slug);
   if (!post) return { title: "Blog - Pocket Fit" };
   return {
-    title: `${post.title} - Pocket Fit`,
-    description: post.description,
+    title: post.seoTitle ?? `${post.title} - Pocket Fit`,
+    description: post.metaDescription ?? post.description,
     openGraph: post.image ? { images: [post.image] } : undefined,
   };
 }
