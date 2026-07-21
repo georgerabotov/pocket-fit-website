@@ -61,7 +61,7 @@ export const PLANS: Plan[] = [
     name: "Food",
     accent: "teal",
     included: true,
-    badge: "Included",
+    badge: "New",
     cta: "Get Started",
     tagline:
       "AI-powered nutrition and meal tracking, built to match your training. For a limited time it's bundled with every Pocket Fit workout membership - unlock workouts and Food comes with it, no separate purchase.",

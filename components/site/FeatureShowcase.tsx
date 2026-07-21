@@ -411,7 +411,7 @@ const MARKUP = String.raw`<section class="features">
 
       <!-- FUEL -->
       <article class="fcard t-food rise">
-        <span class="soon">Included free</span>
+        <span class="soon">New · Included free</span>
         <div class="cap">
           <h3>Fuel</h3>
           <p>Scan your plate or a barcode, confirm the macros, done — no red numbers, no shame.</p>

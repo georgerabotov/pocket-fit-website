@@ -215,7 +215,7 @@ function IncludedPanel({
       <span
         className={`mb-5 w-fit rounded-full px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white ${ACCENT_BG[plan.accent]}`}
       >
-        Included free · limited time
+        New · included free · limited time
       </span>
 
       <p className={`text-xs uppercase tracking-[0.32em] ${t.eyebrow}`}>
