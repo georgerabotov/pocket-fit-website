@@ -30,6 +30,7 @@ export const metadata: Metadata = {
   title: "Pocket Fit - AI workouts around your real life",
   description:
     "Pocket Fit is a simple fitness app that builds personalized, AI-generated workout programs around your goals, equipment, and schedule. Live now on iOS and Android.",
+  alternates: { canonical: "/" },
 };
 
 function Section({

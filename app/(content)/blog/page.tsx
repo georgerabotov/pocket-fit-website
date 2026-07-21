@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Blog - Pocket Fit",
   description:
     "Smarter training, AI fitness, and getting real results - from the Pocket Fit team.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogIndex() {

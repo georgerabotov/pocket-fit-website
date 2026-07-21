@@ -20,6 +20,10 @@ type BlogPost = {
 
 const posts = content.blog as unknown as BlogPost[];
 
+const SITE = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://pocket-fit.app"
+).replace(/\/$/, "");
+
 export function generateStaticParams() {
   return posts.map((p) => ({ slug: p.slug }));
 }
@@ -32,10 +36,22 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = posts.find((p) => p.slug === slug);
   if (!post) return { title: "Blog - Pocket Fit" };
+  const url = `/blog/${slug}`;
+  const title = post.seoTitle ?? `${post.title} - Pocket Fit`;
+  const description = post.metaDescription ?? post.description;
+  const images = post.image ? [post.image] : undefined;
   return {
-    title: post.seoTitle ?? `${post.title} - Pocket Fit`,
-    description: post.metaDescription ?? post.description,
-    openGraph: post.image ? { images: [post.image] } : undefined,
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title,
+      description,
+      images,
+    },
+    twitter: { card: "summary_large_image", title, description, images },
   };
 }
 
@@ -128,8 +144,27 @@ export default async function BlogPost({
       }))
     : [];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.metaDescription ?? post.description,
+    image: post.image ? `${SITE}${post.image}` : undefined,
+    mainEntityOfPage: `${SITE}/blog/${post.slug}`,
+    author: { "@type": "Person", name: "Georgi", url: `${SITE}/our-story` },
+    publisher: {
+      "@type": "Organization",
+      name: "Pocket Fit",
+      logo: { "@type": "ImageObject", url: `${SITE}/icon.png` },
+    },
+  };
+
   return (
     <article className="mx-auto w-full max-w-2xl px-5 py-16 sm:py-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link
         href="/blog"
         className="text-sm font-semibold text-violet-700 hover:underline"

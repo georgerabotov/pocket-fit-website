@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Pricing - Pocket Fit",
   description:
     "One plan, total access. Grab your membership pass - personalized AI workouts, live tracking, analytics, and an AI coach.",
+  alternates: { canonical: "/pricing" },
 };
 
 export default function PricingPage() {
