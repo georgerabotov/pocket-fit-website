@@ -11,6 +11,7 @@ export type Plan = {
   cta?: string;
   accent: Accent;
   comingSoon?: boolean;
+  included?: boolean;
   tagline?: string;
 };
 
@@ -23,6 +24,15 @@ export const FEATURES = [
   "Calendar and scheduling capabilities",
   "Advanced analytics including body weight and exercise progression",
   "AI Personal Coach support",
+  "Nutrition & meal tracking (Food) - included free while we launch",
+];
+
+// what the bundled Food membership unlocks (shown on the Food card)
+export const FOOD_FEATURES = [
+  "Snap a photo or scan a barcode to log a meal",
+  "AI macro estimates - protein, carbs and fat",
+  "Daily targets matched to your training, no red numbers",
+  "Included with every workout membership - no separate purchase",
 ];
 
 export const PLANS: Plan[] = [
@@ -50,9 +60,11 @@ export const PLANS: Plan[] = [
     id: "food",
     name: "Food",
     accent: "teal",
-    comingSoon: true,
+    included: true,
+    badge: "Included",
+    cta: "Get Started",
     tagline:
-      "AI-powered nutrition and meal tracking, built to match your training. A separate Pocket Fit Food membership - launching soon.",
+      "AI-powered nutrition and meal tracking, built to match your training. For a limited time it's bundled with every Pocket Fit workout membership - unlock workouts and Food comes with it, no separate purchase.",
   },
   {
     id: "hardcore",

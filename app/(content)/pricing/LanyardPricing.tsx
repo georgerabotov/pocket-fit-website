@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { APP_STORE, FEATURES, PLANS, type Plan } from "./plans";
+import { APP_STORE, FEATURES, FOOD_FEATURES, PLANS, type Plan } from "./plans";
 
 const Badges = dynamic(() => import("./Badges"), {
   ssr: false,
@@ -190,6 +190,78 @@ function ComingSoonPanel({
   );
 }
 
+function IncludedPanel({
+  plan,
+  side,
+  dark,
+  onClose,
+}: {
+  plan: Plan;
+  side: Side;
+  dark: boolean;
+  onClose: () => void;
+}) {
+  const t = palette(dark);
+  const accentText = (dark ? ACCENT_TEXT_DARK : ACCENT_TEXT_LIGHT)[plan.accent];
+  return (
+    <div className={panelShell(side)}>
+      <button
+        onClick={onClose}
+        className={`mb-8 w-fit text-[0.7rem] uppercase tracking-[0.3em] transition-colors ${t.back}`}
+      >
+        ← All plans
+      </button>
+
+      <span
+        className={`mb-5 w-fit rounded-full px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.18em] text-white ${ACCENT_BG[plan.accent]}`}
+      >
+        Included free · limited time
+      </span>
+
+      <p className={`text-xs uppercase tracking-[0.32em] ${t.eyebrow}`}>
+        Pocket Fit {plan.name}
+      </p>
+      <p
+        className={`mt-3 font-[family-name:var(--font-fraunces)] text-6xl font-semibold ${t.head}`}
+      >
+        Included
+      </p>
+      <p className={`mt-4 max-w-sm text-[0.95rem] leading-relaxed ${t.note}`}>
+        {plan.tagline}
+      </p>
+
+      <ul className="mt-7 space-y-3.5">
+        {FOOD_FEATURES.map((f) => (
+          <li
+            key={f}
+            className={`flex gap-3 text-[0.95rem] leading-relaxed ${t.feat}`}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              className={`mt-0.5 size-5 shrink-0 ${accentText}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="m5 12 5 5 9-11" />
+            </svg>
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={APP_STORE}
+        className={`mt-9 block w-full rounded-full px-6 py-4 text-center text-sm font-semibold text-white shadow-lg shadow-black/10 transition-opacity hover:opacity-90 ${ACCENT_BG[plan.accent]}`}
+      >
+        {plan.cta ?? "Get Started"}
+      </a>
+    </div>
+  );
+}
+
 function LightSwitch({
   dark,
   onToggle,
@@ -272,6 +344,13 @@ export default function LanyardPricing() {
       {active &&
         (active.comingSoon ? (
           <ComingSoonPanel
+            plan={active}
+            side={side}
+            dark={dark}
+            onClose={() => setSelected(null)}
+          />
+        ) : active.included ? (
+          <IncludedPanel
             plan={active}
             side={side}
             dark={dark}

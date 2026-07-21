@@ -274,7 +274,11 @@ function makeBadgeTexture(plan: Plan, dark: boolean): THREE.CanvasTexture {
   ctx.fillStyle = inkMuted;
   ctx.font = "600 20px Jost, system-ui, sans-serif";
   ctx.letterSpacing = "3px";
-  ctx.fillText(plan.comingSoon ? "COMING SOON" : "MEMBER PASS", pad, 138);
+  ctx.fillText(
+    plan.comingSoon ? "COMING SOON" : plan.included ? "BUNDLED FREE" : "MEMBER PASS",
+    pad,
+    138,
+  );
   ctx.letterSpacing = "0px";
 
   // chip
@@ -304,6 +308,13 @@ function makeBadgeTexture(plan: Plan, dark: boolean): THREE.CanvasTexture {
     ctx.fillStyle = accent;
     ctx.font = "800 62px Jost, system-ui, sans-serif";
     ctx.fillText("Coming soon", pad, h - 70);
+  } else if (plan.included) {
+    ctx.fillStyle = accent;
+    ctx.font = "800 62px Jost, system-ui, sans-serif";
+    ctx.fillText("Included", pad, h - 74);
+    ctx.fillStyle = inkFaint;
+    ctx.font = "500 28px Jost, system-ui, sans-serif";
+    ctx.fillText("with your membership", pad, h - 32);
   } else {
     ctx.fillStyle = accent;
     ctx.font = "800 78px Jost, system-ui, sans-serif";
